@@ -10,5 +10,6 @@ let value: GameConfigGetDatesRequest = {};
 
 ## Fields
 
-| Field       | Type        | Required    | Description |
-| ----------- | ----------- | ----------- | ----------- |
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `input`                                                                                  | [operations.GameConfigGetDatesInput](../../models/operations/gameconfiggetdatesinput.md) | :heavy_minus_sign:                                                                       | JSON-encoded input parameters                                                            |

@@ -6,12 +6,14 @@
 import { UserGetUserLiteRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: UserGetUserLiteRequest = {
-  userId: "<id>",
+  input: {
+    userId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                             | Type                              | Required                          | Description                       |
-| --------------------------------- | --------------------------------- | --------------------------------- | --------------------------------- |
-| `userId`                          | *string*                          | :heavy_check_mark:                | The unique identifier of the user |
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `input`                                                                            | [operations.UserGetUserLiteInput](../../models/operations/usergetuserliteinput.md) | :heavy_check_mark:                                                                 | JSON-encoded input parameters                                                      |

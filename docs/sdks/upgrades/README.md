@@ -12,7 +12,7 @@ Retrieves upgrade information for a specific upgrade type and entity (region, co
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="upgrade.getUpgradeByTypeAndEntity" method="post" path="/upgrade.getUpgradeByTypeAndEntity" -->
+<!-- UsageSnippet language="typescript" operationID="upgrade.getUpgradeByTypeAndEntity" method="get" path="/upgrade.getUpgradeByTypeAndEntity" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -21,7 +21,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.upgrades.getByTypeAndEntity();
+  await warera.upgrades.getByTypeAndEntity({
+    input: {
+      upgradeType: "breakRoom",
+    },
+  });
 
 
 }
@@ -44,7 +48,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await upgradesGetByTypeAndEntity(warera);
+  const res = await upgradesGetByTypeAndEntity(warera, {
+    input: {
+      upgradeType: "breakRoom",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     

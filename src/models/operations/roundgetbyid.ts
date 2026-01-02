@@ -8,23 +8,79 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type RoundGetByIdRequest = {
+export type RoundGetByIdInput = {
   /**
    * The unique identifier of the round
    */
   roundId: string;
 };
 
+export type RoundGetByIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: RoundGetByIdInput;
+};
+
 /** @internal */
-export const RoundGetByIdRequest$inboundSchema: z.ZodMiniType<
-  RoundGetByIdRequest,
+export const RoundGetByIdInput$inboundSchema: z.ZodMiniType<
+  RoundGetByIdInput,
   unknown
 > = z.object({
   roundId: types.string(),
 });
 /** @internal */
-export type RoundGetByIdRequest$Outbound = {
+export type RoundGetByIdInput$Outbound = {
   roundId: string;
+};
+
+/** @internal */
+export const RoundGetByIdInput$outboundSchema: z.ZodMiniType<
+  RoundGetByIdInput$Outbound,
+  RoundGetByIdInput
+> = z.object({
+  roundId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RoundGetByIdInput$ {
+  /** @deprecated use `RoundGetByIdInput$inboundSchema` instead. */
+  export const inboundSchema = RoundGetByIdInput$inboundSchema;
+  /** @deprecated use `RoundGetByIdInput$outboundSchema` instead. */
+  export const outboundSchema = RoundGetByIdInput$outboundSchema;
+  /** @deprecated use `RoundGetByIdInput$Outbound` instead. */
+  export type Outbound = RoundGetByIdInput$Outbound;
+}
+
+export function roundGetByIdInputToJSON(
+  roundGetByIdInput: RoundGetByIdInput,
+): string {
+  return JSON.stringify(
+    RoundGetByIdInput$outboundSchema.parse(roundGetByIdInput),
+  );
+}
+export function roundGetByIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<RoundGetByIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RoundGetByIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoundGetByIdInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const RoundGetByIdRequest$inboundSchema: z.ZodMiniType<
+  RoundGetByIdRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => RoundGetByIdInput$inboundSchema),
+});
+/** @internal */
+export type RoundGetByIdRequest$Outbound = {
+  input: RoundGetByIdInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +88,7 @@ export const RoundGetByIdRequest$outboundSchema: z.ZodMiniType<
   RoundGetByIdRequest$Outbound,
   RoundGetByIdRequest
 > = z.object({
-  roundId: z.string(),
+  input: z.lazy(() => RoundGetByIdInput$outboundSchema),
 });
 /**
  * @internal

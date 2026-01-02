@@ -6,14 +6,14 @@
 import { UserGetUsersByCountryRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: UserGetUsersByCountryRequest = {
-  countryId: "<id>",
+  input: {
+    countryId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `countryId`        | *string*           | :heavy_check_mark: | N/A                |
-| `limit`            | *number*           | :heavy_minus_sign: | N/A                |
-| `cursor`           | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `input`                                                                                        | [operations.UserGetUsersByCountryInput](../../models/operations/usergetusersbycountryinput.md) | :heavy_check_mark:                                                                             | JSON-encoded input parameters                                                                  |

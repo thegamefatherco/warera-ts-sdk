@@ -5,23 +5,84 @@
 import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type CountryGetAllCountriesRequest = {};
+export type CountryGetAllCountriesInput = {};
+
+export type CountryGetAllCountriesRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: CountryGetAllCountriesInput | undefined;
+};
+
+/** @internal */
+export const CountryGetAllCountriesInput$inboundSchema: z.ZodMiniType<
+  CountryGetAllCountriesInput,
+  unknown
+> = z.object({});
+/** @internal */
+export type CountryGetAllCountriesInput$Outbound = {};
+
+/** @internal */
+export const CountryGetAllCountriesInput$outboundSchema: z.ZodMiniType<
+  CountryGetAllCountriesInput$Outbound,
+  CountryGetAllCountriesInput
+> = z.object({});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CountryGetAllCountriesInput$ {
+  /** @deprecated use `CountryGetAllCountriesInput$inboundSchema` instead. */
+  export const inboundSchema = CountryGetAllCountriesInput$inboundSchema;
+  /** @deprecated use `CountryGetAllCountriesInput$outboundSchema` instead. */
+  export const outboundSchema = CountryGetAllCountriesInput$outboundSchema;
+  /** @deprecated use `CountryGetAllCountriesInput$Outbound` instead. */
+  export type Outbound = CountryGetAllCountriesInput$Outbound;
+}
+
+export function countryGetAllCountriesInputToJSON(
+  countryGetAllCountriesInput: CountryGetAllCountriesInput,
+): string {
+  return JSON.stringify(
+    CountryGetAllCountriesInput$outboundSchema.parse(
+      countryGetAllCountriesInput,
+    ),
+  );
+}
+export function countryGetAllCountriesInputFromJSON(
+  jsonString: string,
+): SafeParseResult<CountryGetAllCountriesInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CountryGetAllCountriesInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CountryGetAllCountriesInput' from JSON`,
+  );
+}
 
 /** @internal */
 export const CountryGetAllCountriesRequest$inboundSchema: z.ZodMiniType<
   CountryGetAllCountriesRequest,
   unknown
-> = z.object({});
+> = z.object({
+  input: types.optional(
+    z.lazy(() => CountryGetAllCountriesInput$inboundSchema),
+  ),
+});
 /** @internal */
-export type CountryGetAllCountriesRequest$Outbound = {};
+export type CountryGetAllCountriesRequest$Outbound = {
+  input?: CountryGetAllCountriesInput$Outbound | undefined;
+};
 
 /** @internal */
 export const CountryGetAllCountriesRequest$outboundSchema: z.ZodMiniType<
   CountryGetAllCountriesRequest$Outbound,
   CountryGetAllCountriesRequest
-> = z.object({});
+> = z.object({
+  input: z.optional(z.lazy(() => CountryGetAllCountriesInput$outboundSchema)),
+});
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

@@ -12,7 +12,7 @@ Retrieves a paginated list of events with optional country filter
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="event.getEventsPaginated" method="post" path="/event.getEventsPaginated" -->
+<!-- UsageSnippet language="typescript" operationID="event.getEventsPaginated" method="get" path="/event.getEventsPaginated" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 

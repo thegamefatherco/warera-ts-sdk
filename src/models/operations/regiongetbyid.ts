@@ -8,23 +8,79 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type RegionGetByIdRequest = {
+export type RegionGetByIdInput = {
   /**
    * The unique identifier of the region
    */
   regionId: string;
 };
 
+export type RegionGetByIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: RegionGetByIdInput;
+};
+
 /** @internal */
-export const RegionGetByIdRequest$inboundSchema: z.ZodMiniType<
-  RegionGetByIdRequest,
+export const RegionGetByIdInput$inboundSchema: z.ZodMiniType<
+  RegionGetByIdInput,
   unknown
 > = z.object({
   regionId: types.string(),
 });
 /** @internal */
-export type RegionGetByIdRequest$Outbound = {
+export type RegionGetByIdInput$Outbound = {
   regionId: string;
+};
+
+/** @internal */
+export const RegionGetByIdInput$outboundSchema: z.ZodMiniType<
+  RegionGetByIdInput$Outbound,
+  RegionGetByIdInput
+> = z.object({
+  regionId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RegionGetByIdInput$ {
+  /** @deprecated use `RegionGetByIdInput$inboundSchema` instead. */
+  export const inboundSchema = RegionGetByIdInput$inboundSchema;
+  /** @deprecated use `RegionGetByIdInput$outboundSchema` instead. */
+  export const outboundSchema = RegionGetByIdInput$outboundSchema;
+  /** @deprecated use `RegionGetByIdInput$Outbound` instead. */
+  export type Outbound = RegionGetByIdInput$Outbound;
+}
+
+export function regionGetByIdInputToJSON(
+  regionGetByIdInput: RegionGetByIdInput,
+): string {
+  return JSON.stringify(
+    RegionGetByIdInput$outboundSchema.parse(regionGetByIdInput),
+  );
+}
+export function regionGetByIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<RegionGetByIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RegionGetByIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RegionGetByIdInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const RegionGetByIdRequest$inboundSchema: z.ZodMiniType<
+  RegionGetByIdRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => RegionGetByIdInput$inboundSchema),
+});
+/** @internal */
+export type RegionGetByIdRequest$Outbound = {
+  input: RegionGetByIdInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +88,7 @@ export const RegionGetByIdRequest$outboundSchema: z.ZodMiniType<
   RegionGetByIdRequest$Outbound,
   RegionGetByIdRequest
 > = z.object({
-  regionId: z.string(),
+  input: z.lazy(() => RegionGetByIdInput$outboundSchema),
 });
 /**
  * @internal

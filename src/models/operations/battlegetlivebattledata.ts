@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type BattleGetLiveBattleDataRequest = {
+export type BattleGetLiveBattleDataInput = {
   /**
    * The unique identifier of the battle
    */
@@ -19,18 +19,77 @@ export type BattleGetLiveBattleDataRequest = {
   roundNumber?: number | undefined;
 };
 
+export type BattleGetLiveBattleDataRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: BattleGetLiveBattleDataInput;
+};
+
 /** @internal */
-export const BattleGetLiveBattleDataRequest$inboundSchema: z.ZodMiniType<
-  BattleGetLiveBattleDataRequest,
+export const BattleGetLiveBattleDataInput$inboundSchema: z.ZodMiniType<
+  BattleGetLiveBattleDataInput,
   unknown
 > = z.object({
   battleId: types.string(),
   roundNumber: types.optional(types.number()),
 });
 /** @internal */
-export type BattleGetLiveBattleDataRequest$Outbound = {
+export type BattleGetLiveBattleDataInput$Outbound = {
   battleId: string;
   roundNumber?: number | undefined;
+};
+
+/** @internal */
+export const BattleGetLiveBattleDataInput$outboundSchema: z.ZodMiniType<
+  BattleGetLiveBattleDataInput$Outbound,
+  BattleGetLiveBattleDataInput
+> = z.object({
+  battleId: z.string(),
+  roundNumber: z.optional(z.number()),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleGetLiveBattleDataInput$ {
+  /** @deprecated use `BattleGetLiveBattleDataInput$inboundSchema` instead. */
+  export const inboundSchema = BattleGetLiveBattleDataInput$inboundSchema;
+  /** @deprecated use `BattleGetLiveBattleDataInput$outboundSchema` instead. */
+  export const outboundSchema = BattleGetLiveBattleDataInput$outboundSchema;
+  /** @deprecated use `BattleGetLiveBattleDataInput$Outbound` instead. */
+  export type Outbound = BattleGetLiveBattleDataInput$Outbound;
+}
+
+export function battleGetLiveBattleDataInputToJSON(
+  battleGetLiveBattleDataInput: BattleGetLiveBattleDataInput,
+): string {
+  return JSON.stringify(
+    BattleGetLiveBattleDataInput$outboundSchema.parse(
+      battleGetLiveBattleDataInput,
+    ),
+  );
+}
+export function battleGetLiveBattleDataInputFromJSON(
+  jsonString: string,
+): SafeParseResult<BattleGetLiveBattleDataInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BattleGetLiveBattleDataInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BattleGetLiveBattleDataInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const BattleGetLiveBattleDataRequest$inboundSchema: z.ZodMiniType<
+  BattleGetLiveBattleDataRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => BattleGetLiveBattleDataInput$inboundSchema),
+});
+/** @internal */
+export type BattleGetLiveBattleDataRequest$Outbound = {
+  input: BattleGetLiveBattleDataInput$Outbound;
 };
 
 /** @internal */
@@ -38,8 +97,7 @@ export const BattleGetLiveBattleDataRequest$outboundSchema: z.ZodMiniType<
   BattleGetLiveBattleDataRequest$Outbound,
   BattleGetLiveBattleDataRequest
 > = z.object({
-  battleId: z.string(),
-  roundNumber: z.optional(z.number()),
+  input: z.lazy(() => BattleGetLiveBattleDataInput$outboundSchema),
 });
 /**
  * @internal

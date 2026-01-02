@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type TradingOrderGetTopOrdersRequest = {
+export type TradingOrderGetTopOrdersInput = {
   /**
    * The item code to get orders for
    */
@@ -19,18 +19,77 @@ export type TradingOrderGetTopOrdersRequest = {
   limit?: number | undefined;
 };
 
+export type TradingOrderGetTopOrdersRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: TradingOrderGetTopOrdersInput;
+};
+
 /** @internal */
-export const TradingOrderGetTopOrdersRequest$inboundSchema: z.ZodMiniType<
-  TradingOrderGetTopOrdersRequest,
+export const TradingOrderGetTopOrdersInput$inboundSchema: z.ZodMiniType<
+  TradingOrderGetTopOrdersInput,
   unknown
 > = z.object({
   itemCode: types.string(),
   limit: z._default(types.number(), 10),
 });
 /** @internal */
-export type TradingOrderGetTopOrdersRequest$Outbound = {
+export type TradingOrderGetTopOrdersInput$Outbound = {
   itemCode: string;
   limit: number;
+};
+
+/** @internal */
+export const TradingOrderGetTopOrdersInput$outboundSchema: z.ZodMiniType<
+  TradingOrderGetTopOrdersInput$Outbound,
+  TradingOrderGetTopOrdersInput
+> = z.object({
+  itemCode: z.string(),
+  limit: z._default(z.int(), 10),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TradingOrderGetTopOrdersInput$ {
+  /** @deprecated use `TradingOrderGetTopOrdersInput$inboundSchema` instead. */
+  export const inboundSchema = TradingOrderGetTopOrdersInput$inboundSchema;
+  /** @deprecated use `TradingOrderGetTopOrdersInput$outboundSchema` instead. */
+  export const outboundSchema = TradingOrderGetTopOrdersInput$outboundSchema;
+  /** @deprecated use `TradingOrderGetTopOrdersInput$Outbound` instead. */
+  export type Outbound = TradingOrderGetTopOrdersInput$Outbound;
+}
+
+export function tradingOrderGetTopOrdersInputToJSON(
+  tradingOrderGetTopOrdersInput: TradingOrderGetTopOrdersInput,
+): string {
+  return JSON.stringify(
+    TradingOrderGetTopOrdersInput$outboundSchema.parse(
+      tradingOrderGetTopOrdersInput,
+    ),
+  );
+}
+export function tradingOrderGetTopOrdersInputFromJSON(
+  jsonString: string,
+): SafeParseResult<TradingOrderGetTopOrdersInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TradingOrderGetTopOrdersInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TradingOrderGetTopOrdersInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const TradingOrderGetTopOrdersRequest$inboundSchema: z.ZodMiniType<
+  TradingOrderGetTopOrdersRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => TradingOrderGetTopOrdersInput$inboundSchema),
+});
+/** @internal */
+export type TradingOrderGetTopOrdersRequest$Outbound = {
+  input: TradingOrderGetTopOrdersInput$Outbound;
 };
 
 /** @internal */
@@ -38,8 +97,7 @@ export const TradingOrderGetTopOrdersRequest$outboundSchema: z.ZodMiniType<
   TradingOrderGetTopOrdersRequest$Outbound,
   TradingOrderGetTopOrdersRequest
 > = z.object({
-  itemCode: z.string(),
-  limit: z._default(z.int(), 10),
+  input: z.lazy(() => TradingOrderGetTopOrdersInput$outboundSchema),
 });
 /**
  * @internal

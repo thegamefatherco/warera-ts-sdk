@@ -8,23 +8,79 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type ArticleGetArticleByIdRequest = {
+export type ArticleGetArticleByIdInput = {
   /**
    * The ID of the article to get
    */
   articleId: string;
 };
 
+export type ArticleGetArticleByIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: ArticleGetArticleByIdInput;
+};
+
 /** @internal */
-export const ArticleGetArticleByIdRequest$inboundSchema: z.ZodMiniType<
-  ArticleGetArticleByIdRequest,
+export const ArticleGetArticleByIdInput$inboundSchema: z.ZodMiniType<
+  ArticleGetArticleByIdInput,
   unknown
 > = z.object({
   articleId: types.string(),
 });
 /** @internal */
-export type ArticleGetArticleByIdRequest$Outbound = {
+export type ArticleGetArticleByIdInput$Outbound = {
   articleId: string;
+};
+
+/** @internal */
+export const ArticleGetArticleByIdInput$outboundSchema: z.ZodMiniType<
+  ArticleGetArticleByIdInput$Outbound,
+  ArticleGetArticleByIdInput
+> = z.object({
+  articleId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ArticleGetArticleByIdInput$ {
+  /** @deprecated use `ArticleGetArticleByIdInput$inboundSchema` instead. */
+  export const inboundSchema = ArticleGetArticleByIdInput$inboundSchema;
+  /** @deprecated use `ArticleGetArticleByIdInput$outboundSchema` instead. */
+  export const outboundSchema = ArticleGetArticleByIdInput$outboundSchema;
+  /** @deprecated use `ArticleGetArticleByIdInput$Outbound` instead. */
+  export type Outbound = ArticleGetArticleByIdInput$Outbound;
+}
+
+export function articleGetArticleByIdInputToJSON(
+  articleGetArticleByIdInput: ArticleGetArticleByIdInput,
+): string {
+  return JSON.stringify(
+    ArticleGetArticleByIdInput$outboundSchema.parse(articleGetArticleByIdInput),
+  );
+}
+export function articleGetArticleByIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<ArticleGetArticleByIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ArticleGetArticleByIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ArticleGetArticleByIdInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const ArticleGetArticleByIdRequest$inboundSchema: z.ZodMiniType<
+  ArticleGetArticleByIdRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => ArticleGetArticleByIdInput$inboundSchema),
+});
+/** @internal */
+export type ArticleGetArticleByIdRequest$Outbound = {
+  input: ArticleGetArticleByIdInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +88,7 @@ export const ArticleGetArticleByIdRequest$outboundSchema: z.ZodMiniType<
   ArticleGetArticleByIdRequest$Outbound,
   ArticleGetArticleByIdRequest
 > = z.object({
-  articleId: z.string(),
+  input: z.lazy(() => ArticleGetArticleByIdInput$outboundSchema),
 });
 /**
  * @internal

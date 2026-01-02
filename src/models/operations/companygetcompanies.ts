@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type CompanyGetCompaniesRequest = {
+export type CompanyGetCompaniesInput = {
   /**
    * Filter companies by user ID
    */
@@ -27,9 +27,16 @@ export type CompanyGetCompaniesRequest = {
   cursor?: string | undefined;
 };
 
+export type CompanyGetCompaniesRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: CompanyGetCompaniesInput | undefined;
+};
+
 /** @internal */
-export const CompanyGetCompaniesRequest$inboundSchema: z.ZodMiniType<
-  CompanyGetCompaniesRequest,
+export const CompanyGetCompaniesInput$inboundSchema: z.ZodMiniType<
+  CompanyGetCompaniesInput,
   unknown
 > = z.object({
   userId: types.optional(types.string()),
@@ -38,7 +45,7 @@ export const CompanyGetCompaniesRequest$inboundSchema: z.ZodMiniType<
   cursor: types.optional(types.string()),
 });
 /** @internal */
-export type CompanyGetCompaniesRequest$Outbound = {
+export type CompanyGetCompaniesInput$Outbound = {
   userId?: string | undefined;
   orgId?: string | undefined;
   perPage: number;
@@ -46,14 +53,63 @@ export type CompanyGetCompaniesRequest$Outbound = {
 };
 
 /** @internal */
-export const CompanyGetCompaniesRequest$outboundSchema: z.ZodMiniType<
-  CompanyGetCompaniesRequest$Outbound,
-  CompanyGetCompaniesRequest
+export const CompanyGetCompaniesInput$outboundSchema: z.ZodMiniType<
+  CompanyGetCompaniesInput$Outbound,
+  CompanyGetCompaniesInput
 > = z.object({
   userId: z.optional(z.string()),
   orgId: z.optional(z.string()),
   perPage: z._default(z.number(), 10),
   cursor: z.optional(z.string()),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CompanyGetCompaniesInput$ {
+  /** @deprecated use `CompanyGetCompaniesInput$inboundSchema` instead. */
+  export const inboundSchema = CompanyGetCompaniesInput$inboundSchema;
+  /** @deprecated use `CompanyGetCompaniesInput$outboundSchema` instead. */
+  export const outboundSchema = CompanyGetCompaniesInput$outboundSchema;
+  /** @deprecated use `CompanyGetCompaniesInput$Outbound` instead. */
+  export type Outbound = CompanyGetCompaniesInput$Outbound;
+}
+
+export function companyGetCompaniesInputToJSON(
+  companyGetCompaniesInput: CompanyGetCompaniesInput,
+): string {
+  return JSON.stringify(
+    CompanyGetCompaniesInput$outboundSchema.parse(companyGetCompaniesInput),
+  );
+}
+export function companyGetCompaniesInputFromJSON(
+  jsonString: string,
+): SafeParseResult<CompanyGetCompaniesInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CompanyGetCompaniesInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CompanyGetCompaniesInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const CompanyGetCompaniesRequest$inboundSchema: z.ZodMiniType<
+  CompanyGetCompaniesRequest,
+  unknown
+> = z.object({
+  input: types.optional(z.lazy(() => CompanyGetCompaniesInput$inboundSchema)),
+});
+/** @internal */
+export type CompanyGetCompaniesRequest$Outbound = {
+  input?: CompanyGetCompaniesInput$Outbound | undefined;
+};
+
+/** @internal */
+export const CompanyGetCompaniesRequest$outboundSchema: z.ZodMiniType<
+  CompanyGetCompaniesRequest$Outbound,
+  CompanyGetCompaniesRequest
+> = z.object({
+  input: z.optional(z.lazy(() => CompanyGetCompaniesInput$outboundSchema)),
 });
 /**
  * @internal

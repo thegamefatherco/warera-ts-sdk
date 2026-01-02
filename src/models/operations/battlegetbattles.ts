@@ -34,7 +34,7 @@ export const Filter = {
  */
 export type Filter = ClosedEnum<typeof Filter>;
 
-export type BattleGetBattlesRequest = {
+export type BattleGetBattlesInput = {
   /**
    * Whether to get active battles
    */
@@ -67,6 +67,13 @@ export type BattleGetBattlesRequest = {
    * Filter battles by country ID
    */
   countryId?: string | undefined;
+};
+
+export type BattleGetBattlesRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: BattleGetBattlesInput | undefined;
 };
 
 /** @internal */
@@ -106,8 +113,8 @@ export namespace Filter$ {
 }
 
 /** @internal */
-export const BattleGetBattlesRequest$inboundSchema: z.ZodMiniType<
-  BattleGetBattlesRequest,
+export const BattleGetBattlesInput$inboundSchema: z.ZodMiniType<
+  BattleGetBattlesInput,
   unknown
 > = z.object({
   isActive: types.optional(types.boolean()),
@@ -120,7 +127,7 @@ export const BattleGetBattlesRequest$inboundSchema: z.ZodMiniType<
   countryId: types.optional(types.string()),
 });
 /** @internal */
-export type BattleGetBattlesRequest$Outbound = {
+export type BattleGetBattlesInput$Outbound = {
   isActive?: boolean | undefined;
   limit: number;
   cursor?: string | undefined;
@@ -132,9 +139,9 @@ export type BattleGetBattlesRequest$Outbound = {
 };
 
 /** @internal */
-export const BattleGetBattlesRequest$outboundSchema: z.ZodMiniType<
-  BattleGetBattlesRequest$Outbound,
-  BattleGetBattlesRequest
+export const BattleGetBattlesInput$outboundSchema: z.ZodMiniType<
+  BattleGetBattlesInput$Outbound,
+  BattleGetBattlesInput
 > = z.object({
   isActive: z.optional(z.boolean()),
   limit: z._default(z.number(), 10),
@@ -144,6 +151,55 @@ export const BattleGetBattlesRequest$outboundSchema: z.ZodMiniType<
   defenderRegionId: z.optional(z.string()),
   warId: z.optional(z.string()),
   countryId: z.optional(z.string()),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleGetBattlesInput$ {
+  /** @deprecated use `BattleGetBattlesInput$inboundSchema` instead. */
+  export const inboundSchema = BattleGetBattlesInput$inboundSchema;
+  /** @deprecated use `BattleGetBattlesInput$outboundSchema` instead. */
+  export const outboundSchema = BattleGetBattlesInput$outboundSchema;
+  /** @deprecated use `BattleGetBattlesInput$Outbound` instead. */
+  export type Outbound = BattleGetBattlesInput$Outbound;
+}
+
+export function battleGetBattlesInputToJSON(
+  battleGetBattlesInput: BattleGetBattlesInput,
+): string {
+  return JSON.stringify(
+    BattleGetBattlesInput$outboundSchema.parse(battleGetBattlesInput),
+  );
+}
+export function battleGetBattlesInputFromJSON(
+  jsonString: string,
+): SafeParseResult<BattleGetBattlesInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BattleGetBattlesInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BattleGetBattlesInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const BattleGetBattlesRequest$inboundSchema: z.ZodMiniType<
+  BattleGetBattlesRequest,
+  unknown
+> = z.object({
+  input: types.optional(z.lazy(() => BattleGetBattlesInput$inboundSchema)),
+});
+/** @internal */
+export type BattleGetBattlesRequest$Outbound = {
+  input?: BattleGetBattlesInput$Outbound | undefined;
+};
+
+/** @internal */
+export const BattleGetBattlesRequest$outboundSchema: z.ZodMiniType<
+  BattleGetBattlesRequest$Outbound,
+  BattleGetBattlesRequest
+> = z.object({
+  input: z.optional(z.lazy(() => BattleGetBattlesInput$outboundSchema)),
 });
 /**
  * @internal

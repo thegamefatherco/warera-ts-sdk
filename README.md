@@ -86,7 +86,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.companies.getById();
+  await warera.companies.getById({
+    input: {
+      companyId: "<id>",
+    },
+  });
 }
 
 run();
@@ -102,8 +106,8 @@ run();
 
 ### [Articles](docs/sdks/articles/README.md)
 
-* [get](docs/sdks/articles/README.md#get) - Get article by ID
-* [getPaginated](docs/sdks/articles/README.md#getpaginated) - Get paginated articles
+* [getById](docs/sdks/articles/README.md#getbyid) - Get article by ID
+* [listPaginated](docs/sdks/articles/README.md#listpaginated) - Get paginated articles
 
 ### [BattleRankings](docs/sdks/battlerankings/README.md)
 
@@ -113,12 +117,12 @@ run();
 
 * [getById](docs/sdks/battles/README.md#getbyid) - Get battle by ID
 * [getLiveData](docs/sdks/battles/README.md#getlivedata) - Get live battle data
-* [getAll](docs/sdks/battles/README.md#getall) - Get battles
+* [list](docs/sdks/battles/README.md#list) - Get battles
 
 ### [Companies](docs/sdks/companies/README.md)
 
 * [getById](docs/sdks/companies/README.md#getbyid) - Get company by ID
-* [getAll](docs/sdks/companies/README.md#getall) - Get companies with pagination
+* [list](docs/sdks/companies/README.md#list) - Get companies with pagination
 
 ### [Countries](docs/sdks/countries/README.md)
 
@@ -129,10 +133,10 @@ run();
 
 * [getPaginated](docs/sdks/events/README.md#getpaginated) - Get paginated events
 
-### [GameConfigs](docs/sdks/gameconfigs/README.md)
+### [GameConfig](docs/sdks/gameconfig/README.md)
 
-* [getDates](docs/sdks/gameconfigs/README.md#getdates) - Get game dates
-* [get](docs/sdks/gameconfigs/README.md#get) - Get game configuration
+* [getDates](docs/sdks/gameconfig/README.md#getdates) - Get game dates
+* [get](docs/sdks/gameconfig/README.md#get) - Get game configuration
 
 ### [Governments](docs/sdks/governments/README.md)
 
@@ -140,37 +144,40 @@ run();
 
 ### [ItemOffers](docs/sdks/itemoffers/README.md)
 
-* [get](docs/sdks/itemoffers/README.md#get) - Get item offer by ID
+* [getById](docs/sdks/itemoffers/README.md#getbyid) - Get item offer by ID
 
 ### [ItemTradings](docs/sdks/itemtradings/README.md)
 
 * [getPrices](docs/sdks/itemtradings/README.md#getprices) - Get item prices
 
+### [MilitaryUnits](docs/sdks/militaryunits/README.md)
+
+* [getPaginated](docs/sdks/militaryunits/README.md#getpaginated) - Get military units (paginated)
+
 ### [Mus](docs/sdks/mus/README.md)
 
-* [get](docs/sdks/mus/README.md#get) - Get military unit by ID
-* [getPaginated](docs/sdks/mus/README.md#getpaginated) - Get military units (paginated)
+* [getById](docs/sdks/mus/README.md#getbyid) - Get military unit by ID
 
 ### [Rankings](docs/sdks/rankings/README.md)
 
 * [get](docs/sdks/rankings/README.md#get) - Get ranking data
 
-### [Region](docs/sdks/region/README.md)
-
-* [getById](docs/sdks/region/README.md#getbyid) - Get region by ID
-
 ### [Regions](docs/sdks/regions/README.md)
 
-* [getAll](docs/sdks/regions/README.md#getall) - Get all regions
+* [getById](docs/sdks/regions/README.md#getbyid) - Get region by ID
+* [list](docs/sdks/regions/README.md#list) - Get all regions
+
+### [Round](docs/sdks/round/README.md)
+
+* [getLastHits](docs/sdks/round/README.md#getlasthits) - Get last hits in round
 
 ### [Rounds](docs/sdks/rounds/README.md)
 
-* [get](docs/sdks/rounds/README.md#get) - Get round by ID
-* [getLastHits](docs/sdks/rounds/README.md#getlasthits) - Get last hits in round
+* [getById](docs/sdks/rounds/README.md#getbyid) - Get round by ID
 
 ### [Search](docs/sdks/search/README.md)
 
-* [perform](docs/sdks/search/README.md#perform) - Global search
+* [global](docs/sdks/search/README.md#global) - Global search
 
 ### [TradingOrders](docs/sdks/tradingorders/README.md)
 
@@ -178,7 +185,7 @@ run();
 
 ### [Transactions](docs/sdks/transactions/README.md)
 
-* [getAll](docs/sdks/transactions/README.md#getall) - Get paginated transactions
+* [listPaginated](docs/sdks/transactions/README.md#listpaginated) - Get paginated transactions
 
 ### [Upgrades](docs/sdks/upgrades/README.md)
 
@@ -187,12 +194,12 @@ run();
 ### [Users](docs/sdks/users/README.md)
 
 * [getLite](docs/sdks/users/README.md#getlite) - Get user profile (lite)
-* [getByCountry](docs/sdks/users/README.md#getbycountry) - Get users by country
+* [listByCountry](docs/sdks/users/README.md#listbycountry) - Get users by country
 
 ### [WorkOffers](docs/sdks/workoffers/README.md)
 
-* [get](docs/sdks/workoffers/README.md#get) - Get work offer by ID
-* [getByCompany](docs/sdks/workoffers/README.md#getbycompany) - Get work offer by company ID
+* [getById](docs/sdks/workoffers/README.md#getbyid) - Get work offer by ID
+* [getByCompanyId](docs/sdks/workoffers/README.md#getbycompanyid) - Get work offer by company ID
 * [getPaginated](docs/sdks/workoffers/README.md#getpaginated) - Get paginated work offers
 
 </details>
@@ -213,37 +220,37 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 
 <summary>Available standalone functions</summary>
 
-- [`articlesGet`](docs/sdks/articles/README.md#get) - Get article by ID
-- [`articlesGetPaginated`](docs/sdks/articles/README.md#getpaginated) - Get paginated articles
+- [`articlesGetById`](docs/sdks/articles/README.md#getbyid) - Get article by ID
+- [`articlesListPaginated`](docs/sdks/articles/README.md#listpaginated) - Get paginated articles
 - [`battleRankingsGet`](docs/sdks/battlerankings/README.md#get) - Get battle rankings
-- [`battlesGetAll`](docs/sdks/battles/README.md#getall) - Get battles
 - [`battlesGetById`](docs/sdks/battles/README.md#getbyid) - Get battle by ID
 - [`battlesGetLiveData`](docs/sdks/battles/README.md#getlivedata) - Get live battle data
-- [`companiesGetAll`](docs/sdks/companies/README.md#getall) - Get companies with pagination
+- [`battlesList`](docs/sdks/battles/README.md#list) - Get battles
 - [`companiesGetById`](docs/sdks/companies/README.md#getbyid) - Get company by ID
+- [`companiesList`](docs/sdks/companies/README.md#list) - Get companies with pagination
 - [`countriesGetAll`](docs/sdks/countries/README.md#getall) - Get all countries
 - [`countriesGetById`](docs/sdks/countries/README.md#getbyid) - Get country by ID
 - [`eventsGetPaginated`](docs/sdks/events/README.md#getpaginated) - Get paginated events
-- [`gameConfigsGet`](docs/sdks/gameconfigs/README.md#get) - Get game configuration
-- [`gameConfigsGetDates`](docs/sdks/gameconfigs/README.md#getdates) - Get game dates
+- [`gameConfigGet`](docs/sdks/gameconfig/README.md#get) - Get game configuration
+- [`gameConfigGetDates`](docs/sdks/gameconfig/README.md#getdates) - Get game dates
 - [`governmentsGetByCountryId`](docs/sdks/governments/README.md#getbycountryid) - Get government by country ID
-- [`itemOffersGet`](docs/sdks/itemoffers/README.md#get) - Get item offer by ID
+- [`itemOffersGetById`](docs/sdks/itemoffers/README.md#getbyid) - Get item offer by ID
 - [`itemTradingsGetPrices`](docs/sdks/itemtradings/README.md#getprices) - Get item prices
-- [`musGet`](docs/sdks/mus/README.md#get) - Get military unit by ID
-- [`musGetPaginated`](docs/sdks/mus/README.md#getpaginated) - Get military units (paginated)
+- [`militaryUnitsGetPaginated`](docs/sdks/militaryunits/README.md#getpaginated) - Get military units (paginated)
+- [`musGetById`](docs/sdks/mus/README.md#getbyid) - Get military unit by ID
 - [`rankingsGet`](docs/sdks/rankings/README.md#get) - Get ranking data
-- [`regionGetById`](docs/sdks/region/README.md#getbyid) - Get region by ID
-- [`regionsGetAll`](docs/sdks/regions/README.md#getall) - Get all regions
-- [`roundsGet`](docs/sdks/rounds/README.md#get) - Get round by ID
-- [`roundsGetLastHits`](docs/sdks/rounds/README.md#getlasthits) - Get last hits in round
-- [`searchPerform`](docs/sdks/search/README.md#perform) - Global search
+- [`regionsGetById`](docs/sdks/regions/README.md#getbyid) - Get region by ID
+- [`regionsList`](docs/sdks/regions/README.md#list) - Get all regions
+- [`roundGetLastHits`](docs/sdks/round/README.md#getlasthits) - Get last hits in round
+- [`roundsGetById`](docs/sdks/rounds/README.md#getbyid) - Get round by ID
+- [`searchGlobal`](docs/sdks/search/README.md#global) - Global search
 - [`tradingOrdersGetTop`](docs/sdks/tradingorders/README.md#gettop) - Get best orders for an item
-- [`transactionsGetAll`](docs/sdks/transactions/README.md#getall) - Get paginated transactions
+- [`transactionsListPaginated`](docs/sdks/transactions/README.md#listpaginated) - Get paginated transactions
 - [`upgradesGetByTypeAndEntity`](docs/sdks/upgrades/README.md#getbytypeandentity) - Get upgrade by type and entity
-- [`usersGetByCountry`](docs/sdks/users/README.md#getbycountry) - Get users by country
 - [`usersGetLite`](docs/sdks/users/README.md#getlite) - Get user profile (lite)
-- [`workOffersGet`](docs/sdks/workoffers/README.md#get) - Get work offer by ID
-- [`workOffersGetByCompany`](docs/sdks/workoffers/README.md#getbycompany) - Get work offer by company ID
+- [`usersListByCountry`](docs/sdks/users/README.md#listbycountry) - Get users by country
+- [`workOffersGetByCompanyId`](docs/sdks/workoffers/README.md#getbycompanyid) - Get work offer by company ID
+- [`workOffersGetById`](docs/sdks/workoffers/README.md#getbyid) - Get work offer by ID
 - [`workOffersGetPaginated`](docs/sdks/workoffers/README.md#getpaginated) - Get paginated work offers
 
 </details>
@@ -264,6 +271,10 @@ const warera = new Warera({
 
 async function run() {
   await warera.companies.getById({
+    input: {
+      companyId: "<id>",
+    },
+  }, {
     retries: {
       strategy: "backoff",
       backoff: {
@@ -300,7 +311,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.companies.getById();
+  await warera.companies.getById({
+    input: {
+      companyId: "<id>",
+    },
+  });
 }
 
 run();
@@ -332,7 +347,11 @@ const warera = new Warera({
 
 async function run() {
   try {
-    await warera.companies.getById();
+    await warera.companies.getById({
+      input: {
+        companyId: "<id>",
+      },
+    });
   } catch (error) {
     if (error instanceof errors.WarEraError) {
       console.log(error.message);

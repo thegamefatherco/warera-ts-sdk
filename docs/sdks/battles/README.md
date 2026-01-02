@@ -6,7 +6,7 @@
 
 * [getById](#getbyid) - Get battle by ID
 * [getLiveData](#getlivedata) - Get live battle data
-* [getAll](#getall) - Get battles
+* [list](#list) - Get battles
 
 ## getById
 
@@ -14,7 +14,7 @@ Retrieves detailed information about a specific battle
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="battle.getById" method="post" path="/battle.getById" -->
+<!-- UsageSnippet language="typescript" operationID="battle.getById" method="get" path="/battle.getById" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -23,7 +23,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.battles.getById();
+  await warera.battles.getById({
+    input: {
+      battleId: "<id>",
+    },
+  });
 
 
 }
@@ -46,7 +50,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await battlesGetById(warera);
+  const res = await battlesGetById(warera, {
+    input: {
+      battleId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
@@ -83,7 +91,7 @@ Retrieves real-time battle data including current round information
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="battle.getLiveBattleData" method="post" path="/battle.getLiveBattleData" -->
+<!-- UsageSnippet language="typescript" operationID="battle.getLiveBattleData" method="get" path="/battle.getLiveBattleData" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -92,7 +100,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.battles.getLiveData();
+  await warera.battles.getLiveData({
+    input: {
+      battleId: "<id>",
+    },
+  });
 
 
 }
@@ -115,7 +127,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await battlesGetLiveData(warera);
+  const res = await battlesGetLiveData(warera, {
+    input: {
+      battleId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
@@ -146,13 +162,13 @@ run();
 | ------------------------- | ------------------------- | ------------------------- |
 | errors.WarEraDefaultError | 4XX, 5XX                  | \*/\*                     |
 
-## getAll
+## list
 
 Retrieves a list of battles
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="battle.getBattles" method="post" path="/battle.getBattles" -->
+<!-- UsageSnippet language="typescript" operationID="battle.getBattles" method="get" path="/battle.getBattles" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -161,7 +177,7 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.battles.getAll();
+  await warera.battles.list();
 
 
 }
@@ -175,7 +191,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { battlesGetAll } from "@thegamefatherco/warera-sdk/funcs/battlesGetAll.js";
+import { battlesList } from "@thegamefatherco/warera-sdk/funcs/battlesList.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -184,12 +200,12 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await battlesGetAll(warera);
+  const res = await battlesList(warera);
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("battlesGetAll failed:", res.error);
+    console.log("battlesList failed:", res.error);
   }
 }
 

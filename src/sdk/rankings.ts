@@ -15,7 +15,7 @@ export class Rankings extends ClientSDK {
    * Retrieves ranking data for the specified ranking type and optional year-week filter
    */
   async get(
-    request?: operations.RankingGetRankingRequest | undefined,
+    request: operations.RankingGetRankingRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(rankingsGet(

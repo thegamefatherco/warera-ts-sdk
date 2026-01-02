@@ -5,7 +5,7 @@
 ### Available Operations
 
 * [getById](#getbyid) - Get company by ID
-* [getAll](#getall) - Get companies with pagination
+* [list](#list) - Get companies with pagination
 
 ## getById
 
@@ -13,7 +13,7 @@ Retrieves detailed information about a specific company
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="company.getById" method="post" path="/company.getById" -->
+<!-- UsageSnippet language="typescript" operationID="company.getById" method="get" path="/company.getById" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -22,7 +22,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.companies.getById();
+  await warera.companies.getById({
+    input: {
+      companyId: "<id>",
+    },
+  });
 
 
 }
@@ -45,7 +49,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await companiesGetById(warera);
+  const res = await companiesGetById(warera, {
+    input: {
+      companyId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
@@ -76,13 +84,13 @@ run();
 | ------------------------- | ------------------------- | ------------------------- |
 | errors.WarEraDefaultError | 4XX, 5XX                  | \*/\*                     |
 
-## getAll
+## list
 
 Retrieves a paginated list of companies with optional filtering
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="company.getCompanies" method="post" path="/company.getCompanies" -->
+<!-- UsageSnippet language="typescript" operationID="company.getCompanies" method="get" path="/company.getCompanies" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -91,7 +99,7 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.companies.getAll();
+  await warera.companies.list();
 
 
 }
@@ -105,7 +113,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { companiesGetAll } from "@thegamefatherco/warera-sdk/funcs/companiesGetAll.js";
+import { companiesList } from "@thegamefatherco/warera-sdk/funcs/companiesList.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -114,12 +122,12 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await companiesGetAll(warera);
+  const res = await companiesList(warera);
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("companiesGetAll failed:", res.error);
+    console.log("companiesList failed:", res.error);
   }
 }
 

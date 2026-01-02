@@ -6,12 +6,14 @@
 import { RoundGetLastHitsRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: RoundGetLastHitsRequest = {
-  roundId: "<id>",
+  input: {
+    roundId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                              | Type                               | Required                           | Description                        |
-| ---------------------------------- | ---------------------------------- | ---------------------------------- | ---------------------------------- |
-| `roundId`                          | *string*                           | :heavy_check_mark:                 | The unique identifier of the round |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `input`                                                                              | [operations.RoundGetLastHitsInput](../../models/operations/roundgetlasthitsinput.md) | :heavy_check_mark:                                                                   | JSON-encoded input parameters                                                        |

@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type EventGetEventsPaginatedRequest = {
+export type EventGetEventsPaginatedInput = {
   /**
    * The limit of events to get
    */
@@ -23,9 +23,16 @@ export type EventGetEventsPaginatedRequest = {
   countryId?: string | undefined;
 };
 
+export type EventGetEventsPaginatedRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: EventGetEventsPaginatedInput | undefined;
+};
+
 /** @internal */
-export const EventGetEventsPaginatedRequest$inboundSchema: z.ZodMiniType<
-  EventGetEventsPaginatedRequest,
+export const EventGetEventsPaginatedInput$inboundSchema: z.ZodMiniType<
+  EventGetEventsPaginatedInput,
   unknown
 > = z.object({
   limit: z._default(types.number(), 10),
@@ -33,10 +40,65 @@ export const EventGetEventsPaginatedRequest$inboundSchema: z.ZodMiniType<
   countryId: types.optional(types.string()),
 });
 /** @internal */
-export type EventGetEventsPaginatedRequest$Outbound = {
+export type EventGetEventsPaginatedInput$Outbound = {
   limit: number;
   cursor?: string | undefined;
   countryId?: string | undefined;
+};
+
+/** @internal */
+export const EventGetEventsPaginatedInput$outboundSchema: z.ZodMiniType<
+  EventGetEventsPaginatedInput$Outbound,
+  EventGetEventsPaginatedInput
+> = z.object({
+  limit: z._default(z.number(), 10),
+  cursor: z.optional(z.string()),
+  countryId: z.optional(z.string()),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EventGetEventsPaginatedInput$ {
+  /** @deprecated use `EventGetEventsPaginatedInput$inboundSchema` instead. */
+  export const inboundSchema = EventGetEventsPaginatedInput$inboundSchema;
+  /** @deprecated use `EventGetEventsPaginatedInput$outboundSchema` instead. */
+  export const outboundSchema = EventGetEventsPaginatedInput$outboundSchema;
+  /** @deprecated use `EventGetEventsPaginatedInput$Outbound` instead. */
+  export type Outbound = EventGetEventsPaginatedInput$Outbound;
+}
+
+export function eventGetEventsPaginatedInputToJSON(
+  eventGetEventsPaginatedInput: EventGetEventsPaginatedInput,
+): string {
+  return JSON.stringify(
+    EventGetEventsPaginatedInput$outboundSchema.parse(
+      eventGetEventsPaginatedInput,
+    ),
+  );
+}
+export function eventGetEventsPaginatedInputFromJSON(
+  jsonString: string,
+): SafeParseResult<EventGetEventsPaginatedInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EventGetEventsPaginatedInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EventGetEventsPaginatedInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const EventGetEventsPaginatedRequest$inboundSchema: z.ZodMiniType<
+  EventGetEventsPaginatedRequest,
+  unknown
+> = z.object({
+  input: types.optional(
+    z.lazy(() => EventGetEventsPaginatedInput$inboundSchema),
+  ),
+});
+/** @internal */
+export type EventGetEventsPaginatedRequest$Outbound = {
+  input?: EventGetEventsPaginatedInput$Outbound | undefined;
 };
 
 /** @internal */
@@ -44,9 +106,7 @@ export const EventGetEventsPaginatedRequest$outboundSchema: z.ZodMiniType<
   EventGetEventsPaginatedRequest$Outbound,
   EventGetEventsPaginatedRequest
 > = z.object({
-  limit: z._default(z.number(), 10),
-  cursor: z.optional(z.string()),
-  countryId: z.optional(z.string()),
+  input: z.optional(z.lazy(() => EventGetEventsPaginatedInput$outboundSchema)),
 });
 /**
  * @internal

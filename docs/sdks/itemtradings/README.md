@@ -12,7 +12,7 @@ Retrieves current market prices for all tradeable items
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="itemTrading.getPrices" method="post" path="/itemTrading.getPrices" -->
+<!-- UsageSnippet language="typescript" operationID="itemTrading.getPrices" method="get" path="/itemTrading.getPrices" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 

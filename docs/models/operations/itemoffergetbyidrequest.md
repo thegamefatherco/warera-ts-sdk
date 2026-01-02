@@ -6,12 +6,14 @@
 import { ItemOfferGetByIdRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: ItemOfferGetByIdRequest = {
-  itemOfferId: "<id>",
+  input: {
+    itemOfferId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `itemOfferId`      | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `input`                                                                              | [operations.ItemOfferGetByIdInput](../../models/operations/itemoffergetbyidinput.md) | :heavy_check_mark:                                                                   | JSON-encoded input parameters                                                        |

@@ -6,12 +6,14 @@
 import { WorkOfferGetByIdRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: WorkOfferGetByIdRequest = {
-  workOfferId: "<id>",
+  input: {
+    workOfferId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `workOfferId`      | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                                | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `input`                                                                              | [operations.WorkOfferGetByIdInput](../../models/operations/workoffergetbyidinput.md) | :heavy_check_mark:                                                                   | JSON-encoded input parameters                                                        |

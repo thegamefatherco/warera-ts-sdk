@@ -49,7 +49,7 @@ export const Side = {
  */
 export type Side = ClosedEnum<typeof Side>;
 
-export type BattleRankingGetRankingRequest = {
+export type BattleRankingGetRankingInput = {
   /**
    * Optional battle ID to filter rankings
    */
@@ -74,6 +74,13 @@ export type BattleRankingGetRankingRequest = {
    * Which side of the battle to rank
    */
   side: Side;
+};
+
+export type BattleRankingGetRankingRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: BattleRankingGetRankingInput;
 };
 
 /** @internal */
@@ -130,8 +137,8 @@ export namespace Side$ {
 }
 
 /** @internal */
-export const BattleRankingGetRankingRequest$inboundSchema: z.ZodMiniType<
-  BattleRankingGetRankingRequest,
+export const BattleRankingGetRankingInput$inboundSchema: z.ZodMiniType<
+  BattleRankingGetRankingInput,
   unknown
 > = z.object({
   battleId: types.optional(types.string()),
@@ -142,7 +149,7 @@ export const BattleRankingGetRankingRequest$inboundSchema: z.ZodMiniType<
   side: Side$inboundSchema,
 });
 /** @internal */
-export type BattleRankingGetRankingRequest$Outbound = {
+export type BattleRankingGetRankingInput$Outbound = {
   battleId?: string | undefined;
   roundId?: string | undefined;
   warId?: string | undefined;
@@ -152,9 +159,9 @@ export type BattleRankingGetRankingRequest$Outbound = {
 };
 
 /** @internal */
-export const BattleRankingGetRankingRequest$outboundSchema: z.ZodMiniType<
-  BattleRankingGetRankingRequest$Outbound,
-  BattleRankingGetRankingRequest
+export const BattleRankingGetRankingInput$outboundSchema: z.ZodMiniType<
+  BattleRankingGetRankingInput$Outbound,
+  BattleRankingGetRankingInput
 > = z.object({
   battleId: z.optional(z.string()),
   roundId: z.optional(z.string()),
@@ -162,6 +169,57 @@ export const BattleRankingGetRankingRequest$outboundSchema: z.ZodMiniType<
   dataType: DataType$outboundSchema,
   type: BattleRankingGetRankingType$outboundSchema,
   side: Side$outboundSchema,
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleRankingGetRankingInput$ {
+  /** @deprecated use `BattleRankingGetRankingInput$inboundSchema` instead. */
+  export const inboundSchema = BattleRankingGetRankingInput$inboundSchema;
+  /** @deprecated use `BattleRankingGetRankingInput$outboundSchema` instead. */
+  export const outboundSchema = BattleRankingGetRankingInput$outboundSchema;
+  /** @deprecated use `BattleRankingGetRankingInput$Outbound` instead. */
+  export type Outbound = BattleRankingGetRankingInput$Outbound;
+}
+
+export function battleRankingGetRankingInputToJSON(
+  battleRankingGetRankingInput: BattleRankingGetRankingInput,
+): string {
+  return JSON.stringify(
+    BattleRankingGetRankingInput$outboundSchema.parse(
+      battleRankingGetRankingInput,
+    ),
+  );
+}
+export function battleRankingGetRankingInputFromJSON(
+  jsonString: string,
+): SafeParseResult<BattleRankingGetRankingInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BattleRankingGetRankingInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BattleRankingGetRankingInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const BattleRankingGetRankingRequest$inboundSchema: z.ZodMiniType<
+  BattleRankingGetRankingRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => BattleRankingGetRankingInput$inboundSchema),
+});
+/** @internal */
+export type BattleRankingGetRankingRequest$Outbound = {
+  input: BattleRankingGetRankingInput$Outbound;
+};
+
+/** @internal */
+export const BattleRankingGetRankingRequest$outboundSchema: z.ZodMiniType<
+  BattleRankingGetRankingRequest$Outbound,
+  BattleRankingGetRankingRequest
+> = z.object({
+  input: z.lazy(() => BattleRankingGetRankingInput$outboundSchema),
 });
 /**
  * @internal

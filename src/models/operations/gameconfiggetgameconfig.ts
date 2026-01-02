@@ -5,23 +5,84 @@
 import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GameConfigGetGameConfigRequest = {};
+export type GameConfigGetGameConfigInput = {};
+
+export type GameConfigGetGameConfigRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: GameConfigGetGameConfigInput | undefined;
+};
+
+/** @internal */
+export const GameConfigGetGameConfigInput$inboundSchema: z.ZodMiniType<
+  GameConfigGetGameConfigInput,
+  unknown
+> = z.object({});
+/** @internal */
+export type GameConfigGetGameConfigInput$Outbound = {};
+
+/** @internal */
+export const GameConfigGetGameConfigInput$outboundSchema: z.ZodMiniType<
+  GameConfigGetGameConfigInput$Outbound,
+  GameConfigGetGameConfigInput
+> = z.object({});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GameConfigGetGameConfigInput$ {
+  /** @deprecated use `GameConfigGetGameConfigInput$inboundSchema` instead. */
+  export const inboundSchema = GameConfigGetGameConfigInput$inboundSchema;
+  /** @deprecated use `GameConfigGetGameConfigInput$outboundSchema` instead. */
+  export const outboundSchema = GameConfigGetGameConfigInput$outboundSchema;
+  /** @deprecated use `GameConfigGetGameConfigInput$Outbound` instead. */
+  export type Outbound = GameConfigGetGameConfigInput$Outbound;
+}
+
+export function gameConfigGetGameConfigInputToJSON(
+  gameConfigGetGameConfigInput: GameConfigGetGameConfigInput,
+): string {
+  return JSON.stringify(
+    GameConfigGetGameConfigInput$outboundSchema.parse(
+      gameConfigGetGameConfigInput,
+    ),
+  );
+}
+export function gameConfigGetGameConfigInputFromJSON(
+  jsonString: string,
+): SafeParseResult<GameConfigGetGameConfigInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GameConfigGetGameConfigInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GameConfigGetGameConfigInput' from JSON`,
+  );
+}
 
 /** @internal */
 export const GameConfigGetGameConfigRequest$inboundSchema: z.ZodMiniType<
   GameConfigGetGameConfigRequest,
   unknown
-> = z.object({});
+> = z.object({
+  input: types.optional(
+    z.lazy(() => GameConfigGetGameConfigInput$inboundSchema),
+  ),
+});
 /** @internal */
-export type GameConfigGetGameConfigRequest$Outbound = {};
+export type GameConfigGetGameConfigRequest$Outbound = {
+  input?: GameConfigGetGameConfigInput$Outbound | undefined;
+};
 
 /** @internal */
 export const GameConfigGetGameConfigRequest$outboundSchema: z.ZodMiniType<
   GameConfigGetGameConfigRequest$Outbound,
   GameConfigGetGameConfigRequest
-> = z.object({});
+> = z.object({
+  input: z.optional(z.lazy(() => GameConfigGetGameConfigInput$outboundSchema)),
+});
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

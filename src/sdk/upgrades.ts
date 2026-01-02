@@ -15,7 +15,7 @@ export class Upgrades extends ClientSDK {
    * Retrieves upgrade information for a specific upgrade type and entity (region, company, or military unit)
    */
   async getByTypeAndEntity(
-    request?: operations.UpgradeGetUpgradeByTypeAndEntityRequest | undefined,
+    request: operations.UpgradeGetUpgradeByTypeAndEntityRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(upgradesGetByTypeAndEntity(

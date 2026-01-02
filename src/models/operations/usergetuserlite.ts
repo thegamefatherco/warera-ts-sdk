@@ -8,23 +8,79 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type UserGetUserLiteRequest = {
+export type UserGetUserLiteInput = {
   /**
    * The unique identifier of the user
    */
   userId: string;
 };
 
+export type UserGetUserLiteRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: UserGetUserLiteInput;
+};
+
 /** @internal */
-export const UserGetUserLiteRequest$inboundSchema: z.ZodMiniType<
-  UserGetUserLiteRequest,
+export const UserGetUserLiteInput$inboundSchema: z.ZodMiniType<
+  UserGetUserLiteInput,
   unknown
 > = z.object({
   userId: types.string(),
 });
 /** @internal */
-export type UserGetUserLiteRequest$Outbound = {
+export type UserGetUserLiteInput$Outbound = {
   userId: string;
+};
+
+/** @internal */
+export const UserGetUserLiteInput$outboundSchema: z.ZodMiniType<
+  UserGetUserLiteInput$Outbound,
+  UserGetUserLiteInput
+> = z.object({
+  userId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UserGetUserLiteInput$ {
+  /** @deprecated use `UserGetUserLiteInput$inboundSchema` instead. */
+  export const inboundSchema = UserGetUserLiteInput$inboundSchema;
+  /** @deprecated use `UserGetUserLiteInput$outboundSchema` instead. */
+  export const outboundSchema = UserGetUserLiteInput$outboundSchema;
+  /** @deprecated use `UserGetUserLiteInput$Outbound` instead. */
+  export type Outbound = UserGetUserLiteInput$Outbound;
+}
+
+export function userGetUserLiteInputToJSON(
+  userGetUserLiteInput: UserGetUserLiteInput,
+): string {
+  return JSON.stringify(
+    UserGetUserLiteInput$outboundSchema.parse(userGetUserLiteInput),
+  );
+}
+export function userGetUserLiteInputFromJSON(
+  jsonString: string,
+): SafeParseResult<UserGetUserLiteInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserGetUserLiteInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserGetUserLiteInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const UserGetUserLiteRequest$inboundSchema: z.ZodMiniType<
+  UserGetUserLiteRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => UserGetUserLiteInput$inboundSchema),
+});
+/** @internal */
+export type UserGetUserLiteRequest$Outbound = {
+  input: UserGetUserLiteInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +88,7 @@ export const UserGetUserLiteRequest$outboundSchema: z.ZodMiniType<
   UserGetUserLiteRequest$Outbound,
   UserGetUserLiteRequest
 > = z.object({
-  userId: z.string(),
+  input: z.lazy(() => UserGetUserLiteInput$outboundSchema),
 });
 /**
  * @internal

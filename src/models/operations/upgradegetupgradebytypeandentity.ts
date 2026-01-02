@@ -26,7 +26,7 @@ export const UpgradeType = {
  */
 export type UpgradeType = ClosedEnum<typeof UpgradeType>;
 
-export type UpgradeGetUpgradeByTypeAndEntityRequest = {
+export type UpgradeGetUpgradeByTypeAndEntityInput = {
   /**
    * The upgrade type to get
    */
@@ -43,6 +43,13 @@ export type UpgradeGetUpgradeByTypeAndEntityRequest = {
    * The military unit ID to get upgrade for
    */
   muId?: string | undefined;
+};
+
+export type UpgradeGetUpgradeByTypeAndEntityRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: UpgradeGetUpgradeByTypeAndEntityInput;
 };
 
 /** @internal */
@@ -63,19 +70,77 @@ export namespace UpgradeType$ {
 }
 
 /** @internal */
-export const UpgradeGetUpgradeByTypeAndEntityRequest$inboundSchema:
-  z.ZodMiniType<UpgradeGetUpgradeByTypeAndEntityRequest, unknown> = z.object({
-    upgradeType: UpgradeType$inboundSchema,
-    regionId: types.optional(types.string()),
-    companyId: types.optional(types.string()),
-    muId: types.optional(types.string()),
-  });
+export const UpgradeGetUpgradeByTypeAndEntityInput$inboundSchema: z.ZodMiniType<
+  UpgradeGetUpgradeByTypeAndEntityInput,
+  unknown
+> = z.object({
+  upgradeType: UpgradeType$inboundSchema,
+  regionId: types.optional(types.string()),
+  companyId: types.optional(types.string()),
+  muId: types.optional(types.string()),
+});
 /** @internal */
-export type UpgradeGetUpgradeByTypeAndEntityRequest$Outbound = {
+export type UpgradeGetUpgradeByTypeAndEntityInput$Outbound = {
   upgradeType: string;
   regionId?: string | undefined;
   companyId?: string | undefined;
   muId?: string | undefined;
+};
+
+/** @internal */
+export const UpgradeGetUpgradeByTypeAndEntityInput$outboundSchema:
+  z.ZodMiniType<
+    UpgradeGetUpgradeByTypeAndEntityInput$Outbound,
+    UpgradeGetUpgradeByTypeAndEntityInput
+  > = z.object({
+    upgradeType: UpgradeType$outboundSchema,
+    regionId: z.optional(z.string()),
+    companyId: z.optional(z.string()),
+    muId: z.optional(z.string()),
+  });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpgradeGetUpgradeByTypeAndEntityInput$ {
+  /** @deprecated use `UpgradeGetUpgradeByTypeAndEntityInput$inboundSchema` instead. */
+  export const inboundSchema =
+    UpgradeGetUpgradeByTypeAndEntityInput$inboundSchema;
+  /** @deprecated use `UpgradeGetUpgradeByTypeAndEntityInput$outboundSchema` instead. */
+  export const outboundSchema =
+    UpgradeGetUpgradeByTypeAndEntityInput$outboundSchema;
+  /** @deprecated use `UpgradeGetUpgradeByTypeAndEntityInput$Outbound` instead. */
+  export type Outbound = UpgradeGetUpgradeByTypeAndEntityInput$Outbound;
+}
+
+export function upgradeGetUpgradeByTypeAndEntityInputToJSON(
+  upgradeGetUpgradeByTypeAndEntityInput: UpgradeGetUpgradeByTypeAndEntityInput,
+): string {
+  return JSON.stringify(
+    UpgradeGetUpgradeByTypeAndEntityInput$outboundSchema.parse(
+      upgradeGetUpgradeByTypeAndEntityInput,
+    ),
+  );
+}
+export function upgradeGetUpgradeByTypeAndEntityInputFromJSON(
+  jsonString: string,
+): SafeParseResult<UpgradeGetUpgradeByTypeAndEntityInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpgradeGetUpgradeByTypeAndEntityInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UpgradeGetUpgradeByTypeAndEntityInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const UpgradeGetUpgradeByTypeAndEntityRequest$inboundSchema:
+  z.ZodMiniType<UpgradeGetUpgradeByTypeAndEntityRequest, unknown> = z.object({
+    input: z.lazy(() => UpgradeGetUpgradeByTypeAndEntityInput$inboundSchema),
+  });
+/** @internal */
+export type UpgradeGetUpgradeByTypeAndEntityRequest$Outbound = {
+  input: UpgradeGetUpgradeByTypeAndEntityInput$Outbound;
 };
 
 /** @internal */
@@ -84,10 +149,7 @@ export const UpgradeGetUpgradeByTypeAndEntityRequest$outboundSchema:
     UpgradeGetUpgradeByTypeAndEntityRequest$Outbound,
     UpgradeGetUpgradeByTypeAndEntityRequest
   > = z.object({
-    upgradeType: UpgradeType$outboundSchema,
-    regionId: z.optional(z.string()),
-    companyId: z.optional(z.string()),
-    muId: z.optional(z.string()),
+    input: z.lazy(() => UpgradeGetUpgradeByTypeAndEntityInput$outboundSchema),
   });
 /**
  * @internal

@@ -4,16 +4,16 @@
 
 ### Available Operations
 
-* [get](#get) - Get article by ID
-* [getPaginated](#getpaginated) - Get paginated articles
+* [getById](#getbyid) - Get article by ID
+* [listPaginated](#listpaginated) - Get paginated articles
 
-## get
+## getById
 
 Retrieves detailed information about a specific article
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="article.getArticleById" method="post" path="/article.getArticleById" -->
+<!-- UsageSnippet language="typescript" operationID="article.getArticleById" method="get" path="/article.getArticleById" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -22,7 +22,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.articles.get();
+  await warera.articles.getById({
+    input: {
+      articleId: "<id>",
+    },
+  });
 
 
 }
@@ -36,7 +40,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { articlesGet } from "@thegamefatherco/warera-sdk/funcs/articlesGet.js";
+import { articlesGetById } from "@thegamefatherco/warera-sdk/funcs/articlesGetById.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -45,12 +49,16 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await articlesGet(warera);
+  const res = await articlesGetById(warera, {
+    input: {
+      articleId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("articlesGet failed:", res.error);
+    console.log("articlesGetById failed:", res.error);
   }
 }
 
@@ -76,13 +84,13 @@ run();
 | ------------------------- | ------------------------- | ------------------------- |
 | errors.WarEraDefaultError | 4XX, 5XX                  | \*/\*                     |
 
-## getPaginated
+## listPaginated
 
 Retrieves a paginated list of articles
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="article.getArticlesPaginated" method="post" path="/article.getArticlesPaginated" -->
+<!-- UsageSnippet language="typescript" operationID="article.getArticlesPaginated" method="get" path="/article.getArticlesPaginated" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -91,7 +99,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.articles.getPaginated();
+  await warera.articles.listPaginated({
+    input: {
+      type: "top",
+    },
+  });
 
 
 }
@@ -105,7 +117,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { articlesGetPaginated } from "@thegamefatherco/warera-sdk/funcs/articlesGetPaginated.js";
+import { articlesListPaginated } from "@thegamefatherco/warera-sdk/funcs/articlesListPaginated.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -114,12 +126,16 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await articlesGetPaginated(warera);
+  const res = await articlesListPaginated(warera, {
+    input: {
+      type: "top",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("articlesGetPaginated failed:", res.error);
+    console.log("articlesListPaginated failed:", res.error);
   }
 }
 

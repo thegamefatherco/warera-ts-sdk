@@ -8,20 +8,72 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type MuGetByIdRequest = {
+export type MuGetByIdInput = {
   muId: string;
 };
+
+export type MuGetByIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: MuGetByIdInput;
+};
+
+/** @internal */
+export const MuGetByIdInput$inboundSchema: z.ZodMiniType<
+  MuGetByIdInput,
+  unknown
+> = z.object({
+  muId: types.string(),
+});
+/** @internal */
+export type MuGetByIdInput$Outbound = {
+  muId: string;
+};
+
+/** @internal */
+export const MuGetByIdInput$outboundSchema: z.ZodMiniType<
+  MuGetByIdInput$Outbound,
+  MuGetByIdInput
+> = z.object({
+  muId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MuGetByIdInput$ {
+  /** @deprecated use `MuGetByIdInput$inboundSchema` instead. */
+  export const inboundSchema = MuGetByIdInput$inboundSchema;
+  /** @deprecated use `MuGetByIdInput$outboundSchema` instead. */
+  export const outboundSchema = MuGetByIdInput$outboundSchema;
+  /** @deprecated use `MuGetByIdInput$Outbound` instead. */
+  export type Outbound = MuGetByIdInput$Outbound;
+}
+
+export function muGetByIdInputToJSON(muGetByIdInput: MuGetByIdInput): string {
+  return JSON.stringify(MuGetByIdInput$outboundSchema.parse(muGetByIdInput));
+}
+export function muGetByIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<MuGetByIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MuGetByIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MuGetByIdInput' from JSON`,
+  );
+}
 
 /** @internal */
 export const MuGetByIdRequest$inboundSchema: z.ZodMiniType<
   MuGetByIdRequest,
   unknown
 > = z.object({
-  muId: types.string(),
+  input: z.lazy(() => MuGetByIdInput$inboundSchema),
 });
 /** @internal */
 export type MuGetByIdRequest$Outbound = {
-  muId: string;
+  input: MuGetByIdInput$Outbound;
 };
 
 /** @internal */
@@ -29,7 +81,7 @@ export const MuGetByIdRequest$outboundSchema: z.ZodMiniType<
   MuGetByIdRequest$Outbound,
   MuGetByIdRequest
 > = z.object({
-  muId: z.string(),
+  input: z.lazy(() => MuGetByIdInput$outboundSchema),
 });
 /**
  * @internal

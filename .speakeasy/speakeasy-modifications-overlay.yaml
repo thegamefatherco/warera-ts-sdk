@@ -2,7 +2,7 @@ overlay: 1.0.0
 x-speakeasy-jsonpath: rfc9535
 info:
   title: Speakeasy Modifications
-  version: 0.0.2
+  version: 0.0.4
   x-speakeasy-metadata:
     after: ""
     before: ""
@@ -325,4 +325,320 @@ actions:
       before: sdk.mu.mu.getManyPaginated()
       created_at: 1767346511721
       reviewed_at: 1767349365672
+      type: method-name
+  - target: $["paths"]["/workOffer.getWorkOffersPaginated"]["get"]
+    update:
+      x-speakeasy-group: workOffers
+      x-speakeasy-name-override: getPaginated
+    x-speakeasy-metadata:
+      after: sdk.workOffers.getPaginated()
+      before: sdk.workOffer.workOffer.getWorkOffersPaginated()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/user.getUsersByCountry"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: listByCountry
+    x-speakeasy-metadata:
+      after: sdk.users.listByCountry()
+      before: sdk.user.user.getUsersByCountry()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/gameConfig.getGameConfig"]["get"]
+    update:
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.gameConfig.get()
+      before: sdk.gameConfig.gameConfig.getGameConfig()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/gameConfig.getDates"]["get"]
+    update:
+      x-speakeasy-name-override: getDates
+    x-speakeasy-metadata:
+      after: sdk.gameConfig.getDates()
+      before: sdk.gameConfig.gameConfig.getDates()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/battleRanking.getRanking"]["get"]
+    update:
+      x-speakeasy-group: battleRankings
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.battleRankings.get()
+      before: sdk.battleRanking.battleRanking.getRanking()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/country.getCountryById"]["get"]
+    update:
+      x-speakeasy-group: countries
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.countries.getById()
+      before: sdk.country.country.getCountryById()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/country.getAllCountries"]["get"]
+    update:
+      x-speakeasy-group: countries
+      x-speakeasy-name-override: getAll
+    x-speakeasy-metadata:
+      after: sdk.countries.getAll()
+      before: sdk.country.country.getAllCountries()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/ranking.getRanking"]["get"]
+    update:
+      x-speakeasy-group: rankings
+      x-speakeasy-name-override: get
+    x-speakeasy-metadata:
+      after: sdk.rankings.get()
+      before: sdk.ranking.ranking.getRanking()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/workOffer.getById"]["get"]
+    update:
+      x-speakeasy-group: workOffers
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.workOffers.getById()
+      before: sdk.workOffer.workOffer.getById()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/company.getCompanies"]["get"]
+    update:
+      x-speakeasy-group: companies
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.companies.list()
+      before: sdk.company.company.getCompanies()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/tradingOrder.getTopOrders"]["get"]
+    update:
+      x-speakeasy-group: tradingOrders
+      x-speakeasy-name-override: getTop
+    x-speakeasy-metadata:
+      after: sdk.tradingOrders.getTop()
+      before: sdk.tradingOrder.tradingOrder.getTopOrders()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/battle.getById"]["get"]
+    update:
+      x-speakeasy-group: battles
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.battles.getById()
+      before: sdk.battle.battle.getById()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/itemTrading.getPrices"]["get"]
+    update:
+      x-speakeasy-group: itemTradings
+      x-speakeasy-name-override: getPrices
+    x-speakeasy-metadata:
+      after: sdk.itemTradings.getPrices()
+      before: sdk.itemTrading.itemTrading.getPrices()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/mu.getById"]["get"]
+    update:
+      x-speakeasy-group: mus
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.mus.getById()
+      before: sdk.mu.mu.getById()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/battle.getBattles"]["get"]
+    update:
+      x-speakeasy-group: battles
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.battles.list()
+      before: sdk.battle.battle.getBattles()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/workOffer.getWorkOfferByCompanyId"]["get"]
+    update:
+      x-speakeasy-group: workOffers
+      x-speakeasy-name-override: getByCompanyId
+    x-speakeasy-metadata:
+      after: sdk.workOffers.getByCompanyId()
+      before: sdk.workOffer.workOffer.getWorkOfferByCompanyId()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/battle.getLiveBattleData"]["get"]
+    update:
+      x-speakeasy-group: battles
+      x-speakeasy-name-override: getLiveData
+    x-speakeasy-metadata:
+      after: sdk.battles.getLiveData()
+      before: sdk.battle.battle.getLiveBattleData()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/government.getByCountryId"]["get"]
+    update:
+      x-speakeasy-group: governments
+      x-speakeasy-name-override: getByCountryId
+    x-speakeasy-metadata:
+      after: sdk.governments.getByCountryId()
+      before: sdk.government.government.getByCountryId()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/user.getUserLite"]["get"]
+    update:
+      x-speakeasy-group: users
+      x-speakeasy-name-override: getLite
+    x-speakeasy-metadata:
+      after: sdk.users.getLite()
+      before: sdk.user.user.getUserLite()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/itemOffer.getById"]["get"]
+    update:
+      x-speakeasy-group: itemOffers
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.itemOffers.getById()
+      before: sdk.itemOffer.itemOffer.getById()
+      created_at: 1767364956345
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/mu.getManyPaginated"]["get"]
+    update:
+      x-speakeasy-group: militaryUnits
+      x-speakeasy-name-override: getPaginated
+    x-speakeasy-metadata:
+      after: sdk.militaryUnits.getPaginated()
+      before: sdk.mu.mu.getManyPaginated()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/region.getById"]["get"]
+    update:
+      x-speakeasy-group: regions
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.regions.getById()
+      before: sdk.region.region.getById()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/round.getById"]["get"]
+    update:
+      x-speakeasy-group: rounds
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.rounds.getById()
+      before: sdk.round.round.getById()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/search.searchAnything"]["get"]
+    update:
+      x-speakeasy-name-override: global
+    x-speakeasy-metadata:
+      after: sdk.search.global()
+      before: sdk.search.search.searchAnything()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/article.getArticleById"]["get"]
+    update:
+      x-speakeasy-group: articles
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.articles.getById()
+      before: sdk.article.article.getArticleById()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/round.getLastHits"]["get"]
+    update:
+      x-speakeasy-name-override: getLastHits
+    x-speakeasy-metadata:
+      after: sdk.round.getLastHits()
+      before: sdk.round.round.getLastHits()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/region.getRegionsObject"]["get"]
+    update:
+      x-speakeasy-group: regions
+      x-speakeasy-name-override: list
+    x-speakeasy-metadata:
+      after: sdk.regions.list()
+      before: sdk.region.region.getRegionsObject()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/upgrade.getUpgradeByTypeAndEntity"]["get"]
+    update:
+      x-speakeasy-group: upgrades
+      x-speakeasy-name-override: getByTypeAndEntity
+    x-speakeasy-metadata:
+      after: sdk.upgrades.getByTypeAndEntity()
+      before: sdk.upgrade.upgrade.getUpgradeByTypeAndEntity()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/article.getArticlesPaginated"]["get"]
+    update:
+      x-speakeasy-group: articles
+      x-speakeasy-name-override: listPaginated
+    x-speakeasy-metadata:
+      after: sdk.articles.listPaginated()
+      before: sdk.article.article.getArticlesPaginated()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/company.getById"]["get"]
+    update:
+      x-speakeasy-group: companies
+      x-speakeasy-name-override: getById
+    x-speakeasy-metadata:
+      after: sdk.companies.getById()
+      before: sdk.company.company.getById()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/transaction.getPaginatedTransactions"]["get"]
+    update:
+      x-speakeasy-group: transactions
+      x-speakeasy-name-override: listPaginated
+    x-speakeasy-metadata:
+      after: sdk.transactions.listPaginated()
+      before: sdk.transaction.transaction.getPaginatedTransactions()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
+      type: method-name
+  - target: $["paths"]["/event.getEventsPaginated"]["get"]
+    update:
+      x-speakeasy-group: events
+      x-speakeasy-name-override: getPaginated
+    x-speakeasy-metadata:
+      after: sdk.events.getPaginated()
+      before: sdk.event.event.getEventsPaginated()
+      created_at: 1767364956346
+      reviewed_at: 1767365056799
       type: method-name

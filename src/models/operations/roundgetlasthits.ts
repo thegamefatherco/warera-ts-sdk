@@ -8,23 +8,79 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type RoundGetLastHitsRequest = {
+export type RoundGetLastHitsInput = {
   /**
    * The unique identifier of the round
    */
   roundId: string;
 };
 
+export type RoundGetLastHitsRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: RoundGetLastHitsInput;
+};
+
 /** @internal */
-export const RoundGetLastHitsRequest$inboundSchema: z.ZodMiniType<
-  RoundGetLastHitsRequest,
+export const RoundGetLastHitsInput$inboundSchema: z.ZodMiniType<
+  RoundGetLastHitsInput,
   unknown
 > = z.object({
   roundId: types.string(),
 });
 /** @internal */
-export type RoundGetLastHitsRequest$Outbound = {
+export type RoundGetLastHitsInput$Outbound = {
   roundId: string;
+};
+
+/** @internal */
+export const RoundGetLastHitsInput$outboundSchema: z.ZodMiniType<
+  RoundGetLastHitsInput$Outbound,
+  RoundGetLastHitsInput
+> = z.object({
+  roundId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RoundGetLastHitsInput$ {
+  /** @deprecated use `RoundGetLastHitsInput$inboundSchema` instead. */
+  export const inboundSchema = RoundGetLastHitsInput$inboundSchema;
+  /** @deprecated use `RoundGetLastHitsInput$outboundSchema` instead. */
+  export const outboundSchema = RoundGetLastHitsInput$outboundSchema;
+  /** @deprecated use `RoundGetLastHitsInput$Outbound` instead. */
+  export type Outbound = RoundGetLastHitsInput$Outbound;
+}
+
+export function roundGetLastHitsInputToJSON(
+  roundGetLastHitsInput: RoundGetLastHitsInput,
+): string {
+  return JSON.stringify(
+    RoundGetLastHitsInput$outboundSchema.parse(roundGetLastHitsInput),
+  );
+}
+export function roundGetLastHitsInputFromJSON(
+  jsonString: string,
+): SafeParseResult<RoundGetLastHitsInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RoundGetLastHitsInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoundGetLastHitsInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const RoundGetLastHitsRequest$inboundSchema: z.ZodMiniType<
+  RoundGetLastHitsRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => RoundGetLastHitsInput$inboundSchema),
+});
+/** @internal */
+export type RoundGetLastHitsRequest$Outbound = {
+  input: RoundGetLastHitsInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +88,7 @@ export const RoundGetLastHitsRequest$outboundSchema: z.ZodMiniType<
   RoundGetLastHitsRequest$Outbound,
   RoundGetLastHitsRequest
 > = z.object({
-  roundId: z.string(),
+  input: z.lazy(() => RoundGetLastHitsInput$outboundSchema),
 });
 /**
  * @internal

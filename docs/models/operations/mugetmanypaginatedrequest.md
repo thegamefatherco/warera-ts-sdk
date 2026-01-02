@@ -10,11 +10,6 @@ let value: MuGetManyPaginatedRequest = {};
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `limit`            | *number*           | :heavy_minus_sign: | N/A                |
-| `cursor`           | *string*           | :heavy_minus_sign: | N/A                |
-| `memberId`         | *string*           | :heavy_minus_sign: | N/A                |
-| `userId`           | *string*           | :heavy_minus_sign: | N/A                |
-| `orgId`            | *string*           | :heavy_minus_sign: | N/A                |
-| `search`           | *string*           | :heavy_minus_sign: | N/A                |
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `input`                                                                                  | [operations.MuGetManyPaginatedInput](../../models/operations/mugetmanypaginatedinput.md) | :heavy_minus_sign:                                                                       | JSON-encoded input parameters                                                            |

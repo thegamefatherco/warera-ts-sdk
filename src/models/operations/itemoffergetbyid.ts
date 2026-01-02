@@ -8,20 +8,76 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type ItemOfferGetByIdRequest = {
+export type ItemOfferGetByIdInput = {
   itemOfferId: string;
 };
+
+export type ItemOfferGetByIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: ItemOfferGetByIdInput;
+};
+
+/** @internal */
+export const ItemOfferGetByIdInput$inboundSchema: z.ZodMiniType<
+  ItemOfferGetByIdInput,
+  unknown
+> = z.object({
+  itemOfferId: types.string(),
+});
+/** @internal */
+export type ItemOfferGetByIdInput$Outbound = {
+  itemOfferId: string;
+};
+
+/** @internal */
+export const ItemOfferGetByIdInput$outboundSchema: z.ZodMiniType<
+  ItemOfferGetByIdInput$Outbound,
+  ItemOfferGetByIdInput
+> = z.object({
+  itemOfferId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ItemOfferGetByIdInput$ {
+  /** @deprecated use `ItemOfferGetByIdInput$inboundSchema` instead. */
+  export const inboundSchema = ItemOfferGetByIdInput$inboundSchema;
+  /** @deprecated use `ItemOfferGetByIdInput$outboundSchema` instead. */
+  export const outboundSchema = ItemOfferGetByIdInput$outboundSchema;
+  /** @deprecated use `ItemOfferGetByIdInput$Outbound` instead. */
+  export type Outbound = ItemOfferGetByIdInput$Outbound;
+}
+
+export function itemOfferGetByIdInputToJSON(
+  itemOfferGetByIdInput: ItemOfferGetByIdInput,
+): string {
+  return JSON.stringify(
+    ItemOfferGetByIdInput$outboundSchema.parse(itemOfferGetByIdInput),
+  );
+}
+export function itemOfferGetByIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<ItemOfferGetByIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ItemOfferGetByIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ItemOfferGetByIdInput' from JSON`,
+  );
+}
 
 /** @internal */
 export const ItemOfferGetByIdRequest$inboundSchema: z.ZodMiniType<
   ItemOfferGetByIdRequest,
   unknown
 > = z.object({
-  itemOfferId: types.string(),
+  input: z.lazy(() => ItemOfferGetByIdInput$inboundSchema),
 });
 /** @internal */
 export type ItemOfferGetByIdRequest$Outbound = {
-  itemOfferId: string;
+  input: ItemOfferGetByIdInput$Outbound;
 };
 
 /** @internal */
@@ -29,7 +85,7 @@ export const ItemOfferGetByIdRequest$outboundSchema: z.ZodMiniType<
   ItemOfferGetByIdRequest$Outbound,
   ItemOfferGetByIdRequest
 > = z.object({
-  itemOfferId: z.string(),
+  input: z.lazy(() => ItemOfferGetByIdInput$outboundSchema),
 });
 /**
  * @internal

@@ -15,7 +15,7 @@ export class TradingOrders extends ClientSDK {
    * Retrieves the best orders for an item
    */
   async getTop(
-    request?: operations.TradingOrderGetTopOrdersRequest | undefined,
+    request: operations.TradingOrderGetTopOrdersRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(tradingOrdersGetTop(

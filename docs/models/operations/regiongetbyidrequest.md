@@ -6,12 +6,14 @@
 import { RegionGetByIdRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: RegionGetByIdRequest = {
-  regionId: "<id>",
+  input: {
+    regionId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                               | Type                                | Required                            | Description                         |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| `regionId`                          | *string*                            | :heavy_check_mark:                  | The unique identifier of the region |
+| Field                                                                          | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `input`                                                                        | [operations.RegionGetByIdInput](../../models/operations/regiongetbyidinput.md) | :heavy_check_mark:                                                             | JSON-encoded input parameters                                                  |

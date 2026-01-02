@@ -15,7 +15,7 @@ export class BattleRankings extends ClientSDK {
    * Retrieves damage, ground, or money rankings for users or countries in battles, rounds, or wars
    */
   async get(
-    request?: operations.BattleRankingGetRankingRequest | undefined,
+    request: operations.BattleRankingGetRankingRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(battleRankingsGet(

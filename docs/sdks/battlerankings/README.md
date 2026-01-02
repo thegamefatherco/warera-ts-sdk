@@ -12,7 +12,7 @@ Retrieves damage, ground, or money rankings for users or countries in battles, r
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="battleRanking.getRanking" method="post" path="/battleRanking.getRanking" -->
+<!-- UsageSnippet language="typescript" operationID="battleRanking.getRanking" method="get" path="/battleRanking.getRanking" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -21,7 +21,13 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.battleRankings.get();
+  await warera.battleRankings.get({
+    input: {
+      dataType: "points",
+      type: "country",
+      side: "attacker",
+    },
+  });
 
 
 }
@@ -44,7 +50,13 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await battleRankingsGet(warera);
+  const res = await battleRankingsGet(warera, {
+    input: {
+      dataType: "points",
+      type: "country",
+      side: "attacker",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     

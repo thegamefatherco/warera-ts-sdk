@@ -8,23 +8,79 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type SearchSearchAnythingRequest = {
+export type SearchSearchAnythingInput = {
   /**
    * The search query string
    */
   searchText: string;
 };
 
+export type SearchSearchAnythingRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: SearchSearchAnythingInput;
+};
+
 /** @internal */
-export const SearchSearchAnythingRequest$inboundSchema: z.ZodMiniType<
-  SearchSearchAnythingRequest,
+export const SearchSearchAnythingInput$inboundSchema: z.ZodMiniType<
+  SearchSearchAnythingInput,
   unknown
 > = z.object({
   searchText: types.string(),
 });
 /** @internal */
-export type SearchSearchAnythingRequest$Outbound = {
+export type SearchSearchAnythingInput$Outbound = {
   searchText: string;
+};
+
+/** @internal */
+export const SearchSearchAnythingInput$outboundSchema: z.ZodMiniType<
+  SearchSearchAnythingInput$Outbound,
+  SearchSearchAnythingInput
+> = z.object({
+  searchText: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchSearchAnythingInput$ {
+  /** @deprecated use `SearchSearchAnythingInput$inboundSchema` instead. */
+  export const inboundSchema = SearchSearchAnythingInput$inboundSchema;
+  /** @deprecated use `SearchSearchAnythingInput$outboundSchema` instead. */
+  export const outboundSchema = SearchSearchAnythingInput$outboundSchema;
+  /** @deprecated use `SearchSearchAnythingInput$Outbound` instead. */
+  export type Outbound = SearchSearchAnythingInput$Outbound;
+}
+
+export function searchSearchAnythingInputToJSON(
+  searchSearchAnythingInput: SearchSearchAnythingInput,
+): string {
+  return JSON.stringify(
+    SearchSearchAnythingInput$outboundSchema.parse(searchSearchAnythingInput),
+  );
+}
+export function searchSearchAnythingInputFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchSearchAnythingInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchSearchAnythingInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchSearchAnythingInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const SearchSearchAnythingRequest$inboundSchema: z.ZodMiniType<
+  SearchSearchAnythingRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => SearchSearchAnythingInput$inboundSchema),
+});
+/** @internal */
+export type SearchSearchAnythingRequest$Outbound = {
+  input: SearchSearchAnythingInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +88,7 @@ export const SearchSearchAnythingRequest$outboundSchema: z.ZodMiniType<
   SearchSearchAnythingRequest$Outbound,
   SearchSearchAnythingRequest
 > = z.object({
-  searchText: z.string(),
+  input: z.lazy(() => SearchSearchAnythingInput$outboundSchema),
 });
 /**
  * @internal

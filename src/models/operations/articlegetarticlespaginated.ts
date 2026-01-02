@@ -26,7 +26,7 @@ export type ArticleGetArticlesPaginatedType = ClosedEnum<
   typeof ArticleGetArticlesPaginatedType
 >;
 
-export type ArticleGetArticlesPaginatedRequest = {
+export type ArticleGetArticlesPaginatedInput = {
   /**
    * The type of articles to get
    */
@@ -50,6 +50,13 @@ export type ArticleGetArticlesPaginatedRequest = {
   languages?: Array<string> | undefined;
 };
 
+export type ArticleGetArticlesPaginatedRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: ArticleGetArticlesPaginatedInput;
+};
+
 /** @internal */
 export const ArticleGetArticlesPaginatedType$inboundSchema: z.ZodMiniEnum<
   typeof ArticleGetArticlesPaginatedType
@@ -70,8 +77,8 @@ export namespace ArticleGetArticlesPaginatedType$ {
 }
 
 /** @internal */
-export const ArticleGetArticlesPaginatedRequest$inboundSchema: z.ZodMiniType<
-  ArticleGetArticlesPaginatedRequest,
+export const ArticleGetArticlesPaginatedInput$inboundSchema: z.ZodMiniType<
+  ArticleGetArticlesPaginatedInput,
   unknown
 > = z.object({
   type: ArticleGetArticlesPaginatedType$inboundSchema,
@@ -82,7 +89,7 @@ export const ArticleGetArticlesPaginatedRequest$inboundSchema: z.ZodMiniType<
   languages: types.optional(z.array(types.string())),
 });
 /** @internal */
-export type ArticleGetArticlesPaginatedRequest$Outbound = {
+export type ArticleGetArticlesPaginatedInput$Outbound = {
   type: string;
   limit: number;
   cursor?: string | undefined;
@@ -92,9 +99,9 @@ export type ArticleGetArticlesPaginatedRequest$Outbound = {
 };
 
 /** @internal */
-export const ArticleGetArticlesPaginatedRequest$outboundSchema: z.ZodMiniType<
-  ArticleGetArticlesPaginatedRequest$Outbound,
-  ArticleGetArticlesPaginatedRequest
+export const ArticleGetArticlesPaginatedInput$outboundSchema: z.ZodMiniType<
+  ArticleGetArticlesPaginatedInput$Outbound,
+  ArticleGetArticlesPaginatedInput
 > = z.object({
   type: ArticleGetArticlesPaginatedType$outboundSchema,
   limit: z._default(z.number(), 10),
@@ -102,6 +109,57 @@ export const ArticleGetArticlesPaginatedRequest$outboundSchema: z.ZodMiniType<
   userId: z.optional(z.string()),
   categories: z.optional(z.array(z.string())),
   languages: z.optional(z.array(z.string())),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ArticleGetArticlesPaginatedInput$ {
+  /** @deprecated use `ArticleGetArticlesPaginatedInput$inboundSchema` instead. */
+  export const inboundSchema = ArticleGetArticlesPaginatedInput$inboundSchema;
+  /** @deprecated use `ArticleGetArticlesPaginatedInput$outboundSchema` instead. */
+  export const outboundSchema = ArticleGetArticlesPaginatedInput$outboundSchema;
+  /** @deprecated use `ArticleGetArticlesPaginatedInput$Outbound` instead. */
+  export type Outbound = ArticleGetArticlesPaginatedInput$Outbound;
+}
+
+export function articleGetArticlesPaginatedInputToJSON(
+  articleGetArticlesPaginatedInput: ArticleGetArticlesPaginatedInput,
+): string {
+  return JSON.stringify(
+    ArticleGetArticlesPaginatedInput$outboundSchema.parse(
+      articleGetArticlesPaginatedInput,
+    ),
+  );
+}
+export function articleGetArticlesPaginatedInputFromJSON(
+  jsonString: string,
+): SafeParseResult<ArticleGetArticlesPaginatedInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ArticleGetArticlesPaginatedInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ArticleGetArticlesPaginatedInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const ArticleGetArticlesPaginatedRequest$inboundSchema: z.ZodMiniType<
+  ArticleGetArticlesPaginatedRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => ArticleGetArticlesPaginatedInput$inboundSchema),
+});
+/** @internal */
+export type ArticleGetArticlesPaginatedRequest$Outbound = {
+  input: ArticleGetArticlesPaginatedInput$Outbound;
+};
+
+/** @internal */
+export const ArticleGetArticlesPaginatedRequest$outboundSchema: z.ZodMiniType<
+  ArticleGetArticlesPaginatedRequest$Outbound,
+  ArticleGetArticlesPaginatedRequest
+> = z.object({
+  input: z.lazy(() => ArticleGetArticlesPaginatedInput$outboundSchema),
 });
 /**
  * @internal

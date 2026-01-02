@@ -8,20 +8,76 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type WorkOfferGetByIdRequest = {
+export type WorkOfferGetByIdInput = {
   workOfferId: string;
 };
+
+export type WorkOfferGetByIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: WorkOfferGetByIdInput;
+};
+
+/** @internal */
+export const WorkOfferGetByIdInput$inboundSchema: z.ZodMiniType<
+  WorkOfferGetByIdInput,
+  unknown
+> = z.object({
+  workOfferId: types.string(),
+});
+/** @internal */
+export type WorkOfferGetByIdInput$Outbound = {
+  workOfferId: string;
+};
+
+/** @internal */
+export const WorkOfferGetByIdInput$outboundSchema: z.ZodMiniType<
+  WorkOfferGetByIdInput$Outbound,
+  WorkOfferGetByIdInput
+> = z.object({
+  workOfferId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WorkOfferGetByIdInput$ {
+  /** @deprecated use `WorkOfferGetByIdInput$inboundSchema` instead. */
+  export const inboundSchema = WorkOfferGetByIdInput$inboundSchema;
+  /** @deprecated use `WorkOfferGetByIdInput$outboundSchema` instead. */
+  export const outboundSchema = WorkOfferGetByIdInput$outboundSchema;
+  /** @deprecated use `WorkOfferGetByIdInput$Outbound` instead. */
+  export type Outbound = WorkOfferGetByIdInput$Outbound;
+}
+
+export function workOfferGetByIdInputToJSON(
+  workOfferGetByIdInput: WorkOfferGetByIdInput,
+): string {
+  return JSON.stringify(
+    WorkOfferGetByIdInput$outboundSchema.parse(workOfferGetByIdInput),
+  );
+}
+export function workOfferGetByIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkOfferGetByIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WorkOfferGetByIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkOfferGetByIdInput' from JSON`,
+  );
+}
 
 /** @internal */
 export const WorkOfferGetByIdRequest$inboundSchema: z.ZodMiniType<
   WorkOfferGetByIdRequest,
   unknown
 > = z.object({
-  workOfferId: types.string(),
+  input: z.lazy(() => WorkOfferGetByIdInput$inboundSchema),
 });
 /** @internal */
 export type WorkOfferGetByIdRequest$Outbound = {
-  workOfferId: string;
+  input: WorkOfferGetByIdInput$Outbound;
 };
 
 /** @internal */
@@ -29,7 +85,7 @@ export const WorkOfferGetByIdRequest$outboundSchema: z.ZodMiniType<
   WorkOfferGetByIdRequest$Outbound,
   WorkOfferGetByIdRequest
 > = z.object({
-  workOfferId: z.string(),
+  input: z.lazy(() => WorkOfferGetByIdInput$outboundSchema),
 });
 /**
  * @internal

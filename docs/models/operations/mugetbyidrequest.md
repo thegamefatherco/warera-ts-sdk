@@ -6,12 +6,14 @@
 import { MuGetByIdRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: MuGetByIdRequest = {
-  muId: "<id>",
+  input: {
+    muId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `muId`             | *string*           | :heavy_check_mark: | N/A                |
+| Field                                                                  | Type                                                                   | Required                                                               | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `input`                                                                | [operations.MuGetByIdInput](../../models/operations/mugetbyidinput.md) | :heavy_check_mark:                                                     | JSON-encoded input parameters                                          |

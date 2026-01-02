@@ -4,15 +4,15 @@
 
 ### Available Operations
 
-* [get](#get) - Get item offer by ID
+* [getById](#getbyid) - Get item offer by ID
 
-## get
+## getById
 
 Retrieves detailed information about a specific item offer
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="itemOffer.getById" method="post" path="/itemOffer.getById" -->
+<!-- UsageSnippet language="typescript" operationID="itemOffer.getById" method="get" path="/itemOffer.getById" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -21,7 +21,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.itemOffers.get();
+  await warera.itemOffers.getById({
+    input: {
+      itemOfferId: "<id>",
+    },
+  });
 
 
 }
@@ -35,7 +39,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { itemOffersGet } from "@thegamefatherco/warera-sdk/funcs/itemOffersGet.js";
+import { itemOffersGetById } from "@thegamefatherco/warera-sdk/funcs/itemOffersGetById.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -44,12 +48,16 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await itemOffersGet(warera);
+  const res = await itemOffersGetById(warera, {
+    input: {
+      itemOfferId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("itemOffersGet failed:", res.error);
+    console.log("itemOffersGetById failed:", res.error);
   }
 }
 

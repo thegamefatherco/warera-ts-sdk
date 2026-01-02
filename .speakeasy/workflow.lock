@@ -2,8 +2,8 @@ speakeasyVersion: 1.680.11
 sources:
     WarEra API:
         sourceNamespace: war-era-api
-        sourceRevisionDigest: sha256:6b09845dfa01074a36b25d198ad582d69422a48b852bc37c76a64c5e31f69241
-        sourceBlobDigest: sha256:9ec5de331996699659d53c27b78bfa581d27ea31efc92d08386ee321c5fc0100
+        sourceRevisionDigest: sha256:c2ba12323d8a6608d5c15ade878543077a57e7c089c31d815b14204a2db2946d
+        sourceBlobDigest: sha256:225194213e8eb25f32c769c68e4d604c0fa8ac1484239c21aa0de9ce14be78b5
         tags:
             - latest
             - 0.17.4-beta
@@ -11,20 +11,21 @@ targets:
     warera:
         source: WarEra API
         sourceNamespace: war-era-api
-        sourceRevisionDigest: sha256:6b09845dfa01074a36b25d198ad582d69422a48b852bc37c76a64c5e31f69241
-        sourceBlobDigest: sha256:9ec5de331996699659d53c27b78bfa581d27ea31efc92d08386ee321c5fc0100
+        sourceRevisionDigest: sha256:c2ba12323d8a6608d5c15ade878543077a57e7c089c31d815b14204a2db2946d
+        sourceBlobDigest: sha256:225194213e8eb25f32c769c68e4d604c0fa8ac1484239c21aa0de9ce14be78b5
         codeSamplesNamespace: war-era-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:0a14b8c119252beef44b5beef79e2cee572398dc7e7371775e4d68361d900adc
+        codeSamplesRevisionDigest: sha256:d09c88aa887f5f749c3b35ed6d35cf79ff24e01a1dfc7491c7d9878c44fd129e
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         WarEra API:
             inputs:
-                - location: https://api2.warera.io/openapi.json
+                - location: openapi.json
             overlays:
                 - location: overlay.yaml
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
+                - location: overlay.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
                 location: registry.speakeasyapi.dev/thecodefatherco/thegamefatherco/war-era-api

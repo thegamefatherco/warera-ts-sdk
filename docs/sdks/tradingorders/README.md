@@ -12,7 +12,7 @@ Retrieves the best orders for an item
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="tradingOrder.getTopOrders" method="post" path="/tradingOrder.getTopOrders" -->
+<!-- UsageSnippet language="typescript" operationID="tradingOrder.getTopOrders" method="get" path="/tradingOrder.getTopOrders" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -21,7 +21,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.tradingOrders.getTop();
+  await warera.tradingOrders.getTop({
+    input: {
+      itemCode: "<value>",
+    },
+  });
 
 
 }
@@ -44,7 +48,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await tradingOrdersGetTop(warera);
+  const res = await tradingOrdersGetTop(warera, {
+    input: {
+      itemCode: "<value>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     

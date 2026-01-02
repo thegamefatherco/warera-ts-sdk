@@ -8,18 +8,80 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
+export type WorkOfferGetWorkOfferByCompanyIdInput = {
+  companyId: string;
+};
+
 export type WorkOfferGetWorkOfferByCompanyIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: WorkOfferGetWorkOfferByCompanyIdInput;
+};
+
+/** @internal */
+export const WorkOfferGetWorkOfferByCompanyIdInput$inboundSchema: z.ZodMiniType<
+  WorkOfferGetWorkOfferByCompanyIdInput,
+  unknown
+> = z.object({
+  companyId: types.string(),
+});
+/** @internal */
+export type WorkOfferGetWorkOfferByCompanyIdInput$Outbound = {
   companyId: string;
 };
 
 /** @internal */
+export const WorkOfferGetWorkOfferByCompanyIdInput$outboundSchema:
+  z.ZodMiniType<
+    WorkOfferGetWorkOfferByCompanyIdInput$Outbound,
+    WorkOfferGetWorkOfferByCompanyIdInput
+  > = z.object({
+    companyId: z.string(),
+  });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WorkOfferGetWorkOfferByCompanyIdInput$ {
+  /** @deprecated use `WorkOfferGetWorkOfferByCompanyIdInput$inboundSchema` instead. */
+  export const inboundSchema =
+    WorkOfferGetWorkOfferByCompanyIdInput$inboundSchema;
+  /** @deprecated use `WorkOfferGetWorkOfferByCompanyIdInput$outboundSchema` instead. */
+  export const outboundSchema =
+    WorkOfferGetWorkOfferByCompanyIdInput$outboundSchema;
+  /** @deprecated use `WorkOfferGetWorkOfferByCompanyIdInput$Outbound` instead. */
+  export type Outbound = WorkOfferGetWorkOfferByCompanyIdInput$Outbound;
+}
+
+export function workOfferGetWorkOfferByCompanyIdInputToJSON(
+  workOfferGetWorkOfferByCompanyIdInput: WorkOfferGetWorkOfferByCompanyIdInput,
+): string {
+  return JSON.stringify(
+    WorkOfferGetWorkOfferByCompanyIdInput$outboundSchema.parse(
+      workOfferGetWorkOfferByCompanyIdInput,
+    ),
+  );
+}
+export function workOfferGetWorkOfferByCompanyIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkOfferGetWorkOfferByCompanyIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      WorkOfferGetWorkOfferByCompanyIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkOfferGetWorkOfferByCompanyIdInput' from JSON`,
+  );
+}
+
+/** @internal */
 export const WorkOfferGetWorkOfferByCompanyIdRequest$inboundSchema:
   z.ZodMiniType<WorkOfferGetWorkOfferByCompanyIdRequest, unknown> = z.object({
-    companyId: types.string(),
+    input: z.lazy(() => WorkOfferGetWorkOfferByCompanyIdInput$inboundSchema),
   });
 /** @internal */
 export type WorkOfferGetWorkOfferByCompanyIdRequest$Outbound = {
-  companyId: string;
+  input: WorkOfferGetWorkOfferByCompanyIdInput$Outbound;
 };
 
 /** @internal */
@@ -28,7 +90,7 @@ export const WorkOfferGetWorkOfferByCompanyIdRequest$outboundSchema:
     WorkOfferGetWorkOfferByCompanyIdRequest$Outbound,
     WorkOfferGetWorkOfferByCompanyIdRequest
   > = z.object({
-    companyId: z.string(),
+    input: z.lazy(() => WorkOfferGetWorkOfferByCompanyIdInput$outboundSchema),
   });
 /**
  * @internal

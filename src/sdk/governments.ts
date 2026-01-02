@@ -15,7 +15,7 @@ export class Governments extends ClientSDK {
    * Retrieves government information for a specific country
    */
   async getByCountryId(
-    request?: operations.GovernmentGetByCountryIdRequest | undefined,
+    request: operations.GovernmentGetByCountryIdRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(governmentsGetByCountryId(

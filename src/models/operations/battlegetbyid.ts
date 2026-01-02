@@ -8,23 +8,79 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type BattleGetByIdRequest = {
+export type BattleGetByIdInput = {
   /**
    * The unique identifier of the battle
    */
   battleId: string;
 };
 
+export type BattleGetByIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: BattleGetByIdInput;
+};
+
 /** @internal */
-export const BattleGetByIdRequest$inboundSchema: z.ZodMiniType<
-  BattleGetByIdRequest,
+export const BattleGetByIdInput$inboundSchema: z.ZodMiniType<
+  BattleGetByIdInput,
   unknown
 > = z.object({
   battleId: types.string(),
 });
 /** @internal */
-export type BattleGetByIdRequest$Outbound = {
+export type BattleGetByIdInput$Outbound = {
   battleId: string;
+};
+
+/** @internal */
+export const BattleGetByIdInput$outboundSchema: z.ZodMiniType<
+  BattleGetByIdInput$Outbound,
+  BattleGetByIdInput
+> = z.object({
+  battleId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleGetByIdInput$ {
+  /** @deprecated use `BattleGetByIdInput$inboundSchema` instead. */
+  export const inboundSchema = BattleGetByIdInput$inboundSchema;
+  /** @deprecated use `BattleGetByIdInput$outboundSchema` instead. */
+  export const outboundSchema = BattleGetByIdInput$outboundSchema;
+  /** @deprecated use `BattleGetByIdInput$Outbound` instead. */
+  export type Outbound = BattleGetByIdInput$Outbound;
+}
+
+export function battleGetByIdInputToJSON(
+  battleGetByIdInput: BattleGetByIdInput,
+): string {
+  return JSON.stringify(
+    BattleGetByIdInput$outboundSchema.parse(battleGetByIdInput),
+  );
+}
+export function battleGetByIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<BattleGetByIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BattleGetByIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BattleGetByIdInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const BattleGetByIdRequest$inboundSchema: z.ZodMiniType<
+  BattleGetByIdRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => BattleGetByIdInput$inboundSchema),
+});
+/** @internal */
+export type BattleGetByIdRequest$Outbound = {
+  input: BattleGetByIdInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +88,7 @@ export const BattleGetByIdRequest$outboundSchema: z.ZodMiniType<
   BattleGetByIdRequest$Outbound,
   BattleGetByIdRequest
 > = z.object({
-  battleId: z.string(),
+  input: z.lazy(() => BattleGetByIdInput$outboundSchema),
 });
 /**
  * @internal

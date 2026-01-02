@@ -44,11 +44,18 @@ export const RankingType = {
  */
 export type RankingType = ClosedEnum<typeof RankingType>;
 
-export type RankingGetRankingRequest = {
+export type RankingGetRankingInput = {
   /**
    * The type of ranking to retrieve
    */
   rankingType: RankingType;
+};
+
+export type RankingGetRankingRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: RankingGetRankingInput;
 };
 
 /** @internal */
@@ -69,15 +76,64 @@ export namespace RankingType$ {
 }
 
 /** @internal */
-export const RankingGetRankingRequest$inboundSchema: z.ZodMiniType<
-  RankingGetRankingRequest,
+export const RankingGetRankingInput$inboundSchema: z.ZodMiniType<
+  RankingGetRankingInput,
   unknown
 > = z.object({
   rankingType: RankingType$inboundSchema,
 });
 /** @internal */
-export type RankingGetRankingRequest$Outbound = {
+export type RankingGetRankingInput$Outbound = {
   rankingType: string;
+};
+
+/** @internal */
+export const RankingGetRankingInput$outboundSchema: z.ZodMiniType<
+  RankingGetRankingInput$Outbound,
+  RankingGetRankingInput
+> = z.object({
+  rankingType: RankingType$outboundSchema,
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RankingGetRankingInput$ {
+  /** @deprecated use `RankingGetRankingInput$inboundSchema` instead. */
+  export const inboundSchema = RankingGetRankingInput$inboundSchema;
+  /** @deprecated use `RankingGetRankingInput$outboundSchema` instead. */
+  export const outboundSchema = RankingGetRankingInput$outboundSchema;
+  /** @deprecated use `RankingGetRankingInput$Outbound` instead. */
+  export type Outbound = RankingGetRankingInput$Outbound;
+}
+
+export function rankingGetRankingInputToJSON(
+  rankingGetRankingInput: RankingGetRankingInput,
+): string {
+  return JSON.stringify(
+    RankingGetRankingInput$outboundSchema.parse(rankingGetRankingInput),
+  );
+}
+export function rankingGetRankingInputFromJSON(
+  jsonString: string,
+): SafeParseResult<RankingGetRankingInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RankingGetRankingInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RankingGetRankingInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const RankingGetRankingRequest$inboundSchema: z.ZodMiniType<
+  RankingGetRankingRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => RankingGetRankingInput$inboundSchema),
+});
+/** @internal */
+export type RankingGetRankingRequest$Outbound = {
+  input: RankingGetRankingInput$Outbound;
 };
 
 /** @internal */
@@ -85,7 +141,7 @@ export const RankingGetRankingRequest$outboundSchema: z.ZodMiniType<
   RankingGetRankingRequest$Outbound,
   RankingGetRankingRequest
 > = z.object({
-  rankingType: RankingType$outboundSchema,
+  input: z.lazy(() => RankingGetRankingInput$outboundSchema),
 });
 /**
  * @internal

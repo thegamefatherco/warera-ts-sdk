@@ -8,7 +8,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type MuGetManyPaginatedRequest = {
+export type MuGetManyPaginatedInput = {
   limit?: number | undefined;
   cursor?: string | undefined;
   memberId?: string | undefined;
@@ -17,9 +17,16 @@ export type MuGetManyPaginatedRequest = {
   search?: string | undefined;
 };
 
+export type MuGetManyPaginatedRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: MuGetManyPaginatedInput | undefined;
+};
+
 /** @internal */
-export const MuGetManyPaginatedRequest$inboundSchema: z.ZodMiniType<
-  MuGetManyPaginatedRequest,
+export const MuGetManyPaginatedInput$inboundSchema: z.ZodMiniType<
+  MuGetManyPaginatedInput,
   unknown
 > = z.object({
   limit: z._default(types.number(), 20),
@@ -30,7 +37,7 @@ export const MuGetManyPaginatedRequest$inboundSchema: z.ZodMiniType<
   search: types.optional(types.string()),
 });
 /** @internal */
-export type MuGetManyPaginatedRequest$Outbound = {
+export type MuGetManyPaginatedInput$Outbound = {
   limit: number;
   cursor?: string | undefined;
   memberId?: string | undefined;
@@ -40,9 +47,9 @@ export type MuGetManyPaginatedRequest$Outbound = {
 };
 
 /** @internal */
-export const MuGetManyPaginatedRequest$outboundSchema: z.ZodMiniType<
-  MuGetManyPaginatedRequest$Outbound,
-  MuGetManyPaginatedRequest
+export const MuGetManyPaginatedInput$outboundSchema: z.ZodMiniType<
+  MuGetManyPaginatedInput$Outbound,
+  MuGetManyPaginatedInput
 > = z.object({
   limit: z._default(z.number(), 20),
   cursor: z.optional(z.string()),
@@ -50,6 +57,55 @@ export const MuGetManyPaginatedRequest$outboundSchema: z.ZodMiniType<
   userId: z.optional(z.string()),
   orgId: z.optional(z.string()),
   search: z.optional(z.string()),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MuGetManyPaginatedInput$ {
+  /** @deprecated use `MuGetManyPaginatedInput$inboundSchema` instead. */
+  export const inboundSchema = MuGetManyPaginatedInput$inboundSchema;
+  /** @deprecated use `MuGetManyPaginatedInput$outboundSchema` instead. */
+  export const outboundSchema = MuGetManyPaginatedInput$outboundSchema;
+  /** @deprecated use `MuGetManyPaginatedInput$Outbound` instead. */
+  export type Outbound = MuGetManyPaginatedInput$Outbound;
+}
+
+export function muGetManyPaginatedInputToJSON(
+  muGetManyPaginatedInput: MuGetManyPaginatedInput,
+): string {
+  return JSON.stringify(
+    MuGetManyPaginatedInput$outboundSchema.parse(muGetManyPaginatedInput),
+  );
+}
+export function muGetManyPaginatedInputFromJSON(
+  jsonString: string,
+): SafeParseResult<MuGetManyPaginatedInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MuGetManyPaginatedInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MuGetManyPaginatedInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const MuGetManyPaginatedRequest$inboundSchema: z.ZodMiniType<
+  MuGetManyPaginatedRequest,
+  unknown
+> = z.object({
+  input: types.optional(z.lazy(() => MuGetManyPaginatedInput$inboundSchema)),
+});
+/** @internal */
+export type MuGetManyPaginatedRequest$Outbound = {
+  input?: MuGetManyPaginatedInput$Outbound | undefined;
+};
+
+/** @internal */
+export const MuGetManyPaginatedRequest$outboundSchema: z.ZodMiniType<
+  MuGetManyPaginatedRequest$Outbound,
+  MuGetManyPaginatedRequest
+> = z.object({
+  input: z.optional(z.lazy(() => MuGetManyPaginatedInput$outboundSchema)),
 });
 /**
  * @internal

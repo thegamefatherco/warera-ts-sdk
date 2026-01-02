@@ -4,17 +4,17 @@
 
 ### Available Operations
 
-* [get](#get) - Get work offer by ID
-* [getByCompany](#getbycompany) - Get work offer by company ID
+* [getById](#getbyid) - Get work offer by ID
+* [getByCompanyId](#getbycompanyid) - Get work offer by company ID
 * [getPaginated](#getpaginated) - Get paginated work offers
 
-## get
+## getById
 
 Retrieves detailed information about a specific work offer
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="workOffer.getById" method="post" path="/workOffer.getById" -->
+<!-- UsageSnippet language="typescript" operationID="workOffer.getById" method="get" path="/workOffer.getById" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -23,7 +23,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.workOffers.get();
+  await warera.workOffers.getById({
+    input: {
+      workOfferId: "<id>",
+    },
+  });
 
 
 }
@@ -37,7 +41,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { workOffersGet } from "@thegamefatherco/warera-sdk/funcs/workOffersGet.js";
+import { workOffersGetById } from "@thegamefatherco/warera-sdk/funcs/workOffersGetById.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -46,12 +50,16 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await workOffersGet(warera);
+  const res = await workOffersGetById(warera, {
+    input: {
+      workOfferId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("workOffersGet failed:", res.error);
+    console.log("workOffersGetById failed:", res.error);
   }
 }
 
@@ -77,13 +85,13 @@ run();
 | ------------------------- | ------------------------- | ------------------------- |
 | errors.WarEraDefaultError | 4XX, 5XX                  | \*/\*                     |
 
-## getByCompany
+## getByCompanyId
 
 Retrieves work offer for a specific company
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="workOffer.getWorkOfferByCompanyId" method="post" path="/workOffer.getWorkOfferByCompanyId" -->
+<!-- UsageSnippet language="typescript" operationID="workOffer.getWorkOfferByCompanyId" method="get" path="/workOffer.getWorkOfferByCompanyId" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -92,7 +100,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.workOffers.getByCompany();
+  await warera.workOffers.getByCompanyId({
+    input: {
+      companyId: "<id>",
+    },
+  });
 
 
 }
@@ -106,7 +118,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { workOffersGetByCompany } from "@thegamefatherco/warera-sdk/funcs/workOffersGetByCompany.js";
+import { workOffersGetByCompanyId } from "@thegamefatherco/warera-sdk/funcs/workOffersGetByCompanyId.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -115,12 +127,16 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await workOffersGetByCompany(warera);
+  const res = await workOffersGetByCompanyId(warera, {
+    input: {
+      companyId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("workOffersGetByCompany failed:", res.error);
+    console.log("workOffersGetByCompanyId failed:", res.error);
   }
 }
 
@@ -152,7 +168,7 @@ Retrieves a paginated list of work offers with optional user and region filterin
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="workOffer.getWorkOffersPaginated" method="post" path="/workOffer.getWorkOffersPaginated" -->
+<!-- UsageSnippet language="typescript" operationID="workOffer.getWorkOffersPaginated" method="get" path="/workOffer.getWorkOffersPaginated" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 

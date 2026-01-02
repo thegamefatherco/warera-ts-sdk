@@ -29,7 +29,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await companiesGetById(warera);
+  const res = await companiesGetById(warera, {
+    input: {
+      companyId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     

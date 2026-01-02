@@ -8,23 +8,79 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type CountryGetCountryByIdRequest = {
+export type CountryGetCountryByIdInput = {
   /**
    * The unique identifier of the country
    */
   countryId: string;
 };
 
+export type CountryGetCountryByIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: CountryGetCountryByIdInput;
+};
+
 /** @internal */
-export const CountryGetCountryByIdRequest$inboundSchema: z.ZodMiniType<
-  CountryGetCountryByIdRequest,
+export const CountryGetCountryByIdInput$inboundSchema: z.ZodMiniType<
+  CountryGetCountryByIdInput,
   unknown
 > = z.object({
   countryId: types.string(),
 });
 /** @internal */
-export type CountryGetCountryByIdRequest$Outbound = {
+export type CountryGetCountryByIdInput$Outbound = {
   countryId: string;
+};
+
+/** @internal */
+export const CountryGetCountryByIdInput$outboundSchema: z.ZodMiniType<
+  CountryGetCountryByIdInput$Outbound,
+  CountryGetCountryByIdInput
+> = z.object({
+  countryId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CountryGetCountryByIdInput$ {
+  /** @deprecated use `CountryGetCountryByIdInput$inboundSchema` instead. */
+  export const inboundSchema = CountryGetCountryByIdInput$inboundSchema;
+  /** @deprecated use `CountryGetCountryByIdInput$outboundSchema` instead. */
+  export const outboundSchema = CountryGetCountryByIdInput$outboundSchema;
+  /** @deprecated use `CountryGetCountryByIdInput$Outbound` instead. */
+  export type Outbound = CountryGetCountryByIdInput$Outbound;
+}
+
+export function countryGetCountryByIdInputToJSON(
+  countryGetCountryByIdInput: CountryGetCountryByIdInput,
+): string {
+  return JSON.stringify(
+    CountryGetCountryByIdInput$outboundSchema.parse(countryGetCountryByIdInput),
+  );
+}
+export function countryGetCountryByIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<CountryGetCountryByIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CountryGetCountryByIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CountryGetCountryByIdInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const CountryGetCountryByIdRequest$inboundSchema: z.ZodMiniType<
+  CountryGetCountryByIdRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => CountryGetCountryByIdInput$inboundSchema),
+});
+/** @internal */
+export type CountryGetCountryByIdRequest$Outbound = {
+  input: CountryGetCountryByIdInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +88,7 @@ export const CountryGetCountryByIdRequest$outboundSchema: z.ZodMiniType<
   CountryGetCountryByIdRequest$Outbound,
   CountryGetCountryByIdRequest
 > = z.object({
-  countryId: z.string(),
+  input: z.lazy(() => CountryGetCountryByIdInput$outboundSchema),
 });
 /**
  * @internal

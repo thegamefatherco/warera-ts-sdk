@@ -43,7 +43,7 @@ export type TransactionType =
   | TransactionTypeEnum1
   | Array<TransactionTypeEnum2>;
 
-export type TransactionGetPaginatedTransactionsRequest = {
+export type TransactionGetPaginatedTransactionsInput = {
   /**
    * The limit of transactions to get
    */
@@ -75,6 +75,13 @@ export type TransactionGetPaginatedTransactionsRequest = {
     | TransactionTypeEnum1
     | Array<TransactionTypeEnum2>
     | undefined;
+};
+
+export type TransactionGetPaginatedTransactionsRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: TransactionGetPaginatedTransactionsInput | undefined;
 };
 
 /** @internal */
@@ -163,25 +170,23 @@ export function transactionTypeFromJSON(
 }
 
 /** @internal */
-export const TransactionGetPaginatedTransactionsRequest$inboundSchema:
-  z.ZodMiniType<TransactionGetPaginatedTransactionsRequest, unknown> = z.object(
-    {
-      limit: z._default(types.number(), 10),
-      cursor: types.optional(types.string()),
-      userId: types.optional(types.string()),
-      muId: types.optional(types.string()),
-      countryId: types.optional(types.string()),
-      itemCode: types.optional(types.string()),
-      transactionType: types.optional(
-        smartUnion([
-          TransactionTypeEnum1$inboundSchema,
-          z.array(TransactionTypeEnum2$inboundSchema),
-        ]),
-      ),
-    },
-  );
+export const TransactionGetPaginatedTransactionsInput$inboundSchema:
+  z.ZodMiniType<TransactionGetPaginatedTransactionsInput, unknown> = z.object({
+    limit: z._default(types.number(), 10),
+    cursor: types.optional(types.string()),
+    userId: types.optional(types.string()),
+    muId: types.optional(types.string()),
+    countryId: types.optional(types.string()),
+    itemCode: types.optional(types.string()),
+    transactionType: types.optional(
+      smartUnion([
+        TransactionTypeEnum1$inboundSchema,
+        z.array(TransactionTypeEnum2$inboundSchema),
+      ]),
+    ),
+  });
 /** @internal */
-export type TransactionGetPaginatedTransactionsRequest$Outbound = {
+export type TransactionGetPaginatedTransactionsInput$Outbound = {
   limit: number;
   cursor?: string | undefined;
   userId?: string | undefined;
@@ -192,10 +197,10 @@ export type TransactionGetPaginatedTransactionsRequest$Outbound = {
 };
 
 /** @internal */
-export const TransactionGetPaginatedTransactionsRequest$outboundSchema:
+export const TransactionGetPaginatedTransactionsInput$outboundSchema:
   z.ZodMiniType<
-    TransactionGetPaginatedTransactionsRequest$Outbound,
-    TransactionGetPaginatedTransactionsRequest
+    TransactionGetPaginatedTransactionsInput$Outbound,
+    TransactionGetPaginatedTransactionsInput
   > = z.object({
     limit: z._default(z.int(), 10),
     cursor: z.optional(z.string()),
@@ -208,6 +213,71 @@ export const TransactionGetPaginatedTransactionsRequest$outboundSchema:
         TransactionTypeEnum1$outboundSchema,
         z.array(TransactionTypeEnum2$outboundSchema),
       ]),
+    ),
+  });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TransactionGetPaginatedTransactionsInput$ {
+  /** @deprecated use `TransactionGetPaginatedTransactionsInput$inboundSchema` instead. */
+  export const inboundSchema =
+    TransactionGetPaginatedTransactionsInput$inboundSchema;
+  /** @deprecated use `TransactionGetPaginatedTransactionsInput$outboundSchema` instead. */
+  export const outboundSchema =
+    TransactionGetPaginatedTransactionsInput$outboundSchema;
+  /** @deprecated use `TransactionGetPaginatedTransactionsInput$Outbound` instead. */
+  export type Outbound = TransactionGetPaginatedTransactionsInput$Outbound;
+}
+
+export function transactionGetPaginatedTransactionsInputToJSON(
+  transactionGetPaginatedTransactionsInput:
+    TransactionGetPaginatedTransactionsInput,
+): string {
+  return JSON.stringify(
+    TransactionGetPaginatedTransactionsInput$outboundSchema.parse(
+      transactionGetPaginatedTransactionsInput,
+    ),
+  );
+}
+export function transactionGetPaginatedTransactionsInputFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  TransactionGetPaginatedTransactionsInput,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      TransactionGetPaginatedTransactionsInput$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'TransactionGetPaginatedTransactionsInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const TransactionGetPaginatedTransactionsRequest$inboundSchema:
+  z.ZodMiniType<TransactionGetPaginatedTransactionsRequest, unknown> = z.object(
+    {
+      input: types.optional(z.lazy(() =>
+        TransactionGetPaginatedTransactionsInput$inboundSchema
+      )),
+    },
+  );
+/** @internal */
+export type TransactionGetPaginatedTransactionsRequest$Outbound = {
+  input?: TransactionGetPaginatedTransactionsInput$Outbound | undefined;
+};
+
+/** @internal */
+export const TransactionGetPaginatedTransactionsRequest$outboundSchema:
+  z.ZodMiniType<
+    TransactionGetPaginatedTransactionsRequest$Outbound,
+    TransactionGetPaginatedTransactionsRequest
+  > = z.object({
+    input: z.optional(
+      z.lazy(() => TransactionGetPaginatedTransactionsInput$outboundSchema),
     ),
   });
 /**

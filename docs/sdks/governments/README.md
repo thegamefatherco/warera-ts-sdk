@@ -12,7 +12,7 @@ Retrieves government information for a specific country
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="government.getByCountryId" method="post" path="/government.getByCountryId" -->
+<!-- UsageSnippet language="typescript" operationID="government.getByCountryId" method="get" path="/government.getByCountryId" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -21,7 +21,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.governments.getByCountryId();
+  await warera.governments.getByCountryId({
+    input: {
+      countryId: "<id>",
+    },
+  });
 
 
 }
@@ -44,7 +48,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await governmentsGetByCountryId(warera);
+  const res = await governmentsGetByCountryId(warera, {
+    input: {
+      countryId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     

@@ -4,15 +4,15 @@
 
 ### Available Operations
 
-* [perform](#perform) - Global search
+* [global](#global) - Global search
 
-## perform
+## global
 
 Performs a global search across users, companies, articles, and other entities
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="search.searchAnything" method="post" path="/search.searchAnything" -->
+<!-- UsageSnippet language="typescript" operationID="search.searchAnything" method="get" path="/search.searchAnything" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -21,7 +21,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.search.perform();
+  await warera.search.global({
+    input: {
+      searchText: "<value>",
+    },
+  });
 
 
 }
@@ -35,7 +39,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { searchPerform } from "@thegamefatherco/warera-sdk/funcs/searchPerform.js";
+import { searchGlobal } from "@thegamefatherco/warera-sdk/funcs/searchGlobal.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -44,12 +48,16 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await searchPerform(warera);
+  const res = await searchGlobal(warera, {
+    input: {
+      searchText: "<value>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("searchPerform failed:", res.error);
+    console.log("searchGlobal failed:", res.error);
   }
 }
 

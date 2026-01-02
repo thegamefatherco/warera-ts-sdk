@@ -8,27 +8,93 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type WorkOfferGetWorkOffersPaginatedRequest = {
+export type WorkOfferGetWorkOffersPaginatedInput = {
   userId?: string | undefined;
   regionId?: string | undefined;
   cursor?: string | undefined;
   limit?: number | undefined;
 };
 
+export type WorkOfferGetWorkOffersPaginatedRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: WorkOfferGetWorkOffersPaginatedInput | undefined;
+};
+
 /** @internal */
-export const WorkOfferGetWorkOffersPaginatedRequest$inboundSchema:
-  z.ZodMiniType<WorkOfferGetWorkOffersPaginatedRequest, unknown> = z.object({
-    userId: types.optional(types.string()),
-    regionId: types.optional(types.string()),
-    cursor: types.optional(types.string()),
-    limit: z._default(types.number(), 10),
-  });
+export const WorkOfferGetWorkOffersPaginatedInput$inboundSchema: z.ZodMiniType<
+  WorkOfferGetWorkOffersPaginatedInput,
+  unknown
+> = z.object({
+  userId: types.optional(types.string()),
+  regionId: types.optional(types.string()),
+  cursor: types.optional(types.string()),
+  limit: z._default(types.number(), 10),
+});
 /** @internal */
-export type WorkOfferGetWorkOffersPaginatedRequest$Outbound = {
+export type WorkOfferGetWorkOffersPaginatedInput$Outbound = {
   userId?: string | undefined;
   regionId?: string | undefined;
   cursor?: string | undefined;
   limit: number;
+};
+
+/** @internal */
+export const WorkOfferGetWorkOffersPaginatedInput$outboundSchema: z.ZodMiniType<
+  WorkOfferGetWorkOffersPaginatedInput$Outbound,
+  WorkOfferGetWorkOffersPaginatedInput
+> = z.object({
+  userId: z.optional(z.string()),
+  regionId: z.optional(z.string()),
+  cursor: z.optional(z.string()),
+  limit: z._default(z.int(), 10),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WorkOfferGetWorkOffersPaginatedInput$ {
+  /** @deprecated use `WorkOfferGetWorkOffersPaginatedInput$inboundSchema` instead. */
+  export const inboundSchema =
+    WorkOfferGetWorkOffersPaginatedInput$inboundSchema;
+  /** @deprecated use `WorkOfferGetWorkOffersPaginatedInput$outboundSchema` instead. */
+  export const outboundSchema =
+    WorkOfferGetWorkOffersPaginatedInput$outboundSchema;
+  /** @deprecated use `WorkOfferGetWorkOffersPaginatedInput$Outbound` instead. */
+  export type Outbound = WorkOfferGetWorkOffersPaginatedInput$Outbound;
+}
+
+export function workOfferGetWorkOffersPaginatedInputToJSON(
+  workOfferGetWorkOffersPaginatedInput: WorkOfferGetWorkOffersPaginatedInput,
+): string {
+  return JSON.stringify(
+    WorkOfferGetWorkOffersPaginatedInput$outboundSchema.parse(
+      workOfferGetWorkOffersPaginatedInput,
+    ),
+  );
+}
+export function workOfferGetWorkOffersPaginatedInputFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkOfferGetWorkOffersPaginatedInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      WorkOfferGetWorkOffersPaginatedInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkOfferGetWorkOffersPaginatedInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const WorkOfferGetWorkOffersPaginatedRequest$inboundSchema:
+  z.ZodMiniType<WorkOfferGetWorkOffersPaginatedRequest, unknown> = z.object({
+    input: types.optional(
+      z.lazy(() => WorkOfferGetWorkOffersPaginatedInput$inboundSchema),
+    ),
+  });
+/** @internal */
+export type WorkOfferGetWorkOffersPaginatedRequest$Outbound = {
+  input?: WorkOfferGetWorkOffersPaginatedInput$Outbound | undefined;
 };
 
 /** @internal */
@@ -37,10 +103,9 @@ export const WorkOfferGetWorkOffersPaginatedRequest$outboundSchema:
     WorkOfferGetWorkOffersPaginatedRequest$Outbound,
     WorkOfferGetWorkOffersPaginatedRequest
   > = z.object({
-    userId: z.optional(z.string()),
-    regionId: z.optional(z.string()),
-    cursor: z.optional(z.string()),
-    limit: z._default(z.int(), 10),
+    input: z.optional(
+      z.lazy(() => WorkOfferGetWorkOffersPaginatedInput$outboundSchema),
+    ),
   });
 /**
  * @internal

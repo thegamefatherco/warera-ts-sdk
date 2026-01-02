@@ -4,9 +4,9 @@ info:
   title: Standardize Server and Security Configurations
   version: 1.1.0
 actions:
-  - target: "$.paths.*.*.requestBody.content.*.schema.properties.*.[?@.exclusiveMinimum==0]"
+  - target: "$.paths.*.*.parameters.*.content.*.schema.properties.*.[?@.exclusiveMinimum==0]"
     replace:
       exclusiveMinimum: false
-  - target: "$.paths.*.*.requestBody.content.*.schema.properties.*.[?@.exclusiveMinimum==1]"
+  - target: "$.paths.*.*.parameters.*.content.*.schema.properties.*.[?@.exclusiveMinimum==1]"
     replace:
       exclusiveMinimum: true

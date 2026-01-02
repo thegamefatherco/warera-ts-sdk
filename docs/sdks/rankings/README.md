@@ -12,7 +12,7 @@ Retrieves ranking data for the specified ranking type and optional year-week fil
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="ranking.getRanking" method="post" path="/ranking.getRanking" -->
+<!-- UsageSnippet language="typescript" operationID="ranking.getRanking" method="get" path="/ranking.getRanking" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -21,7 +21,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.rankings.get();
+  await warera.rankings.get({
+    input: {
+      rankingType: "weeklyCountryDamagesPerCitizen",
+    },
+  });
 
 
 }
@@ -44,7 +48,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await rankingsGet(warera);
+  const res = await rankingsGet(warera, {
+    input: {
+      rankingType: "weeklyCountryDamagesPerCitizen",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     

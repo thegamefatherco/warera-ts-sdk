@@ -4,15 +4,15 @@
 
 ### Available Operations
 
-* [getAll](#getall) - Get paginated transactions
+* [listPaginated](#listpaginated) - Get paginated transactions
 
-## getAll
+## listPaginated
 
 Retrieves a paginated list of transactions
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="transaction.getPaginatedTransactions" method="post" path="/transaction.getPaginatedTransactions" -->
+<!-- UsageSnippet language="typescript" operationID="transaction.getPaginatedTransactions" method="get" path="/transaction.getPaginatedTransactions" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -21,7 +21,7 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.transactions.getAll();
+  await warera.transactions.listPaginated();
 
 
 }
@@ -35,7 +35,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { transactionsGetAll } from "@thegamefatherco/warera-sdk/funcs/transactionsGetAll.js";
+import { transactionsListPaginated } from "@thegamefatherco/warera-sdk/funcs/transactionsListPaginated.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -44,12 +44,12 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await transactionsGetAll(warera);
+  const res = await transactionsListPaginated(warera);
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("transactionsGetAll failed:", res.error);
+    console.log("transactionsListPaginated failed:", res.error);
   }
 }
 

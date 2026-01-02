@@ -13,7 +13,7 @@ Retrieves detailed information about a specific country
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="country.getCountryById" method="post" path="/country.getCountryById" -->
+<!-- UsageSnippet language="typescript" operationID="country.getCountryById" method="get" path="/country.getCountryById" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -22,7 +22,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.countries.getById();
+  await warera.countries.getById({
+    input: {
+      countryId: "<id>",
+    },
+  });
 
 
 }
@@ -45,7 +49,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await countriesGetById(warera);
+  const res = await countriesGetById(warera, {
+    input: {
+      countryId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
@@ -82,7 +90,7 @@ Retrieves a list of all available countries
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="country.getAllCountries" method="post" path="/country.getAllCountries" -->
+<!-- UsageSnippet language="typescript" operationID="country.getAllCountries" method="get" path="/country.getAllCountries" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 

@@ -6,12 +6,14 @@
 import { SearchSearchAnythingRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: SearchSearchAnythingRequest = {
-  searchText: "<value>",
+  input: {
+    searchText: "<value>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                   | Type                    | Required                | Description             |
-| ----------------------- | ----------------------- | ----------------------- | ----------------------- |
-| `searchText`            | *string*                | :heavy_check_mark:      | The search query string |
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `input`                                                                                      | [operations.SearchSearchAnythingInput](../../models/operations/searchsearchanythinginput.md) | :heavy_check_mark:                                                                           | JSON-encoded input parameters                                                                |

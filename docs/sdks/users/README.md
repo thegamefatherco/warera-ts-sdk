@@ -5,7 +5,7 @@
 ### Available Operations
 
 * [getLite](#getlite) - Get user profile (lite)
-* [getByCountry](#getbycountry) - Get users by country
+* [listByCountry](#listbycountry) - Get users by country
 
 ## getLite
 
@@ -13,7 +13,7 @@ Retrieves basic public information about a user including username, skills, and 
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="user.getUserLite" method="post" path="/user.getUserLite" -->
+<!-- UsageSnippet language="typescript" operationID="user.getUserLite" method="get" path="/user.getUserLite" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -22,7 +22,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.users.getLite();
+  await warera.users.getLite({
+    input: {
+      userId: "<id>",
+    },
+  });
 
 
 }
@@ -45,7 +49,11 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await usersGetLite(warera);
+  const res = await usersGetLite(warera, {
+    input: {
+      userId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
@@ -76,13 +84,13 @@ run();
 | ------------------------- | ------------------------- | ------------------------- |
 | errors.WarEraDefaultError | 4XX, 5XX                  | \*/\*                     |
 
-## getByCountry
+## listByCountry
 
 Retrieves a list of users by country
 
 ### Example Usage
 
-<!-- UsageSnippet language="typescript" operationID="user.getUsersByCountry" method="post" path="/user.getUsersByCountry" -->
+<!-- UsageSnippet language="typescript" operationID="user.getUsersByCountry" method="get" path="/user.getUsersByCountry" -->
 ```typescript
 import { Warera } from "@thegamefatherco/warera-sdk";
 
@@ -91,7 +99,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.users.getByCountry();
+  await warera.users.listByCountry({
+    input: {
+      countryId: "<id>",
+    },
+  });
 
 
 }
@@ -105,7 +117,7 @@ The standalone function version of this method:
 
 ```typescript
 import { WareraCore } from "@thegamefatherco/warera-sdk/core.js";
-import { usersGetByCountry } from "@thegamefatherco/warera-sdk/funcs/usersGetByCountry.js";
+import { usersListByCountry } from "@thegamefatherco/warera-sdk/funcs/usersListByCountry.js";
 
 // Use `WareraCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -114,12 +126,16 @@ const warera = new WareraCore({
 });
 
 async function run() {
-  const res = await usersGetByCountry(warera);
+  const res = await usersListByCountry(warera, {
+    input: {
+      countryId: "<id>",
+    },
+  });
   if (res.ok) {
     const { value: result } = res;
     
   } else {
-    console.log("usersGetByCountry failed:", res.error);
+    console.log("usersListByCountry failed:", res.error);
   }
 }
 

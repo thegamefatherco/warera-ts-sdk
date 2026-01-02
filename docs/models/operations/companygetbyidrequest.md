@@ -6,12 +6,14 @@
 import { CompanyGetByIdRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: CompanyGetByIdRequest = {
-  companyId: "<id>",
+  input: {
+    companyId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                                | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `companyId`                          | *string*                             | :heavy_check_mark:                   | The unique identifier of the company |
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `input`                                                                          | [operations.CompanyGetByIdInput](../../models/operations/companygetbyidinput.md) | :heavy_check_mark:                                                               | JSON-encoded input parameters                                                    |

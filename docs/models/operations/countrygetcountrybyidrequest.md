@@ -6,12 +6,14 @@
 import { CountryGetCountryByIdRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: CountryGetCountryByIdRequest = {
-  countryId: "<id>",
+  input: {
+    countryId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                                | Type                                 | Required                             | Description                          |
-| ------------------------------------ | ------------------------------------ | ------------------------------------ | ------------------------------------ |
-| `countryId`                          | *string*                             | :heavy_check_mark:                   | The unique identifier of the country |
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `input`                                                                                        | [operations.CountryGetCountryByIdInput](../../models/operations/countrygetcountrybyidinput.md) | :heavy_check_mark:                                                                             | JSON-encoded input parameters                                                                  |

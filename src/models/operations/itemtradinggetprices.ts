@@ -5,23 +5,80 @@
 import * as z from "zod/v4-mini";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type ItemTradingGetPricesRequest = {};
+export type ItemTradingGetPricesInput = {};
+
+export type ItemTradingGetPricesRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input?: ItemTradingGetPricesInput | undefined;
+};
+
+/** @internal */
+export const ItemTradingGetPricesInput$inboundSchema: z.ZodMiniType<
+  ItemTradingGetPricesInput,
+  unknown
+> = z.object({});
+/** @internal */
+export type ItemTradingGetPricesInput$Outbound = {};
+
+/** @internal */
+export const ItemTradingGetPricesInput$outboundSchema: z.ZodMiniType<
+  ItemTradingGetPricesInput$Outbound,
+  ItemTradingGetPricesInput
+> = z.object({});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ItemTradingGetPricesInput$ {
+  /** @deprecated use `ItemTradingGetPricesInput$inboundSchema` instead. */
+  export const inboundSchema = ItemTradingGetPricesInput$inboundSchema;
+  /** @deprecated use `ItemTradingGetPricesInput$outboundSchema` instead. */
+  export const outboundSchema = ItemTradingGetPricesInput$outboundSchema;
+  /** @deprecated use `ItemTradingGetPricesInput$Outbound` instead. */
+  export type Outbound = ItemTradingGetPricesInput$Outbound;
+}
+
+export function itemTradingGetPricesInputToJSON(
+  itemTradingGetPricesInput: ItemTradingGetPricesInput,
+): string {
+  return JSON.stringify(
+    ItemTradingGetPricesInput$outboundSchema.parse(itemTradingGetPricesInput),
+  );
+}
+export function itemTradingGetPricesInputFromJSON(
+  jsonString: string,
+): SafeParseResult<ItemTradingGetPricesInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ItemTradingGetPricesInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ItemTradingGetPricesInput' from JSON`,
+  );
+}
 
 /** @internal */
 export const ItemTradingGetPricesRequest$inboundSchema: z.ZodMiniType<
   ItemTradingGetPricesRequest,
   unknown
-> = z.object({});
+> = z.object({
+  input: types.optional(z.lazy(() => ItemTradingGetPricesInput$inboundSchema)),
+});
 /** @internal */
-export type ItemTradingGetPricesRequest$Outbound = {};
+export type ItemTradingGetPricesRequest$Outbound = {
+  input?: ItemTradingGetPricesInput$Outbound | undefined;
+};
 
 /** @internal */
 export const ItemTradingGetPricesRequest$outboundSchema: z.ZodMiniType<
   ItemTradingGetPricesRequest$Outbound,
   ItemTradingGetPricesRequest
-> = z.object({});
+> = z.object({
+  input: z.optional(z.lazy(() => ItemTradingGetPricesInput$outboundSchema)),
+});
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

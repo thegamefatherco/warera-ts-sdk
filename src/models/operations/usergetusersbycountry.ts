@@ -8,15 +8,22 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type UserGetUsersByCountryRequest = {
+export type UserGetUsersByCountryInput = {
   countryId: string;
   limit?: number | undefined;
   cursor?: string | undefined;
 };
 
+export type UserGetUsersByCountryRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: UserGetUsersByCountryInput;
+};
+
 /** @internal */
-export const UserGetUsersByCountryRequest$inboundSchema: z.ZodMiniType<
-  UserGetUsersByCountryRequest,
+export const UserGetUsersByCountryInput$inboundSchema: z.ZodMiniType<
+  UserGetUsersByCountryInput,
   unknown
 > = z.object({
   countryId: types.string(),
@@ -24,10 +31,61 @@ export const UserGetUsersByCountryRequest$inboundSchema: z.ZodMiniType<
   cursor: types.optional(types.string()),
 });
 /** @internal */
-export type UserGetUsersByCountryRequest$Outbound = {
+export type UserGetUsersByCountryInput$Outbound = {
   countryId: string;
   limit: number;
   cursor?: string | undefined;
+};
+
+/** @internal */
+export const UserGetUsersByCountryInput$outboundSchema: z.ZodMiniType<
+  UserGetUsersByCountryInput$Outbound,
+  UserGetUsersByCountryInput
+> = z.object({
+  countryId: z.string(),
+  limit: z._default(z.number(), 10),
+  cursor: z.optional(z.string()),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UserGetUsersByCountryInput$ {
+  /** @deprecated use `UserGetUsersByCountryInput$inboundSchema` instead. */
+  export const inboundSchema = UserGetUsersByCountryInput$inboundSchema;
+  /** @deprecated use `UserGetUsersByCountryInput$outboundSchema` instead. */
+  export const outboundSchema = UserGetUsersByCountryInput$outboundSchema;
+  /** @deprecated use `UserGetUsersByCountryInput$Outbound` instead. */
+  export type Outbound = UserGetUsersByCountryInput$Outbound;
+}
+
+export function userGetUsersByCountryInputToJSON(
+  userGetUsersByCountryInput: UserGetUsersByCountryInput,
+): string {
+  return JSON.stringify(
+    UserGetUsersByCountryInput$outboundSchema.parse(userGetUsersByCountryInput),
+  );
+}
+export function userGetUsersByCountryInputFromJSON(
+  jsonString: string,
+): SafeParseResult<UserGetUsersByCountryInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserGetUsersByCountryInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserGetUsersByCountryInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const UserGetUsersByCountryRequest$inboundSchema: z.ZodMiniType<
+  UserGetUsersByCountryRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => UserGetUsersByCountryInput$inboundSchema),
+});
+/** @internal */
+export type UserGetUsersByCountryRequest$Outbound = {
+  input: UserGetUsersByCountryInput$Outbound;
 };
 
 /** @internal */
@@ -35,9 +93,7 @@ export const UserGetUsersByCountryRequest$outboundSchema: z.ZodMiniType<
   UserGetUsersByCountryRequest$Outbound,
   UserGetUsersByCountryRequest
 > = z.object({
-  countryId: z.string(),
-  limit: z._default(z.number(), 10),
-  cursor: z.optional(z.string()),
+  input: z.lazy(() => UserGetUsersByCountryInput$outboundSchema),
 });
 /**
  * @internal

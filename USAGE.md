@@ -7,7 +7,11 @@ const warera = new Warera({
 });
 
 async function run() {
-  await warera.companies.getById();
+  await warera.companies.getById({
+    input: {
+      companyId: "<id>",
+    },
+  });
 }
 
 run();

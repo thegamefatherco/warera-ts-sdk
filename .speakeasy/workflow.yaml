@@ -3,10 +3,11 @@ speakeasyVersion: latest
 sources:
     WarEra API:
         inputs:
-            - location: https://api2.warera.io/openapi.json
+            - location: openapi.json
         overlays:
             - location: overlay.yaml
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            - location: overlay.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
             location: registry.speakeasyapi.dev/thecodefatherco/thegamefatherco/war-era-api

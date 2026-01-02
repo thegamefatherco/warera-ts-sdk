@@ -6,12 +6,14 @@
 import { ArticleGetArticleByIdRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: ArticleGetArticleByIdRequest = {
-  articleId: "<id>",
+  input: {
+    articleId: "<id>",
+  },
 };
 ```
 
 ## Fields
 
-| Field                        | Type                         | Required                     | Description                  |
-| ---------------------------- | ---------------------------- | ---------------------------- | ---------------------------- |
-| `articleId`                  | *string*                     | :heavy_check_mark:           | The ID of the article to get |
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `input`                                                                                        | [operations.ArticleGetArticleByIdInput](../../models/operations/articlegetarticlebyidinput.md) | :heavy_check_mark:                                                                             | JSON-encoded input parameters                                                                  |

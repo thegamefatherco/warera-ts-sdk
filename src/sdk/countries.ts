@@ -16,7 +16,7 @@ export class Countries extends ClientSDK {
    * Retrieves detailed information about a specific country
    */
   async getById(
-    request?: operations.CountryGetCountryByIdRequest | undefined,
+    request: operations.CountryGetCountryByIdRequest,
     options?: RequestOptions,
   ): Promise<void> {
     return unwrapAsync(countriesGetById(

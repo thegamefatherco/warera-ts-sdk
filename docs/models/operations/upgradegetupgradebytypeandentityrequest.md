@@ -6,15 +6,14 @@
 import { UpgradeGetUpgradeByTypeAndEntityRequest } from "@thegamefatherco/warera-sdk/models/operations";
 
 let value: UpgradeGetUpgradeByTypeAndEntityRequest = {
-  upgradeType: "base",
+  input: {
+    upgradeType: "base",
+  },
 };
 ```
 
 ## Fields
 
-| Field                                                            | Type                                                             | Required                                                         | Description                                                      |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `upgradeType`                                                    | [operations.UpgradeType](../../models/operations/upgradetype.md) | :heavy_check_mark:                                               | The upgrade type to get                                          |
-| `regionId`                                                       | *string*                                                         | :heavy_minus_sign:                                               | The region ID to get upgrade for                                 |
-| `companyId`                                                      | *string*                                                         | :heavy_minus_sign:                                               | The company ID to get upgrade for                                |
-| `muId`                                                           | *string*                                                         | :heavy_minus_sign:                                               | The military unit ID to get upgrade for                          |
+| Field                                                                                                                | Type                                                                                                                 | Required                                                                                                             | Description                                                                                                          |
+| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `input`                                                                                                              | [operations.UpgradeGetUpgradeByTypeAndEntityInput](../../models/operations/upgradegetupgradebytypeandentityinput.md) | :heavy_check_mark:                                                                                                   | JSON-encoded input parameters                                                                                        |

@@ -8,23 +8,81 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
-export type GovernmentGetByCountryIdRequest = {
+export type GovernmentGetByCountryIdInput = {
   /**
    * The unique identifier of the country
    */
   countryId: string;
 };
 
+export type GovernmentGetByCountryIdRequest = {
+  /**
+   * JSON-encoded input parameters
+   */
+  input: GovernmentGetByCountryIdInput;
+};
+
 /** @internal */
-export const GovernmentGetByCountryIdRequest$inboundSchema: z.ZodMiniType<
-  GovernmentGetByCountryIdRequest,
+export const GovernmentGetByCountryIdInput$inboundSchema: z.ZodMiniType<
+  GovernmentGetByCountryIdInput,
   unknown
 > = z.object({
   countryId: types.string(),
 });
 /** @internal */
-export type GovernmentGetByCountryIdRequest$Outbound = {
+export type GovernmentGetByCountryIdInput$Outbound = {
   countryId: string;
+};
+
+/** @internal */
+export const GovernmentGetByCountryIdInput$outboundSchema: z.ZodMiniType<
+  GovernmentGetByCountryIdInput$Outbound,
+  GovernmentGetByCountryIdInput
+> = z.object({
+  countryId: z.string(),
+});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GovernmentGetByCountryIdInput$ {
+  /** @deprecated use `GovernmentGetByCountryIdInput$inboundSchema` instead. */
+  export const inboundSchema = GovernmentGetByCountryIdInput$inboundSchema;
+  /** @deprecated use `GovernmentGetByCountryIdInput$outboundSchema` instead. */
+  export const outboundSchema = GovernmentGetByCountryIdInput$outboundSchema;
+  /** @deprecated use `GovernmentGetByCountryIdInput$Outbound` instead. */
+  export type Outbound = GovernmentGetByCountryIdInput$Outbound;
+}
+
+export function governmentGetByCountryIdInputToJSON(
+  governmentGetByCountryIdInput: GovernmentGetByCountryIdInput,
+): string {
+  return JSON.stringify(
+    GovernmentGetByCountryIdInput$outboundSchema.parse(
+      governmentGetByCountryIdInput,
+    ),
+  );
+}
+export function governmentGetByCountryIdInputFromJSON(
+  jsonString: string,
+): SafeParseResult<GovernmentGetByCountryIdInput, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GovernmentGetByCountryIdInput$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GovernmentGetByCountryIdInput' from JSON`,
+  );
+}
+
+/** @internal */
+export const GovernmentGetByCountryIdRequest$inboundSchema: z.ZodMiniType<
+  GovernmentGetByCountryIdRequest,
+  unknown
+> = z.object({
+  input: z.lazy(() => GovernmentGetByCountryIdInput$inboundSchema),
+});
+/** @internal */
+export type GovernmentGetByCountryIdRequest$Outbound = {
+  input: GovernmentGetByCountryIdInput$Outbound;
 };
 
 /** @internal */
@@ -32,7 +90,7 @@ export const GovernmentGetByCountryIdRequest$outboundSchema: z.ZodMiniType<
   GovernmentGetByCountryIdRequest$Outbound,
   GovernmentGetByCountryIdRequest
 > = z.object({
-  countryId: z.string(),
+  input: z.lazy(() => GovernmentGetByCountryIdInput$outboundSchema),
 });
 /**
  * @internal

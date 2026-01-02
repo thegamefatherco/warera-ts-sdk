@@ -9,14 +9,15 @@ import { Battles } from "./battles.js";
 import { Companies } from "./companies.js";
 import { Countries } from "./countries.js";
 import { Events } from "./events.js";
-import { GameConfigs } from "./gameconfigs.js";
+import { GameConfig } from "./gameconfig.js";
 import { Governments } from "./governments.js";
 import { ItemOffers } from "./itemoffers.js";
 import { ItemTradings } from "./itemtradings.js";
+import { MilitaryUnits } from "./militaryunits.js";
 import { Mus } from "./mus.js";
 import { Rankings } from "./rankings.js";
-import { Region } from "./region.js";
 import { Regions } from "./regions.js";
+import { Round } from "./round.js";
 import { Rounds } from "./rounds.js";
 import { Search } from "./search.js";
 import { TradingOrders } from "./tradingorders.js";
@@ -46,11 +47,6 @@ export class Warera extends ClientSDK {
     return (this._governments ??= new Governments(this._options));
   }
 
-  private _region?: Region;
-  get region(): Region {
-    return (this._region ??= new Region(this._options));
-  }
-
   private _regions?: Regions;
   get regions(): Regions {
     return (this._regions ??= new Regions(this._options));
@@ -64,6 +60,11 @@ export class Warera extends ClientSDK {
   private _rounds?: Rounds;
   get rounds(): Rounds {
     return (this._rounds ??= new Rounds(this._options));
+  }
+
+  private _round?: Round;
+  get round(): Round {
+    return (this._round ??= new Round(this._options));
   }
 
   private _battleRankings?: BattleRankings;
@@ -101,9 +102,9 @@ export class Warera extends ClientSDK {
     return (this._search ??= new Search(this._options));
   }
 
-  private _gameConfigs?: GameConfigs;
-  get gameConfigs(): GameConfigs {
-    return (this._gameConfigs ??= new GameConfigs(this._options));
+  private _gameConfig?: GameConfig;
+  get gameConfig(): GameConfig {
+    return (this._gameConfig ??= new GameConfig(this._options));
   }
 
   private _users?: Users;
@@ -119,6 +120,11 @@ export class Warera extends ClientSDK {
   private _mus?: Mus;
   get mus(): Mus {
     return (this._mus ??= new Mus(this._options));
+  }
+
+  private _militaryUnits?: MilitaryUnits;
+  get militaryUnits(): MilitaryUnits {
+    return (this._militaryUnits ??= new MilitaryUnits(this._options));
   }
 
   private _transactions?: Transactions;
