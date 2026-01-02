@@ -1,7 +1,10 @@
 {
   "name": "@thegamefatherco/warera-sdk",
   "version": "0.1.4",
-  "author": "Speakeasy",
+  "author": "The Gamefather Co.",
+  "repository": {
+    "url": "https://github.com/thegamefatherco/warera-ts-sdk"
+  },
   "type": "module",
   "tshy": {
     "sourceDialects": [
