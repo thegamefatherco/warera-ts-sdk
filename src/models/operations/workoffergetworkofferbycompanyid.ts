@@ -3,11 +3,20 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WorkOfferGetWorkOfferByCompanyIdRequest = {
   companyId: string;
 };
 
+/** @internal */
+export const WorkOfferGetWorkOfferByCompanyIdRequest$inboundSchema:
+  z.ZodMiniType<WorkOfferGetWorkOfferByCompanyIdRequest, unknown> = z.object({
+    companyId: types.string(),
+  });
 /** @internal */
 export type WorkOfferGetWorkOfferByCompanyIdRequest$Outbound = {
   companyId: string;
@@ -21,6 +30,20 @@ export const WorkOfferGetWorkOfferByCompanyIdRequest$outboundSchema:
   > = z.object({
     companyId: z.string(),
   });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WorkOfferGetWorkOfferByCompanyIdRequest$ {
+  /** @deprecated use `WorkOfferGetWorkOfferByCompanyIdRequest$inboundSchema` instead. */
+  export const inboundSchema =
+    WorkOfferGetWorkOfferByCompanyIdRequest$inboundSchema;
+  /** @deprecated use `WorkOfferGetWorkOfferByCompanyIdRequest$outboundSchema` instead. */
+  export const outboundSchema =
+    WorkOfferGetWorkOfferByCompanyIdRequest$outboundSchema;
+  /** @deprecated use `WorkOfferGetWorkOfferByCompanyIdRequest$Outbound` instead. */
+  export type Outbound = WorkOfferGetWorkOfferByCompanyIdRequest$Outbound;
+}
 
 export function workOfferGetWorkOfferByCompanyIdRequestToJSON(
   workOfferGetWorkOfferByCompanyIdRequest:
@@ -30,5 +53,20 @@ export function workOfferGetWorkOfferByCompanyIdRequestToJSON(
     WorkOfferGetWorkOfferByCompanyIdRequest$outboundSchema.parse(
       workOfferGetWorkOfferByCompanyIdRequest,
     ),
+  );
+}
+export function workOfferGetWorkOfferByCompanyIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  WorkOfferGetWorkOfferByCompanyIdRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      WorkOfferGetWorkOfferByCompanyIdRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'WorkOfferGetWorkOfferByCompanyIdRequest' from JSON`,
   );
 }

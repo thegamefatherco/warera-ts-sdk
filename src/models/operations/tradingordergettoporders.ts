@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type TradingOrderGetTopOrdersRequest = {
   /**
@@ -15,6 +19,14 @@ export type TradingOrderGetTopOrdersRequest = {
   limit?: number | undefined;
 };
 
+/** @internal */
+export const TradingOrderGetTopOrdersRequest$inboundSchema: z.ZodMiniType<
+  TradingOrderGetTopOrdersRequest,
+  unknown
+> = z.object({
+  itemCode: types.string(),
+  limit: z._default(types.number(), 10),
+});
 /** @internal */
 export type TradingOrderGetTopOrdersRequest$Outbound = {
   itemCode: string;
@@ -29,6 +41,18 @@ export const TradingOrderGetTopOrdersRequest$outboundSchema: z.ZodMiniType<
   itemCode: z.string(),
   limit: z._default(z.int(), 10),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TradingOrderGetTopOrdersRequest$ {
+  /** @deprecated use `TradingOrderGetTopOrdersRequest$inboundSchema` instead. */
+  export const inboundSchema = TradingOrderGetTopOrdersRequest$inboundSchema;
+  /** @deprecated use `TradingOrderGetTopOrdersRequest$outboundSchema` instead. */
+  export const outboundSchema = TradingOrderGetTopOrdersRequest$outboundSchema;
+  /** @deprecated use `TradingOrderGetTopOrdersRequest$Outbound` instead. */
+  export type Outbound = TradingOrderGetTopOrdersRequest$Outbound;
+}
 
 export function tradingOrderGetTopOrdersRequestToJSON(
   tradingOrderGetTopOrdersRequest: TradingOrderGetTopOrdersRequest,
@@ -37,5 +61,14 @@ export function tradingOrderGetTopOrdersRequestToJSON(
     TradingOrderGetTopOrdersRequest$outboundSchema.parse(
       tradingOrderGetTopOrdersRequest,
     ),
+  );
+}
+export function tradingOrderGetTopOrdersRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<TradingOrderGetTopOrdersRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TradingOrderGetTopOrdersRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TradingOrderGetTopOrdersRequest' from JSON`,
   );
 }

@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CompanyGetByIdRequest = {
   /**
@@ -11,6 +15,13 @@ export type CompanyGetByIdRequest = {
   companyId: string;
 };
 
+/** @internal */
+export const CompanyGetByIdRequest$inboundSchema: z.ZodMiniType<
+  CompanyGetByIdRequest,
+  unknown
+> = z.object({
+  companyId: types.string(),
+});
 /** @internal */
 export type CompanyGetByIdRequest$Outbound = {
   companyId: string;
@@ -23,11 +34,32 @@ export const CompanyGetByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   companyId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CompanyGetByIdRequest$ {
+  /** @deprecated use `CompanyGetByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = CompanyGetByIdRequest$inboundSchema;
+  /** @deprecated use `CompanyGetByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = CompanyGetByIdRequest$outboundSchema;
+  /** @deprecated use `CompanyGetByIdRequest$Outbound` instead. */
+  export type Outbound = CompanyGetByIdRequest$Outbound;
+}
 
 export function companyGetByIdRequestToJSON(
   companyGetByIdRequest: CompanyGetByIdRequest,
 ): string {
   return JSON.stringify(
     CompanyGetByIdRequest$outboundSchema.parse(companyGetByIdRequest),
+  );
+}
+export function companyGetByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CompanyGetByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CompanyGetByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CompanyGetByIdRequest' from JSON`,
   );
 }

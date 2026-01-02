@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ArticleGetArticleByIdRequest = {
   /**
@@ -11,6 +15,13 @@ export type ArticleGetArticleByIdRequest = {
   articleId: string;
 };
 
+/** @internal */
+export const ArticleGetArticleByIdRequest$inboundSchema: z.ZodMiniType<
+  ArticleGetArticleByIdRequest,
+  unknown
+> = z.object({
+  articleId: types.string(),
+});
 /** @internal */
 export type ArticleGetArticleByIdRequest$Outbound = {
   articleId: string;
@@ -23,6 +34,18 @@ export const ArticleGetArticleByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   articleId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ArticleGetArticleByIdRequest$ {
+  /** @deprecated use `ArticleGetArticleByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = ArticleGetArticleByIdRequest$inboundSchema;
+  /** @deprecated use `ArticleGetArticleByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = ArticleGetArticleByIdRequest$outboundSchema;
+  /** @deprecated use `ArticleGetArticleByIdRequest$Outbound` instead. */
+  export type Outbound = ArticleGetArticleByIdRequest$Outbound;
+}
 
 export function articleGetArticleByIdRequestToJSON(
   articleGetArticleByIdRequest: ArticleGetArticleByIdRequest,
@@ -31,5 +54,14 @@ export function articleGetArticleByIdRequestToJSON(
     ArticleGetArticleByIdRequest$outboundSchema.parse(
       articleGetArticleByIdRequest,
     ),
+  );
+}
+export function articleGetArticleByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ArticleGetArticleByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ArticleGetArticleByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ArticleGetArticleByIdRequest' from JSON`,
   );
 }

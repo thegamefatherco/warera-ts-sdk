@@ -27,30 +27,32 @@ generation:
   requestBodyFieldName: body
   persistentEdits: {}
   tests:
-    generateTests: false
+    generateTests: true
     generateNewTests: true
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.1.4
+  version: 0.1.6
   acceptHeaderEnum: false
   additionalDependencies:
     dependencies: {}
     devDependencies: {}
     peerDependencies: {}
-  additionalPackageJSON: {}
+  additionalPackageJSON:
+    repository:
+      url: https://github.com/thegamefatherco/warera-ts-sdk
   additionalScripts: {}
-  alwaysIncludeInboundAndOutbound: false
-  author: Speakeasy
-  baseErrorName: WareraError
+  alwaysIncludeInboundAndOutbound: true
+  author: The Gamefather Co.
+  baseErrorName: WarEraError
   clientServerStatusCodesAsErrors: true
   constFieldsAlwaysOptional: false
-  defaultErrorName: WareraDefaultError
+  defaultErrorName: WarEraDefaultError
   enableCustomCodeRegions: false
   enableMCPServer: false
-  enableReactQuery: false
+  enableReactQuery: true
   enumFormat: union
   envVarPrefix: WARERA
-  exportZodModelNamespace: false
+  exportZodModelNamespace: true
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   formStringArrayEncodeMode: array

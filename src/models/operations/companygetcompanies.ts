@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CompanyGetCompaniesRequest = {
   /**
@@ -24,6 +28,16 @@ export type CompanyGetCompaniesRequest = {
 };
 
 /** @internal */
+export const CompanyGetCompaniesRequest$inboundSchema: z.ZodMiniType<
+  CompanyGetCompaniesRequest,
+  unknown
+> = z.object({
+  userId: types.optional(types.string()),
+  orgId: types.optional(types.string()),
+  perPage: z._default(types.number(), 10),
+  cursor: types.optional(types.string()),
+});
+/** @internal */
 export type CompanyGetCompaniesRequest$Outbound = {
   userId?: string | undefined;
   orgId?: string | undefined;
@@ -41,11 +55,32 @@ export const CompanyGetCompaniesRequest$outboundSchema: z.ZodMiniType<
   perPage: z._default(z.number(), 10),
   cursor: z.optional(z.string()),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CompanyGetCompaniesRequest$ {
+  /** @deprecated use `CompanyGetCompaniesRequest$inboundSchema` instead. */
+  export const inboundSchema = CompanyGetCompaniesRequest$inboundSchema;
+  /** @deprecated use `CompanyGetCompaniesRequest$outboundSchema` instead. */
+  export const outboundSchema = CompanyGetCompaniesRequest$outboundSchema;
+  /** @deprecated use `CompanyGetCompaniesRequest$Outbound` instead. */
+  export type Outbound = CompanyGetCompaniesRequest$Outbound;
+}
 
 export function companyGetCompaniesRequestToJSON(
   companyGetCompaniesRequest: CompanyGetCompaniesRequest,
 ): string {
   return JSON.stringify(
     CompanyGetCompaniesRequest$outboundSchema.parse(companyGetCompaniesRequest),
+  );
+}
+export function companyGetCompaniesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CompanyGetCompaniesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CompanyGetCompaniesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CompanyGetCompaniesRequest' from JSON`,
   );
 }

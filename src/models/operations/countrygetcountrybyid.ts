@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CountryGetCountryByIdRequest = {
   /**
@@ -11,6 +15,13 @@ export type CountryGetCountryByIdRequest = {
   countryId: string;
 };
 
+/** @internal */
+export const CountryGetCountryByIdRequest$inboundSchema: z.ZodMiniType<
+  CountryGetCountryByIdRequest,
+  unknown
+> = z.object({
+  countryId: types.string(),
+});
 /** @internal */
 export type CountryGetCountryByIdRequest$Outbound = {
   countryId: string;
@@ -23,6 +34,18 @@ export const CountryGetCountryByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   countryId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CountryGetCountryByIdRequest$ {
+  /** @deprecated use `CountryGetCountryByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = CountryGetCountryByIdRequest$inboundSchema;
+  /** @deprecated use `CountryGetCountryByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = CountryGetCountryByIdRequest$outboundSchema;
+  /** @deprecated use `CountryGetCountryByIdRequest$Outbound` instead. */
+  export type Outbound = CountryGetCountryByIdRequest$Outbound;
+}
 
 export function countryGetCountryByIdRequestToJSON(
   countryGetCountryByIdRequest: CountryGetCountryByIdRequest,
@@ -31,5 +54,14 @@ export function countryGetCountryByIdRequestToJSON(
     CountryGetCountryByIdRequest$outboundSchema.parse(
       countryGetCountryByIdRequest,
     ),
+  );
+}
+export function countryGetCountryByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CountryGetCountryByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CountryGetCountryByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CountryGetCountryByIdRequest' from JSON`,
   );
 }

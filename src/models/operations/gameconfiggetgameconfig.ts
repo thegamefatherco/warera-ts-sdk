@@ -3,9 +3,17 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GameConfigGetGameConfigRequest = {};
 
+/** @internal */
+export const GameConfigGetGameConfigRequest$inboundSchema: z.ZodMiniType<
+  GameConfigGetGameConfigRequest,
+  unknown
+> = z.object({});
 /** @internal */
 export type GameConfigGetGameConfigRequest$Outbound = {};
 
@@ -14,6 +22,18 @@ export const GameConfigGetGameConfigRequest$outboundSchema: z.ZodMiniType<
   GameConfigGetGameConfigRequest$Outbound,
   GameConfigGetGameConfigRequest
 > = z.object({});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GameConfigGetGameConfigRequest$ {
+  /** @deprecated use `GameConfigGetGameConfigRequest$inboundSchema` instead. */
+  export const inboundSchema = GameConfigGetGameConfigRequest$inboundSchema;
+  /** @deprecated use `GameConfigGetGameConfigRequest$outboundSchema` instead. */
+  export const outboundSchema = GameConfigGetGameConfigRequest$outboundSchema;
+  /** @deprecated use `GameConfigGetGameConfigRequest$Outbound` instead. */
+  export type Outbound = GameConfigGetGameConfigRequest$Outbound;
+}
 
 export function gameConfigGetGameConfigRequestToJSON(
   gameConfigGetGameConfigRequest: GameConfigGetGameConfigRequest,
@@ -22,5 +42,14 @@ export function gameConfigGetGameConfigRequestToJSON(
     GameConfigGetGameConfigRequest$outboundSchema.parse(
       gameConfigGetGameConfigRequest,
     ),
+  );
+}
+export function gameConfigGetGameConfigRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GameConfigGetGameConfigRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GameConfigGetGameConfigRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GameConfigGetGameConfigRequest' from JSON`,
   );
 }

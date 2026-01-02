@@ -3,7 +3,7 @@
  */
 
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
-import { WareraDefaultError } from "../models/errors/wareradefaulterror.js";
+import { WarEraDefaultError } from "../models/errors/wareradefaulterror.js";
 import { ERR, OK, Result } from "../types/fp.js";
 import { matchResponse, matchStatusCode, StatusCodePredicate } from "./http.js";
 import { isPlainObject } from "./is-plain-object.js";
@@ -181,14 +181,14 @@ export type MatchFunc<T, E> = (
 
 export function match<T, E>(
   ...matchers: Array<Matcher<T, E>>
-): MatchFunc<T, E | WareraDefaultError | ResponseValidationError> {
+): MatchFunc<T, E | WarEraDefaultError | ResponseValidationError> {
   return async function matchFunc(
     response: Response,
     request: Request,
     options?: { resultKey?: string; extraFields?: Record<string, unknown> },
   ): Promise<
     [
-      result: Result<T, E | WareraDefaultError | ResponseValidationError>,
+      result: Result<T, E | WarEraDefaultError | ResponseValidationError>,
       raw: unknown,
     ]
   > {
@@ -211,7 +211,7 @@ export function match<T, E>(
     if (!matcher) {
       return [{
         ok: false,
-        error: new WareraDefaultError("Unexpected Status or Content-Type", {
+        error: new WarEraDefaultError("Unexpected Status or Content-Type", {
           response,
           request,
           body: await response.text().catch(() => ""),
@@ -258,7 +258,7 @@ export function match<T, E>(
     if (matcher.enc === "fail") {
       return [{
         ok: false,
-        error: new WareraDefaultError("API error occurred", {
+        error: new WarEraDefaultError("API error occurred", {
           request,
           response,
           body,

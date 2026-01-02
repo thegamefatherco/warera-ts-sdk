@@ -3,7 +3,11 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The upgrade type to get
@@ -42,9 +46,30 @@ export type UpgradeGetUpgradeByTypeAndEntityRequest = {
 };
 
 /** @internal */
-export const UpgradeType$outboundSchema: z.ZodMiniEnum<typeof UpgradeType> = z
+export const UpgradeType$inboundSchema: z.ZodMiniEnum<typeof UpgradeType> = z
   .enum(UpgradeType);
+/** @internal */
+export const UpgradeType$outboundSchema: z.ZodMiniEnum<typeof UpgradeType> =
+  UpgradeType$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpgradeType$ {
+  /** @deprecated use `UpgradeType$inboundSchema` instead. */
+  export const inboundSchema = UpgradeType$inboundSchema;
+  /** @deprecated use `UpgradeType$outboundSchema` instead. */
+  export const outboundSchema = UpgradeType$outboundSchema;
+}
 
+/** @internal */
+export const UpgradeGetUpgradeByTypeAndEntityRequest$inboundSchema:
+  z.ZodMiniType<UpgradeGetUpgradeByTypeAndEntityRequest, unknown> = z.object({
+    upgradeType: UpgradeType$inboundSchema,
+    regionId: types.optional(types.string()),
+    companyId: types.optional(types.string()),
+    muId: types.optional(types.string()),
+  });
 /** @internal */
 export type UpgradeGetUpgradeByTypeAndEntityRequest$Outbound = {
   upgradeType: string;
@@ -64,6 +89,20 @@ export const UpgradeGetUpgradeByTypeAndEntityRequest$outboundSchema:
     companyId: z.optional(z.string()),
     muId: z.optional(z.string()),
   });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UpgradeGetUpgradeByTypeAndEntityRequest$ {
+  /** @deprecated use `UpgradeGetUpgradeByTypeAndEntityRequest$inboundSchema` instead. */
+  export const inboundSchema =
+    UpgradeGetUpgradeByTypeAndEntityRequest$inboundSchema;
+  /** @deprecated use `UpgradeGetUpgradeByTypeAndEntityRequest$outboundSchema` instead. */
+  export const outboundSchema =
+    UpgradeGetUpgradeByTypeAndEntityRequest$outboundSchema;
+  /** @deprecated use `UpgradeGetUpgradeByTypeAndEntityRequest$Outbound` instead. */
+  export type Outbound = UpgradeGetUpgradeByTypeAndEntityRequest$Outbound;
+}
 
 export function upgradeGetUpgradeByTypeAndEntityRequestToJSON(
   upgradeGetUpgradeByTypeAndEntityRequest:
@@ -73,5 +112,20 @@ export function upgradeGetUpgradeByTypeAndEntityRequestToJSON(
     UpgradeGetUpgradeByTypeAndEntityRequest$outboundSchema.parse(
       upgradeGetUpgradeByTypeAndEntityRequest,
     ),
+  );
+}
+export function upgradeGetUpgradeByTypeAndEntityRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  UpgradeGetUpgradeByTypeAndEntityRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      UpgradeGetUpgradeByTypeAndEntityRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'UpgradeGetUpgradeByTypeAndEntityRequest' from JSON`,
   );
 }

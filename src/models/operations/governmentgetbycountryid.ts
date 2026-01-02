@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GovernmentGetByCountryIdRequest = {
   /**
@@ -11,6 +15,13 @@ export type GovernmentGetByCountryIdRequest = {
   countryId: string;
 };
 
+/** @internal */
+export const GovernmentGetByCountryIdRequest$inboundSchema: z.ZodMiniType<
+  GovernmentGetByCountryIdRequest,
+  unknown
+> = z.object({
+  countryId: types.string(),
+});
 /** @internal */
 export type GovernmentGetByCountryIdRequest$Outbound = {
   countryId: string;
@@ -23,6 +34,18 @@ export const GovernmentGetByCountryIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   countryId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GovernmentGetByCountryIdRequest$ {
+  /** @deprecated use `GovernmentGetByCountryIdRequest$inboundSchema` instead. */
+  export const inboundSchema = GovernmentGetByCountryIdRequest$inboundSchema;
+  /** @deprecated use `GovernmentGetByCountryIdRequest$outboundSchema` instead. */
+  export const outboundSchema = GovernmentGetByCountryIdRequest$outboundSchema;
+  /** @deprecated use `GovernmentGetByCountryIdRequest$Outbound` instead. */
+  export type Outbound = GovernmentGetByCountryIdRequest$Outbound;
+}
 
 export function governmentGetByCountryIdRequestToJSON(
   governmentGetByCountryIdRequest: GovernmentGetByCountryIdRequest,
@@ -31,5 +54,14 @@ export function governmentGetByCountryIdRequestToJSON(
     GovernmentGetByCountryIdRequest$outboundSchema.parse(
       governmentGetByCountryIdRequest,
     ),
+  );
+}
+export function governmentGetByCountryIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GovernmentGetByCountryIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GovernmentGetByCountryIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GovernmentGetByCountryIdRequest' from JSON`,
   );
 }

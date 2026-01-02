@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BattleGetLiveBattleDataRequest = {
   /**
@@ -15,6 +19,14 @@ export type BattleGetLiveBattleDataRequest = {
   roundNumber?: number | undefined;
 };
 
+/** @internal */
+export const BattleGetLiveBattleDataRequest$inboundSchema: z.ZodMiniType<
+  BattleGetLiveBattleDataRequest,
+  unknown
+> = z.object({
+  battleId: types.string(),
+  roundNumber: types.optional(types.number()),
+});
 /** @internal */
 export type BattleGetLiveBattleDataRequest$Outbound = {
   battleId: string;
@@ -29,6 +41,18 @@ export const BattleGetLiveBattleDataRequest$outboundSchema: z.ZodMiniType<
   battleId: z.string(),
   roundNumber: z.optional(z.number()),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleGetLiveBattleDataRequest$ {
+  /** @deprecated use `BattleGetLiveBattleDataRequest$inboundSchema` instead. */
+  export const inboundSchema = BattleGetLiveBattleDataRequest$inboundSchema;
+  /** @deprecated use `BattleGetLiveBattleDataRequest$outboundSchema` instead. */
+  export const outboundSchema = BattleGetLiveBattleDataRequest$outboundSchema;
+  /** @deprecated use `BattleGetLiveBattleDataRequest$Outbound` instead. */
+  export type Outbound = BattleGetLiveBattleDataRequest$Outbound;
+}
 
 export function battleGetLiveBattleDataRequestToJSON(
   battleGetLiveBattleDataRequest: BattleGetLiveBattleDataRequest,
@@ -37,5 +61,14 @@ export function battleGetLiveBattleDataRequestToJSON(
     BattleGetLiveBattleDataRequest$outboundSchema.parse(
       battleGetLiveBattleDataRequest,
     ),
+  );
+}
+export function battleGetLiveBattleDataRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BattleGetLiveBattleDataRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BattleGetLiveBattleDataRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BattleGetLiveBattleDataRequest' from JSON`,
   );
 }

@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RoundGetByIdRequest = {
   /**
@@ -11,6 +15,13 @@ export type RoundGetByIdRequest = {
   roundId: string;
 };
 
+/** @internal */
+export const RoundGetByIdRequest$inboundSchema: z.ZodMiniType<
+  RoundGetByIdRequest,
+  unknown
+> = z.object({
+  roundId: types.string(),
+});
 /** @internal */
 export type RoundGetByIdRequest$Outbound = {
   roundId: string;
@@ -23,11 +34,32 @@ export const RoundGetByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   roundId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RoundGetByIdRequest$ {
+  /** @deprecated use `RoundGetByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = RoundGetByIdRequest$inboundSchema;
+  /** @deprecated use `RoundGetByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = RoundGetByIdRequest$outboundSchema;
+  /** @deprecated use `RoundGetByIdRequest$Outbound` instead. */
+  export type Outbound = RoundGetByIdRequest$Outbound;
+}
 
 export function roundGetByIdRequestToJSON(
   roundGetByIdRequest: RoundGetByIdRequest,
 ): string {
   return JSON.stringify(
     RoundGetByIdRequest$outboundSchema.parse(roundGetByIdRequest),
+  );
+}
+export function roundGetByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RoundGetByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RoundGetByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoundGetByIdRequest' from JSON`,
   );
 }

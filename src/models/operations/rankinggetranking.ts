@@ -3,7 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The type of ranking to retrieve
@@ -49,9 +52,29 @@ export type RankingGetRankingRequest = {
 };
 
 /** @internal */
-export const RankingType$outboundSchema: z.ZodMiniEnum<typeof RankingType> = z
+export const RankingType$inboundSchema: z.ZodMiniEnum<typeof RankingType> = z
   .enum(RankingType);
+/** @internal */
+export const RankingType$outboundSchema: z.ZodMiniEnum<typeof RankingType> =
+  RankingType$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RankingType$ {
+  /** @deprecated use `RankingType$inboundSchema` instead. */
+  export const inboundSchema = RankingType$inboundSchema;
+  /** @deprecated use `RankingType$outboundSchema` instead. */
+  export const outboundSchema = RankingType$outboundSchema;
+}
 
+/** @internal */
+export const RankingGetRankingRequest$inboundSchema: z.ZodMiniType<
+  RankingGetRankingRequest,
+  unknown
+> = z.object({
+  rankingType: RankingType$inboundSchema,
+});
 /** @internal */
 export type RankingGetRankingRequest$Outbound = {
   rankingType: string;
@@ -64,11 +87,32 @@ export const RankingGetRankingRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   rankingType: RankingType$outboundSchema,
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RankingGetRankingRequest$ {
+  /** @deprecated use `RankingGetRankingRequest$inboundSchema` instead. */
+  export const inboundSchema = RankingGetRankingRequest$inboundSchema;
+  /** @deprecated use `RankingGetRankingRequest$outboundSchema` instead. */
+  export const outboundSchema = RankingGetRankingRequest$outboundSchema;
+  /** @deprecated use `RankingGetRankingRequest$Outbound` instead. */
+  export type Outbound = RankingGetRankingRequest$Outbound;
+}
 
 export function rankingGetRankingRequestToJSON(
   rankingGetRankingRequest: RankingGetRankingRequest,
 ): string {
   return JSON.stringify(
     RankingGetRankingRequest$outboundSchema.parse(rankingGetRankingRequest),
+  );
+}
+export function rankingGetRankingRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RankingGetRankingRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RankingGetRankingRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RankingGetRankingRequest' from JSON`,
   );
 }

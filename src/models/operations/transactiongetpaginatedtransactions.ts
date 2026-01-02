@@ -3,8 +3,12 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { smartUnion } from "../../types/smartUnion.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export const TransactionTypeEnum2 = {
   ApplicationFee: "applicationFee",
@@ -74,15 +78,51 @@ export type TransactionGetPaginatedTransactionsRequest = {
 };
 
 /** @internal */
-export const TransactionTypeEnum2$outboundSchema: z.ZodMiniEnum<
+export const TransactionTypeEnum2$inboundSchema: z.ZodMiniEnum<
   typeof TransactionTypeEnum2
 > = z.enum(TransactionTypeEnum2);
+/** @internal */
+export const TransactionTypeEnum2$outboundSchema: z.ZodMiniEnum<
+  typeof TransactionTypeEnum2
+> = TransactionTypeEnum2$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TransactionTypeEnum2$ {
+  /** @deprecated use `TransactionTypeEnum2$inboundSchema` instead. */
+  export const inboundSchema = TransactionTypeEnum2$inboundSchema;
+  /** @deprecated use `TransactionTypeEnum2$outboundSchema` instead. */
+  export const outboundSchema = TransactionTypeEnum2$outboundSchema;
+}
 
+/** @internal */
+export const TransactionTypeEnum1$inboundSchema: z.ZodMiniEnum<
+  typeof TransactionTypeEnum1
+> = z.enum(TransactionTypeEnum1);
 /** @internal */
 export const TransactionTypeEnum1$outboundSchema: z.ZodMiniEnum<
   typeof TransactionTypeEnum1
-> = z.enum(TransactionTypeEnum1);
+> = TransactionTypeEnum1$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TransactionTypeEnum1$ {
+  /** @deprecated use `TransactionTypeEnum1$inboundSchema` instead. */
+  export const inboundSchema = TransactionTypeEnum1$inboundSchema;
+  /** @deprecated use `TransactionTypeEnum1$outboundSchema` instead. */
+  export const outboundSchema = TransactionTypeEnum1$outboundSchema;
+}
 
+/** @internal */
+export const TransactionType$inboundSchema: z.ZodMiniType<
+  TransactionType,
+  unknown
+> = smartUnion([
+  TransactionTypeEnum1$inboundSchema,
+  z.array(TransactionTypeEnum2$inboundSchema),
+]);
 /** @internal */
 export type TransactionType$Outbound = string | Array<string>;
 
@@ -94,13 +134,52 @@ export const TransactionType$outboundSchema: z.ZodMiniType<
   TransactionTypeEnum1$outboundSchema,
   z.array(TransactionTypeEnum2$outboundSchema),
 ]);
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TransactionType$ {
+  /** @deprecated use `TransactionType$inboundSchema` instead. */
+  export const inboundSchema = TransactionType$inboundSchema;
+  /** @deprecated use `TransactionType$outboundSchema` instead. */
+  export const outboundSchema = TransactionType$outboundSchema;
+  /** @deprecated use `TransactionType$Outbound` instead. */
+  export type Outbound = TransactionType$Outbound;
+}
 
 export function transactionTypeToJSON(
   transactionType: TransactionType,
 ): string {
   return JSON.stringify(TransactionType$outboundSchema.parse(transactionType));
 }
+export function transactionTypeFromJSON(
+  jsonString: string,
+): SafeParseResult<TransactionType, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => TransactionType$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'TransactionType' from JSON`,
+  );
+}
 
+/** @internal */
+export const TransactionGetPaginatedTransactionsRequest$inboundSchema:
+  z.ZodMiniType<TransactionGetPaginatedTransactionsRequest, unknown> = z.object(
+    {
+      limit: z._default(types.number(), 10),
+      cursor: types.optional(types.string()),
+      userId: types.optional(types.string()),
+      muId: types.optional(types.string()),
+      countryId: types.optional(types.string()),
+      itemCode: types.optional(types.string()),
+      transactionType: types.optional(
+        smartUnion([
+          TransactionTypeEnum1$inboundSchema,
+          z.array(TransactionTypeEnum2$inboundSchema),
+        ]),
+      ),
+    },
+  );
 /** @internal */
 export type TransactionGetPaginatedTransactionsRequest$Outbound = {
   limit: number;
@@ -131,6 +210,20 @@ export const TransactionGetPaginatedTransactionsRequest$outboundSchema:
       ]),
     ),
   });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace TransactionGetPaginatedTransactionsRequest$ {
+  /** @deprecated use `TransactionGetPaginatedTransactionsRequest$inboundSchema` instead. */
+  export const inboundSchema =
+    TransactionGetPaginatedTransactionsRequest$inboundSchema;
+  /** @deprecated use `TransactionGetPaginatedTransactionsRequest$outboundSchema` instead. */
+  export const outboundSchema =
+    TransactionGetPaginatedTransactionsRequest$outboundSchema;
+  /** @deprecated use `TransactionGetPaginatedTransactionsRequest$Outbound` instead. */
+  export type Outbound = TransactionGetPaginatedTransactionsRequest$Outbound;
+}
 
 export function transactionGetPaginatedTransactionsRequestToJSON(
   transactionGetPaginatedTransactionsRequest:
@@ -140,5 +233,20 @@ export function transactionGetPaginatedTransactionsRequestToJSON(
     TransactionGetPaginatedTransactionsRequest$outboundSchema.parse(
       transactionGetPaginatedTransactionsRequest,
     ),
+  );
+}
+export function transactionGetPaginatedTransactionsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  TransactionGetPaginatedTransactionsRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      TransactionGetPaginatedTransactionsRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'TransactionGetPaginatedTransactionsRequest' from JSON`,
   );
 }

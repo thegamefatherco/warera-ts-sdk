@@ -3,11 +3,22 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ItemOfferGetByIdRequest = {
   itemOfferId: string;
 };
 
+/** @internal */
+export const ItemOfferGetByIdRequest$inboundSchema: z.ZodMiniType<
+  ItemOfferGetByIdRequest,
+  unknown
+> = z.object({
+  itemOfferId: types.string(),
+});
 /** @internal */
 export type ItemOfferGetByIdRequest$Outbound = {
   itemOfferId: string;
@@ -20,11 +31,32 @@ export const ItemOfferGetByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   itemOfferId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ItemOfferGetByIdRequest$ {
+  /** @deprecated use `ItemOfferGetByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = ItemOfferGetByIdRequest$inboundSchema;
+  /** @deprecated use `ItemOfferGetByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = ItemOfferGetByIdRequest$outboundSchema;
+  /** @deprecated use `ItemOfferGetByIdRequest$Outbound` instead. */
+  export type Outbound = ItemOfferGetByIdRequest$Outbound;
+}
 
 export function itemOfferGetByIdRequestToJSON(
   itemOfferGetByIdRequest: ItemOfferGetByIdRequest,
 ): string {
   return JSON.stringify(
     ItemOfferGetByIdRequest$outboundSchema.parse(itemOfferGetByIdRequest),
+  );
+}
+export function itemOfferGetByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ItemOfferGetByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ItemOfferGetByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ItemOfferGetByIdRequest' from JSON`,
   );
 }

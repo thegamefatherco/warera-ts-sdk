@@ -4,9 +4,9 @@
 
 import * as z from "zod/v4/core";
 import { formatZodError } from "./sdkvalidationerror.js";
-import { WareraError } from "./wareraerror.js";
+import { WarEraError } from "./wareraerror.js";
 
-export class ResponseValidationError extends WareraError {
+export class ResponseValidationError extends WarEraError {
   /**
    * The raw value that failed validation.
    */

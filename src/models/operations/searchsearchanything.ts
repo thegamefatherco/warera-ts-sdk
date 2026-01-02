@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type SearchSearchAnythingRequest = {
   /**
@@ -11,6 +15,13 @@ export type SearchSearchAnythingRequest = {
   searchText: string;
 };
 
+/** @internal */
+export const SearchSearchAnythingRequest$inboundSchema: z.ZodMiniType<
+  SearchSearchAnythingRequest,
+  unknown
+> = z.object({
+  searchText: types.string(),
+});
 /** @internal */
 export type SearchSearchAnythingRequest$Outbound = {
   searchText: string;
@@ -23,6 +34,18 @@ export const SearchSearchAnythingRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   searchText: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace SearchSearchAnythingRequest$ {
+  /** @deprecated use `SearchSearchAnythingRequest$inboundSchema` instead. */
+  export const inboundSchema = SearchSearchAnythingRequest$inboundSchema;
+  /** @deprecated use `SearchSearchAnythingRequest$outboundSchema` instead. */
+  export const outboundSchema = SearchSearchAnythingRequest$outboundSchema;
+  /** @deprecated use `SearchSearchAnythingRequest$Outbound` instead. */
+  export type Outbound = SearchSearchAnythingRequest$Outbound;
+}
 
 export function searchSearchAnythingRequestToJSON(
   searchSearchAnythingRequest: SearchSearchAnythingRequest,
@@ -31,5 +54,14 @@ export function searchSearchAnythingRequestToJSON(
     SearchSearchAnythingRequest$outboundSchema.parse(
       searchSearchAnythingRequest,
     ),
+  );
+}
+export function searchSearchAnythingRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<SearchSearchAnythingRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => SearchSearchAnythingRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'SearchSearchAnythingRequest' from JSON`,
   );
 }

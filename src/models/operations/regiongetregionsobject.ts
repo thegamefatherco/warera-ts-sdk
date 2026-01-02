@@ -3,9 +3,17 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RegionGetRegionsObjectRequest = {};
 
+/** @internal */
+export const RegionGetRegionsObjectRequest$inboundSchema: z.ZodMiniType<
+  RegionGetRegionsObjectRequest,
+  unknown
+> = z.object({});
 /** @internal */
 export type RegionGetRegionsObjectRequest$Outbound = {};
 
@@ -14,6 +22,18 @@ export const RegionGetRegionsObjectRequest$outboundSchema: z.ZodMiniType<
   RegionGetRegionsObjectRequest$Outbound,
   RegionGetRegionsObjectRequest
 > = z.object({});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RegionGetRegionsObjectRequest$ {
+  /** @deprecated use `RegionGetRegionsObjectRequest$inboundSchema` instead. */
+  export const inboundSchema = RegionGetRegionsObjectRequest$inboundSchema;
+  /** @deprecated use `RegionGetRegionsObjectRequest$outboundSchema` instead. */
+  export const outboundSchema = RegionGetRegionsObjectRequest$outboundSchema;
+  /** @deprecated use `RegionGetRegionsObjectRequest$Outbound` instead. */
+  export type Outbound = RegionGetRegionsObjectRequest$Outbound;
+}
 
 export function regionGetRegionsObjectRequestToJSON(
   regionGetRegionsObjectRequest: RegionGetRegionsObjectRequest,
@@ -22,5 +42,14 @@ export function regionGetRegionsObjectRequestToJSON(
     RegionGetRegionsObjectRequest$outboundSchema.parse(
       regionGetRegionsObjectRequest,
     ),
+  );
+}
+export function regionGetRegionsObjectRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RegionGetRegionsObjectRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RegionGetRegionsObjectRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RegionGetRegionsObjectRequest' from JSON`,
   );
 }

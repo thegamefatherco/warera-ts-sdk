@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type EventGetEventsPaginatedRequest = {
   /**
@@ -20,6 +24,15 @@ export type EventGetEventsPaginatedRequest = {
 };
 
 /** @internal */
+export const EventGetEventsPaginatedRequest$inboundSchema: z.ZodMiniType<
+  EventGetEventsPaginatedRequest,
+  unknown
+> = z.object({
+  limit: z._default(types.number(), 10),
+  cursor: types.optional(types.string()),
+  countryId: types.optional(types.string()),
+});
+/** @internal */
 export type EventGetEventsPaginatedRequest$Outbound = {
   limit: number;
   cursor?: string | undefined;
@@ -35,6 +48,18 @@ export const EventGetEventsPaginatedRequest$outboundSchema: z.ZodMiniType<
   cursor: z.optional(z.string()),
   countryId: z.optional(z.string()),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace EventGetEventsPaginatedRequest$ {
+  /** @deprecated use `EventGetEventsPaginatedRequest$inboundSchema` instead. */
+  export const inboundSchema = EventGetEventsPaginatedRequest$inboundSchema;
+  /** @deprecated use `EventGetEventsPaginatedRequest$outboundSchema` instead. */
+  export const outboundSchema = EventGetEventsPaginatedRequest$outboundSchema;
+  /** @deprecated use `EventGetEventsPaginatedRequest$Outbound` instead. */
+  export type Outbound = EventGetEventsPaginatedRequest$Outbound;
+}
 
 export function eventGetEventsPaginatedRequestToJSON(
   eventGetEventsPaginatedRequest: EventGetEventsPaginatedRequest,
@@ -43,5 +68,14 @@ export function eventGetEventsPaginatedRequestToJSON(
     EventGetEventsPaginatedRequest$outboundSchema.parse(
       eventGetEventsPaginatedRequest,
     ),
+  );
+}
+export function eventGetEventsPaginatedRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<EventGetEventsPaginatedRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => EventGetEventsPaginatedRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EventGetEventsPaginatedRequest' from JSON`,
   );
 }

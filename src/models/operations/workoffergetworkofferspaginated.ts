@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WorkOfferGetWorkOffersPaginatedRequest = {
   userId?: string | undefined;
@@ -11,6 +15,14 @@ export type WorkOfferGetWorkOffersPaginatedRequest = {
   limit?: number | undefined;
 };
 
+/** @internal */
+export const WorkOfferGetWorkOffersPaginatedRequest$inboundSchema:
+  z.ZodMiniType<WorkOfferGetWorkOffersPaginatedRequest, unknown> = z.object({
+    userId: types.optional(types.string()),
+    regionId: types.optional(types.string()),
+    cursor: types.optional(types.string()),
+    limit: z._default(types.number(), 10),
+  });
 /** @internal */
 export type WorkOfferGetWorkOffersPaginatedRequest$Outbound = {
   userId?: string | undefined;
@@ -30,6 +42,20 @@ export const WorkOfferGetWorkOffersPaginatedRequest$outboundSchema:
     cursor: z.optional(z.string()),
     limit: z._default(z.int(), 10),
   });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WorkOfferGetWorkOffersPaginatedRequest$ {
+  /** @deprecated use `WorkOfferGetWorkOffersPaginatedRequest$inboundSchema` instead. */
+  export const inboundSchema =
+    WorkOfferGetWorkOffersPaginatedRequest$inboundSchema;
+  /** @deprecated use `WorkOfferGetWorkOffersPaginatedRequest$outboundSchema` instead. */
+  export const outboundSchema =
+    WorkOfferGetWorkOffersPaginatedRequest$outboundSchema;
+  /** @deprecated use `WorkOfferGetWorkOffersPaginatedRequest$Outbound` instead. */
+  export type Outbound = WorkOfferGetWorkOffersPaginatedRequest$Outbound;
+}
 
 export function workOfferGetWorkOffersPaginatedRequestToJSON(
   workOfferGetWorkOffersPaginatedRequest:
@@ -39,5 +65,15 @@ export function workOfferGetWorkOffersPaginatedRequestToJSON(
     WorkOfferGetWorkOffersPaginatedRequest$outboundSchema.parse(
       workOfferGetWorkOffersPaginatedRequest,
     ),
+  );
+}
+export function workOfferGetWorkOffersPaginatedRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkOfferGetWorkOffersPaginatedRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      WorkOfferGetWorkOffersPaginatedRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkOfferGetWorkOffersPaginatedRequest' from JSON`,
   );
 }

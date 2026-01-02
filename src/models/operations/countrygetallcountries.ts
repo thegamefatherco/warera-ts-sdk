@@ -3,9 +3,17 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type CountryGetAllCountriesRequest = {};
 
+/** @internal */
+export const CountryGetAllCountriesRequest$inboundSchema: z.ZodMiniType<
+  CountryGetAllCountriesRequest,
+  unknown
+> = z.object({});
 /** @internal */
 export type CountryGetAllCountriesRequest$Outbound = {};
 
@@ -14,6 +22,18 @@ export const CountryGetAllCountriesRequest$outboundSchema: z.ZodMiniType<
   CountryGetAllCountriesRequest$Outbound,
   CountryGetAllCountriesRequest
 > = z.object({});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace CountryGetAllCountriesRequest$ {
+  /** @deprecated use `CountryGetAllCountriesRequest$inboundSchema` instead. */
+  export const inboundSchema = CountryGetAllCountriesRequest$inboundSchema;
+  /** @deprecated use `CountryGetAllCountriesRequest$outboundSchema` instead. */
+  export const outboundSchema = CountryGetAllCountriesRequest$outboundSchema;
+  /** @deprecated use `CountryGetAllCountriesRequest$Outbound` instead. */
+  export type Outbound = CountryGetAllCountriesRequest$Outbound;
+}
 
 export function countryGetAllCountriesRequestToJSON(
   countryGetAllCountriesRequest: CountryGetAllCountriesRequest,
@@ -22,5 +42,14 @@ export function countryGetAllCountriesRequestToJSON(
     CountryGetAllCountriesRequest$outboundSchema.parse(
       countryGetAllCountriesRequest,
     ),
+  );
+}
+export function countryGetAllCountriesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<CountryGetAllCountriesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => CountryGetAllCountriesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'CountryGetAllCountriesRequest' from JSON`,
   );
 }

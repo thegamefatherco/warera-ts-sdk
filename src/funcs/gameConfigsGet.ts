@@ -17,7 +17,7 @@ import {
 } from "../models/errors/httpclienterrors.js";
 import { ResponseValidationError } from "../models/errors/responsevalidationerror.js";
 import { SDKValidationError } from "../models/errors/sdkvalidationerror.js";
-import { WareraError } from "../models/errors/wareraerror.js";
+import { WarEraError } from "../models/errors/wareraerror.js";
 import * as operations from "../models/operations/index.js";
 import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
@@ -35,7 +35,7 @@ export function gameConfigsGet(
 ): APIPromise<
   Result<
     void,
-    | WareraError
+    | WarEraError
     | ResponseValidationError
     | ConnectionError
     | RequestAbortedError
@@ -60,7 +60,7 @@ async function $do(
   [
     Result<
       void,
-      | WareraError
+      | WarEraError
       | ResponseValidationError
       | ConnectionError
       | RequestAbortedError
@@ -120,7 +120,7 @@ async function $do(
 
   const [result] = await M.match<
     void,
-    | WareraError
+    | WarEraError
     | ResponseValidationError
     | ConnectionError
     | RequestAbortedError

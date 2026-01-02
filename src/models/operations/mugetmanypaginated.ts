@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MuGetManyPaginatedRequest = {
   limit?: number | undefined;
@@ -13,6 +17,18 @@ export type MuGetManyPaginatedRequest = {
   search?: string | undefined;
 };
 
+/** @internal */
+export const MuGetManyPaginatedRequest$inboundSchema: z.ZodMiniType<
+  MuGetManyPaginatedRequest,
+  unknown
+> = z.object({
+  limit: z._default(types.number(), 20),
+  cursor: types.optional(types.string()),
+  memberId: types.optional(types.string()),
+  userId: types.optional(types.string()),
+  orgId: types.optional(types.string()),
+  search: types.optional(types.string()),
+});
 /** @internal */
 export type MuGetManyPaginatedRequest$Outbound = {
   limit: number;
@@ -35,11 +51,32 @@ export const MuGetManyPaginatedRequest$outboundSchema: z.ZodMiniType<
   orgId: z.optional(z.string()),
   search: z.optional(z.string()),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MuGetManyPaginatedRequest$ {
+  /** @deprecated use `MuGetManyPaginatedRequest$inboundSchema` instead. */
+  export const inboundSchema = MuGetManyPaginatedRequest$inboundSchema;
+  /** @deprecated use `MuGetManyPaginatedRequest$outboundSchema` instead. */
+  export const outboundSchema = MuGetManyPaginatedRequest$outboundSchema;
+  /** @deprecated use `MuGetManyPaginatedRequest$Outbound` instead. */
+  export type Outbound = MuGetManyPaginatedRequest$Outbound;
+}
 
 export function muGetManyPaginatedRequestToJSON(
   muGetManyPaginatedRequest: MuGetManyPaginatedRequest,
 ): string {
   return JSON.stringify(
     MuGetManyPaginatedRequest$outboundSchema.parse(muGetManyPaginatedRequest),
+  );
+}
+export function muGetManyPaginatedRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<MuGetManyPaginatedRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MuGetManyPaginatedRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MuGetManyPaginatedRequest' from JSON`,
   );
 }

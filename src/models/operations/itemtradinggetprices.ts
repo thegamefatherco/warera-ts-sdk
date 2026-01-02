@@ -3,9 +3,17 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type ItemTradingGetPricesRequest = {};
 
+/** @internal */
+export const ItemTradingGetPricesRequest$inboundSchema: z.ZodMiniType<
+  ItemTradingGetPricesRequest,
+  unknown
+> = z.object({});
 /** @internal */
 export type ItemTradingGetPricesRequest$Outbound = {};
 
@@ -14,6 +22,18 @@ export const ItemTradingGetPricesRequest$outboundSchema: z.ZodMiniType<
   ItemTradingGetPricesRequest$Outbound,
   ItemTradingGetPricesRequest
 > = z.object({});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ItemTradingGetPricesRequest$ {
+  /** @deprecated use `ItemTradingGetPricesRequest$inboundSchema` instead. */
+  export const inboundSchema = ItemTradingGetPricesRequest$inboundSchema;
+  /** @deprecated use `ItemTradingGetPricesRequest$outboundSchema` instead. */
+  export const outboundSchema = ItemTradingGetPricesRequest$outboundSchema;
+  /** @deprecated use `ItemTradingGetPricesRequest$Outbound` instead. */
+  export type Outbound = ItemTradingGetPricesRequest$Outbound;
+}
 
 export function itemTradingGetPricesRequestToJSON(
   itemTradingGetPricesRequest: ItemTradingGetPricesRequest,
@@ -22,5 +42,14 @@ export function itemTradingGetPricesRequestToJSON(
     ItemTradingGetPricesRequest$outboundSchema.parse(
       itemTradingGetPricesRequest,
     ),
+  );
+}
+export function itemTradingGetPricesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ItemTradingGetPricesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => ItemTradingGetPricesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ItemTradingGetPricesRequest' from JSON`,
   );
 }

@@ -3,11 +3,22 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type WorkOfferGetByIdRequest = {
   workOfferId: string;
 };
 
+/** @internal */
+export const WorkOfferGetByIdRequest$inboundSchema: z.ZodMiniType<
+  WorkOfferGetByIdRequest,
+  unknown
+> = z.object({
+  workOfferId: types.string(),
+});
 /** @internal */
 export type WorkOfferGetByIdRequest$Outbound = {
   workOfferId: string;
@@ -20,11 +31,32 @@ export const WorkOfferGetByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   workOfferId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace WorkOfferGetByIdRequest$ {
+  /** @deprecated use `WorkOfferGetByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = WorkOfferGetByIdRequest$inboundSchema;
+  /** @deprecated use `WorkOfferGetByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = WorkOfferGetByIdRequest$outboundSchema;
+  /** @deprecated use `WorkOfferGetByIdRequest$Outbound` instead. */
+  export type Outbound = WorkOfferGetByIdRequest$Outbound;
+}
 
 export function workOfferGetByIdRequestToJSON(
   workOfferGetByIdRequest: WorkOfferGetByIdRequest,
 ): string {
   return JSON.stringify(
     WorkOfferGetByIdRequest$outboundSchema.parse(workOfferGetByIdRequest),
+  );
+}
+export function workOfferGetByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<WorkOfferGetByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => WorkOfferGetByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'WorkOfferGetByIdRequest' from JSON`,
   );
 }

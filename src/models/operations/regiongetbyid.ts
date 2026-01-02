@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RegionGetByIdRequest = {
   /**
@@ -11,6 +15,13 @@ export type RegionGetByIdRequest = {
   regionId: string;
 };
 
+/** @internal */
+export const RegionGetByIdRequest$inboundSchema: z.ZodMiniType<
+  RegionGetByIdRequest,
+  unknown
+> = z.object({
+  regionId: types.string(),
+});
 /** @internal */
 export type RegionGetByIdRequest$Outbound = {
   regionId: string;
@@ -23,11 +34,32 @@ export const RegionGetByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   regionId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RegionGetByIdRequest$ {
+  /** @deprecated use `RegionGetByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = RegionGetByIdRequest$inboundSchema;
+  /** @deprecated use `RegionGetByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = RegionGetByIdRequest$outboundSchema;
+  /** @deprecated use `RegionGetByIdRequest$Outbound` instead. */
+  export type Outbound = RegionGetByIdRequest$Outbound;
+}
 
 export function regionGetByIdRequestToJSON(
   regionGetByIdRequest: RegionGetByIdRequest,
 ): string {
   return JSON.stringify(
     RegionGetByIdRequest$outboundSchema.parse(regionGetByIdRequest),
+  );
+}
+export function regionGetByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RegionGetByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RegionGetByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RegionGetByIdRequest' from JSON`,
   );
 }

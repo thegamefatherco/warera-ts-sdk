@@ -37,34 +37,30 @@ WarEra API: WarEra tRPC API endpoints. ⚠️ Please notice that every call is i
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
-> [!TIP]
-> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
-
-
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
 
 ```bash
-npm add <UNSET>
+npm add @thegamefatherco/warera-sdk
 ```
 
 ### PNPM
 
 ```bash
-pnpm add <UNSET>
+pnpm add @thegamefatherco/warera-sdk
 ```
 
 ### Bun
 
 ```bash
-bun add <UNSET>
+bun add @thegamefatherco/warera-sdk
 ```
 
 ### Yarn
 
 ```bash
-yarn add <UNSET>
+yarn add @thegamefatherco/warera-sdk
 ```
 
 > [!NOTE]
@@ -315,7 +311,7 @@ run();
 <!-- Start Error Handling [errors] -->
 ## Error Handling
 
-[`WareraError`](./src/models/errors/wareraerror.ts) is the base class for all HTTP error responses. It has the following properties:
+[`WarEraError`](./src/models/errors/wareraerror.ts) is the base class for all HTTP error responses. It has the following properties:
 
 | Property            | Type       | Description                                            |
 | ------------------- | ---------- | ------------------------------------------------------ |
@@ -338,7 +334,7 @@ async function run() {
   try {
     await warera.companies.getById();
   } catch (error) {
-    if (error instanceof errors.WareraError) {
+    if (error instanceof errors.WarEraError) {
       console.log(error.message);
       console.log(error.statusCode);
       console.log(error.body);
@@ -353,7 +349,7 @@ run();
 
 ### Error Classes
 **Primary error:**
-* [`WareraError`](./src/models/errors/wareraerror.ts): The base class for HTTP error responses.
+* [`WarEraError`](./src/models/errors/wareraerror.ts): The base class for HTTP error responses.
 
 <details><summary>Less common errors (6)</summary>
 
@@ -367,7 +363,7 @@ run();
 * [`UnexpectedClientError`](./src/models/errors/httpclienterrors.ts): Unrecognised or unexpected error.
 
 
-**Inherit from [`WareraError`](./src/models/errors/wareraerror.ts)**:
+**Inherit from [`WarEraError`](./src/models/errors/wareraerror.ts)**:
 * [`ResponseValidationError`](./src/models/errors/responsevalidationerror.ts): Type mismatch between the data returned from the server and the structure expected by the SDK. See `error.rawValue` for the raw value and `error.pretty()` for a nicely formatted multi-line string.
 
 </details>

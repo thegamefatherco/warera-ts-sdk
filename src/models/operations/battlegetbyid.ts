@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type BattleGetByIdRequest = {
   /**
@@ -11,6 +15,13 @@ export type BattleGetByIdRequest = {
   battleId: string;
 };
 
+/** @internal */
+export const BattleGetByIdRequest$inboundSchema: z.ZodMiniType<
+  BattleGetByIdRequest,
+  unknown
+> = z.object({
+  battleId: types.string(),
+});
 /** @internal */
 export type BattleGetByIdRequest$Outbound = {
   battleId: string;
@@ -23,11 +34,32 @@ export const BattleGetByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   battleId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleGetByIdRequest$ {
+  /** @deprecated use `BattleGetByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = BattleGetByIdRequest$inboundSchema;
+  /** @deprecated use `BattleGetByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = BattleGetByIdRequest$outboundSchema;
+  /** @deprecated use `BattleGetByIdRequest$Outbound` instead. */
+  export type Outbound = BattleGetByIdRequest$Outbound;
+}
 
 export function battleGetByIdRequestToJSON(
   battleGetByIdRequest: BattleGetByIdRequest,
 ): string {
   return JSON.stringify(
     BattleGetByIdRequest$outboundSchema.parse(battleGetByIdRequest),
+  );
+}
+export function battleGetByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BattleGetByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BattleGetByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BattleGetByIdRequest' from JSON`,
   );
 }

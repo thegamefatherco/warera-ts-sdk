@@ -3,7 +3,11 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * Type of ranking data to retrieve (damage, ground points, or money)
@@ -73,18 +77,70 @@ export type BattleRankingGetRankingRequest = {
 };
 
 /** @internal */
-export const DataType$outboundSchema: z.ZodMiniEnum<typeof DataType> = z.enum(
+export const DataType$inboundSchema: z.ZodMiniEnum<typeof DataType> = z.enum(
   DataType,
 );
+/** @internal */
+export const DataType$outboundSchema: z.ZodMiniEnum<typeof DataType> =
+  DataType$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace DataType$ {
+  /** @deprecated use `DataType$inboundSchema` instead. */
+  export const inboundSchema = DataType$inboundSchema;
+  /** @deprecated use `DataType$outboundSchema` instead. */
+  export const outboundSchema = DataType$outboundSchema;
+}
 
+/** @internal */
+export const BattleRankingGetRankingType$inboundSchema: z.ZodMiniEnum<
+  typeof BattleRankingGetRankingType
+> = z.enum(BattleRankingGetRankingType);
 /** @internal */
 export const BattleRankingGetRankingType$outboundSchema: z.ZodMiniEnum<
   typeof BattleRankingGetRankingType
-> = z.enum(BattleRankingGetRankingType);
+> = BattleRankingGetRankingType$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleRankingGetRankingType$ {
+  /** @deprecated use `BattleRankingGetRankingType$inboundSchema` instead. */
+  export const inboundSchema = BattleRankingGetRankingType$inboundSchema;
+  /** @deprecated use `BattleRankingGetRankingType$outboundSchema` instead. */
+  export const outboundSchema = BattleRankingGetRankingType$outboundSchema;
+}
 
 /** @internal */
-export const Side$outboundSchema: z.ZodMiniEnum<typeof Side> = z.enum(Side);
+export const Side$inboundSchema: z.ZodMiniEnum<typeof Side> = z.enum(Side);
+/** @internal */
+export const Side$outboundSchema: z.ZodMiniEnum<typeof Side> =
+  Side$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Side$ {
+  /** @deprecated use `Side$inboundSchema` instead. */
+  export const inboundSchema = Side$inboundSchema;
+  /** @deprecated use `Side$outboundSchema` instead. */
+  export const outboundSchema = Side$outboundSchema;
+}
 
+/** @internal */
+export const BattleRankingGetRankingRequest$inboundSchema: z.ZodMiniType<
+  BattleRankingGetRankingRequest,
+  unknown
+> = z.object({
+  battleId: types.optional(types.string()),
+  roundId: types.optional(types.string()),
+  warId: types.optional(types.string()),
+  dataType: DataType$inboundSchema,
+  type: BattleRankingGetRankingType$inboundSchema,
+  side: Side$inboundSchema,
+});
 /** @internal */
 export type BattleRankingGetRankingRequest$Outbound = {
   battleId?: string | undefined;
@@ -107,6 +163,18 @@ export const BattleRankingGetRankingRequest$outboundSchema: z.ZodMiniType<
   type: BattleRankingGetRankingType$outboundSchema,
   side: Side$outboundSchema,
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleRankingGetRankingRequest$ {
+  /** @deprecated use `BattleRankingGetRankingRequest$inboundSchema` instead. */
+  export const inboundSchema = BattleRankingGetRankingRequest$inboundSchema;
+  /** @deprecated use `BattleRankingGetRankingRequest$outboundSchema` instead. */
+  export const outboundSchema = BattleRankingGetRankingRequest$outboundSchema;
+  /** @deprecated use `BattleRankingGetRankingRequest$Outbound` instead. */
+  export type Outbound = BattleRankingGetRankingRequest$Outbound;
+}
 
 export function battleRankingGetRankingRequestToJSON(
   battleRankingGetRankingRequest: BattleRankingGetRankingRequest,
@@ -115,5 +183,14 @@ export function battleRankingGetRankingRequestToJSON(
     BattleRankingGetRankingRequest$outboundSchema.parse(
       battleRankingGetRankingRequest,
     ),
+  );
+}
+export function battleRankingGetRankingRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BattleRankingGetRankingRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BattleRankingGetRankingRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BattleRankingGetRankingRequest' from JSON`,
   );
 }

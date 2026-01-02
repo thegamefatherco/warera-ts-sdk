@@ -75,7 +75,7 @@ run();
 
 | Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
-| errors.WareraDefaultError | 4XX, 5XX                  | \*/\*                     |
+| errors.WarEraDefaultError | 4XX, 5XX                  | \*/\*                     |
 
 ## getLiveData
 
@@ -144,7 +144,7 @@ run();
 
 | Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
-| errors.WareraDefaultError | 4XX, 5XX                  | \*/\*                     |
+| errors.WarEraDefaultError | 4XX, 5XX                  | \*/\*                     |
 
 ## getAll
 
@@ -213,4 +213,4 @@ run();
 
 | Error Type                | Status Code               | Content Type              |
 | ------------------------- | ------------------------- | ------------------------- |
-| errors.WareraDefaultError | 4XX, 5XX                  | \*/\*                     |
+| errors.WarEraDefaultError | 4XX, 5XX                  | \*/\*                     |

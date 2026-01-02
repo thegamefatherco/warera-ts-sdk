@@ -3,11 +3,22 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type MuGetByIdRequest = {
   muId: string;
 };
 
+/** @internal */
+export const MuGetByIdRequest$inboundSchema: z.ZodMiniType<
+  MuGetByIdRequest,
+  unknown
+> = z.object({
+  muId: types.string(),
+});
 /** @internal */
 export type MuGetByIdRequest$Outbound = {
   muId: string;
@@ -20,11 +31,32 @@ export const MuGetByIdRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   muId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace MuGetByIdRequest$ {
+  /** @deprecated use `MuGetByIdRequest$inboundSchema` instead. */
+  export const inboundSchema = MuGetByIdRequest$inboundSchema;
+  /** @deprecated use `MuGetByIdRequest$outboundSchema` instead. */
+  export const outboundSchema = MuGetByIdRequest$outboundSchema;
+  /** @deprecated use `MuGetByIdRequest$Outbound` instead. */
+  export type Outbound = MuGetByIdRequest$Outbound;
+}
 
 export function muGetByIdRequestToJSON(
   muGetByIdRequest: MuGetByIdRequest,
 ): string {
   return JSON.stringify(
     MuGetByIdRequest$outboundSchema.parse(muGetByIdRequest),
+  );
+}
+export function muGetByIdRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<MuGetByIdRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => MuGetByIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'MuGetByIdRequest' from JSON`,
   );
 }

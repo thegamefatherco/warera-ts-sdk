@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type UserGetUsersByCountryRequest = {
   countryId: string;
@@ -10,6 +14,15 @@ export type UserGetUsersByCountryRequest = {
   cursor?: string | undefined;
 };
 
+/** @internal */
+export const UserGetUsersByCountryRequest$inboundSchema: z.ZodMiniType<
+  UserGetUsersByCountryRequest,
+  unknown
+> = z.object({
+  countryId: types.string(),
+  limit: z._default(types.number(), 10),
+  cursor: types.optional(types.string()),
+});
 /** @internal */
 export type UserGetUsersByCountryRequest$Outbound = {
   countryId: string;
@@ -26,6 +39,18 @@ export const UserGetUsersByCountryRequest$outboundSchema: z.ZodMiniType<
   limit: z._default(z.number(), 10),
   cursor: z.optional(z.string()),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace UserGetUsersByCountryRequest$ {
+  /** @deprecated use `UserGetUsersByCountryRequest$inboundSchema` instead. */
+  export const inboundSchema = UserGetUsersByCountryRequest$inboundSchema;
+  /** @deprecated use `UserGetUsersByCountryRequest$outboundSchema` instead. */
+  export const outboundSchema = UserGetUsersByCountryRequest$outboundSchema;
+  /** @deprecated use `UserGetUsersByCountryRequest$Outbound` instead. */
+  export type Outbound = UserGetUsersByCountryRequest$Outbound;
+}
 
 export function userGetUsersByCountryRequestToJSON(
   userGetUsersByCountryRequest: UserGetUsersByCountryRequest,
@@ -34,5 +59,14 @@ export function userGetUsersByCountryRequestToJSON(
     UserGetUsersByCountryRequest$outboundSchema.parse(
       userGetUsersByCountryRequest,
     ),
+  );
+}
+export function userGetUsersByCountryRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<UserGetUsersByCountryRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => UserGetUsersByCountryRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'UserGetUsersByCountryRequest' from JSON`,
   );
 }

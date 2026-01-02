@@ -3,9 +3,17 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type GameConfigGetDatesRequest = {};
 
+/** @internal */
+export const GameConfigGetDatesRequest$inboundSchema: z.ZodMiniType<
+  GameConfigGetDatesRequest,
+  unknown
+> = z.object({});
 /** @internal */
 export type GameConfigGetDatesRequest$Outbound = {};
 
@@ -14,11 +22,32 @@ export const GameConfigGetDatesRequest$outboundSchema: z.ZodMiniType<
   GameConfigGetDatesRequest$Outbound,
   GameConfigGetDatesRequest
 > = z.object({});
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace GameConfigGetDatesRequest$ {
+  /** @deprecated use `GameConfigGetDatesRequest$inboundSchema` instead. */
+  export const inboundSchema = GameConfigGetDatesRequest$inboundSchema;
+  /** @deprecated use `GameConfigGetDatesRequest$outboundSchema` instead. */
+  export const outboundSchema = GameConfigGetDatesRequest$outboundSchema;
+  /** @deprecated use `GameConfigGetDatesRequest$Outbound` instead. */
+  export type Outbound = GameConfigGetDatesRequest$Outbound;
+}
 
 export function gameConfigGetDatesRequestToJSON(
   gameConfigGetDatesRequest: GameConfigGetDatesRequest,
 ): string {
   return JSON.stringify(
     GameConfigGetDatesRequest$outboundSchema.parse(gameConfigGetDatesRequest),
+  );
+}
+export function gameConfigGetDatesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<GameConfigGetDatesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GameConfigGetDatesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GameConfigGetDatesRequest' from JSON`,
   );
 }

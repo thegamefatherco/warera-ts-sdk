@@ -3,7 +3,11 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The direction to get the battles
@@ -66,15 +70,55 @@ export type BattleGetBattlesRequest = {
 };
 
 /** @internal */
-export const Direction$outboundSchema: z.ZodMiniEnum<typeof Direction> = z.enum(
+export const Direction$inboundSchema: z.ZodMiniEnum<typeof Direction> = z.enum(
   Direction,
 );
+/** @internal */
+export const Direction$outboundSchema: z.ZodMiniEnum<typeof Direction> =
+  Direction$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Direction$ {
+  /** @deprecated use `Direction$inboundSchema` instead. */
+  export const inboundSchema = Direction$inboundSchema;
+  /** @deprecated use `Direction$outboundSchema` instead. */
+  export const outboundSchema = Direction$outboundSchema;
+}
 
 /** @internal */
-export const Filter$outboundSchema: z.ZodMiniEnum<typeof Filter> = z.enum(
+export const Filter$inboundSchema: z.ZodMiniEnum<typeof Filter> = z.enum(
   Filter,
 );
+/** @internal */
+export const Filter$outboundSchema: z.ZodMiniEnum<typeof Filter> =
+  Filter$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace Filter$ {
+  /** @deprecated use `Filter$inboundSchema` instead. */
+  export const inboundSchema = Filter$inboundSchema;
+  /** @deprecated use `Filter$outboundSchema` instead. */
+  export const outboundSchema = Filter$outboundSchema;
+}
 
+/** @internal */
+export const BattleGetBattlesRequest$inboundSchema: z.ZodMiniType<
+  BattleGetBattlesRequest,
+  unknown
+> = z.object({
+  isActive: types.optional(types.boolean()),
+  limit: z._default(types.number(), 10),
+  cursor: types.optional(types.string()),
+  direction: types.optional(Direction$inboundSchema),
+  filter: types.optional(Filter$inboundSchema),
+  defenderRegionId: types.optional(types.string()),
+  warId: types.optional(types.string()),
+  countryId: types.optional(types.string()),
+});
 /** @internal */
 export type BattleGetBattlesRequest$Outbound = {
   isActive?: boolean | undefined;
@@ -101,11 +145,32 @@ export const BattleGetBattlesRequest$outboundSchema: z.ZodMiniType<
   warId: z.optional(z.string()),
   countryId: z.optional(z.string()),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace BattleGetBattlesRequest$ {
+  /** @deprecated use `BattleGetBattlesRequest$inboundSchema` instead. */
+  export const inboundSchema = BattleGetBattlesRequest$inboundSchema;
+  /** @deprecated use `BattleGetBattlesRequest$outboundSchema` instead. */
+  export const outboundSchema = BattleGetBattlesRequest$outboundSchema;
+  /** @deprecated use `BattleGetBattlesRequest$Outbound` instead. */
+  export type Outbound = BattleGetBattlesRequest$Outbound;
+}
 
 export function battleGetBattlesRequestToJSON(
   battleGetBattlesRequest: BattleGetBattlesRequest,
 ): string {
   return JSON.stringify(
     BattleGetBattlesRequest$outboundSchema.parse(battleGetBattlesRequest),
+  );
+}
+export function battleGetBattlesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<BattleGetBattlesRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => BattleGetBattlesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'BattleGetBattlesRequest' from JSON`,
   );
 }

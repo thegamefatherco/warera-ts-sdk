@@ -3,6 +3,10 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 export type RoundGetLastHitsRequest = {
   /**
@@ -11,6 +15,13 @@ export type RoundGetLastHitsRequest = {
   roundId: string;
 };
 
+/** @internal */
+export const RoundGetLastHitsRequest$inboundSchema: z.ZodMiniType<
+  RoundGetLastHitsRequest,
+  unknown
+> = z.object({
+  roundId: types.string(),
+});
 /** @internal */
 export type RoundGetLastHitsRequest$Outbound = {
   roundId: string;
@@ -23,11 +34,32 @@ export const RoundGetLastHitsRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   roundId: z.string(),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace RoundGetLastHitsRequest$ {
+  /** @deprecated use `RoundGetLastHitsRequest$inboundSchema` instead. */
+  export const inboundSchema = RoundGetLastHitsRequest$inboundSchema;
+  /** @deprecated use `RoundGetLastHitsRequest$outboundSchema` instead. */
+  export const outboundSchema = RoundGetLastHitsRequest$outboundSchema;
+  /** @deprecated use `RoundGetLastHitsRequest$Outbound` instead. */
+  export type Outbound = RoundGetLastHitsRequest$Outbound;
+}
 
 export function roundGetLastHitsRequestToJSON(
   roundGetLastHitsRequest: RoundGetLastHitsRequest,
 ): string {
   return JSON.stringify(
     RoundGetLastHitsRequest$outboundSchema.parse(roundGetLastHitsRequest),
+  );
+}
+export function roundGetLastHitsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<RoundGetLastHitsRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => RoundGetLastHitsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'RoundGetLastHitsRequest' from JSON`,
   );
 }

@@ -3,7 +3,11 @@
  */
 
 import * as z from "zod/v4-mini";
+import { safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
+import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
+import { SDKValidationError } from "../errors/sdkvalidationerror.js";
 
 /**
  * The type of articles to get
@@ -47,10 +51,36 @@ export type ArticleGetArticlesPaginatedRequest = {
 };
 
 /** @internal */
-export const ArticleGetArticlesPaginatedType$outboundSchema: z.ZodMiniEnum<
+export const ArticleGetArticlesPaginatedType$inboundSchema: z.ZodMiniEnum<
   typeof ArticleGetArticlesPaginatedType
 > = z.enum(ArticleGetArticlesPaginatedType);
+/** @internal */
+export const ArticleGetArticlesPaginatedType$outboundSchema: z.ZodMiniEnum<
+  typeof ArticleGetArticlesPaginatedType
+> = ArticleGetArticlesPaginatedType$inboundSchema;
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ArticleGetArticlesPaginatedType$ {
+  /** @deprecated use `ArticleGetArticlesPaginatedType$inboundSchema` instead. */
+  export const inboundSchema = ArticleGetArticlesPaginatedType$inboundSchema;
+  /** @deprecated use `ArticleGetArticlesPaginatedType$outboundSchema` instead. */
+  export const outboundSchema = ArticleGetArticlesPaginatedType$outboundSchema;
+}
 
+/** @internal */
+export const ArticleGetArticlesPaginatedRequest$inboundSchema: z.ZodMiniType<
+  ArticleGetArticlesPaginatedRequest,
+  unknown
+> = z.object({
+  type: ArticleGetArticlesPaginatedType$inboundSchema,
+  limit: z._default(types.number(), 10),
+  cursor: types.optional(types.string()),
+  userId: types.optional(types.string()),
+  categories: types.optional(z.array(types.string())),
+  languages: types.optional(z.array(types.string())),
+});
 /** @internal */
 export type ArticleGetArticlesPaginatedRequest$Outbound = {
   type: string;
@@ -73,6 +103,19 @@ export const ArticleGetArticlesPaginatedRequest$outboundSchema: z.ZodMiniType<
   categories: z.optional(z.array(z.string())),
   languages: z.optional(z.array(z.string())),
 });
+/**
+ * @internal
+ * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
+ */
+export namespace ArticleGetArticlesPaginatedRequest$ {
+  /** @deprecated use `ArticleGetArticlesPaginatedRequest$inboundSchema` instead. */
+  export const inboundSchema = ArticleGetArticlesPaginatedRequest$inboundSchema;
+  /** @deprecated use `ArticleGetArticlesPaginatedRequest$outboundSchema` instead. */
+  export const outboundSchema =
+    ArticleGetArticlesPaginatedRequest$outboundSchema;
+  /** @deprecated use `ArticleGetArticlesPaginatedRequest$Outbound` instead. */
+  export type Outbound = ArticleGetArticlesPaginatedRequest$Outbound;
+}
 
 export function articleGetArticlesPaginatedRequestToJSON(
   articleGetArticlesPaginatedRequest: ArticleGetArticlesPaginatedRequest,
@@ -81,5 +124,15 @@ export function articleGetArticlesPaginatedRequestToJSON(
     ArticleGetArticlesPaginatedRequest$outboundSchema.parse(
       articleGetArticlesPaginatedRequest,
     ),
+  );
+}
+export function articleGetArticlesPaginatedRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<ArticleGetArticlesPaginatedRequest, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      ArticleGetArticlesPaginatedRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'ArticleGetArticlesPaginatedRequest' from JSON`,
   );
 }

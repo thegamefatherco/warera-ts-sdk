@@ -14,7 +14,7 @@ targets:
         sourceRevisionDigest: sha256:6b09845dfa01074a36b25d198ad582d69422a48b852bc37c76a64c5e31f69241
         sourceBlobDigest: sha256:9ec5de331996699659d53c27b78bfa581d27ea31efc92d08386ee321c5fc0100
         codeSamplesNamespace: war-era-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:afc294de5bdaedf833f077ffc13a8c9f787eeedd5052bee84f4d08827eab85e1
+        codeSamplesRevisionDigest: sha256:0a14b8c119252beef44b5beef79e2cee572398dc7e7371775e4d68361d900adc
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -32,6 +32,9 @@ workflow:
         warera:
             target: typescript
             source: WarEra API
+            publish:
+                npm:
+                    token: $npm_token
             codeSamples:
                 registry:
                     location: registry.speakeasyapi.dev/thecodefatherco/thegamefatherco/war-era-api-typescript-code-samples
