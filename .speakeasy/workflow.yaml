@@ -1,0 +1,22 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    WarEra API:
+        inputs:
+            - location: https://api2.warera.io/openapi.json
+        overlays:
+            - location: overlay.yaml
+            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+        output: .speakeasy/out.openapi.yaml
+        registry:
+            location: registry.speakeasyapi.dev/thecodefatherco/thecodefatherco/war-era-api
+targets:
+    warera:
+        target: typescript
+        source: WarEra API
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/thecodefatherco/thecodefatherco/war-era-api-typescript-code-samples
+            labelOverride:
+                fixedValue: Typescript (SDK)
+            blocking: false

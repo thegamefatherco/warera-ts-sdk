@@ -1,0 +1,17 @@
+# RegionGetByIdRequest
+
+## Example Usage
+
+```typescript
+import { RegionGetByIdRequest } from "@thegamefatherco/warera-sdk/models/operations";
+
+let value: RegionGetByIdRequest = {
+  regionId: "<id>",
+};
+```
+
+## Fields
+
+| Field                               | Type                                | Required                            | Description                         |
+| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
+| `regionId`                          | *string*                            | :heavy_check_mark:                  | The unique identifier of the region |
