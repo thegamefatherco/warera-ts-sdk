@@ -2,8 +2,8 @@ speakeasyVersion: 1.680.11
 sources:
     WarEra API:
         sourceNamespace: war-era-api
-        sourceRevisionDigest: sha256:1f0f1f2d4bf2bf9030ac1ab73f89dbb0023077990af1eea7c526ef0c6815a562
-        sourceBlobDigest: sha256:8532a3fd6ab363b74c09de7d71a602b6657f3068501e074a9532e359815762d7
+        sourceRevisionDigest: sha256:6b09845dfa01074a36b25d198ad582d69422a48b852bc37c76a64c5e31f69241
+        sourceBlobDigest: sha256:9ec5de331996699659d53c27b78bfa581d27ea31efc92d08386ee321c5fc0100
         tags:
             - latest
             - 0.17.4-beta
@@ -11,10 +11,10 @@ targets:
     warera:
         source: WarEra API
         sourceNamespace: war-era-api
-        sourceRevisionDigest: sha256:1f0f1f2d4bf2bf9030ac1ab73f89dbb0023077990af1eea7c526ef0c6815a562
-        sourceBlobDigest: sha256:8532a3fd6ab363b74c09de7d71a602b6657f3068501e074a9532e359815762d7
+        sourceRevisionDigest: sha256:6b09845dfa01074a36b25d198ad582d69422a48b852bc37c76a64c5e31f69241
+        sourceBlobDigest: sha256:9ec5de331996699659d53c27b78bfa581d27ea31efc92d08386ee321c5fc0100
         codeSamplesNamespace: war-era-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:442905d36a99c7527ccdcf999b555fdc46850be67565be392abbd585d581d97f
+        codeSamplesRevisionDigest: sha256:afc294de5bdaedf833f077ffc13a8c9f787eeedd5052bee84f4d08827eab85e1
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -27,14 +27,14 @@ workflow:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             output: .speakeasy/out.openapi.yaml
             registry:
-                location: registry.speakeasyapi.dev/thecodefatherco/thecodefatherco/war-era-api
+                location: registry.speakeasyapi.dev/thecodefatherco/thegamefatherco/war-era-api
     targets:
         warera:
             target: typescript
             source: WarEra API
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/thecodefatherco/thecodefatherco/war-era-api-typescript-code-samples
+                    location: registry.speakeasyapi.dev/thecodefatherco/thegamefatherco/war-era-api-typescript-code-samples
                 labelOverride:
                     fixedValue: Typescript (SDK)
                 blocking: false

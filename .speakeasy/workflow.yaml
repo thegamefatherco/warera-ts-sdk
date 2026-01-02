@@ -9,14 +9,17 @@ sources:
             - location: .speakeasy/speakeasy-modifications-overlay.yaml
         output: .speakeasy/out.openapi.yaml
         registry:
-            location: registry.speakeasyapi.dev/thecodefatherco/thecodefatherco/war-era-api
+            location: registry.speakeasyapi.dev/thecodefatherco/thegamefatherco/war-era-api
 targets:
     warera:
         target: typescript
         source: WarEra API
+        publish:
+            npm:
+                token: $npm_token
         codeSamples:
             registry:
-                location: registry.speakeasyapi.dev/thecodefatherco/thecodefatherco/war-era-api-typescript-code-samples
+                location: registry.speakeasyapi.dev/thecodefatherco/thegamefatherco/war-era-api-typescript-code-samples
             labelOverride:
                 fixedValue: Typescript (SDK)
             blocking: false
