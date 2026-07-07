@@ -1,9 +1,9 @@
-speakeasyVersion: 1.680.11
+speakeasyVersion: 1.789.0
 sources:
     WarEra API:
         sourceNamespace: war-era-api
-        sourceRevisionDigest: sha256:c2ba12323d8a6608d5c15ade878543077a57e7c089c31d815b14204a2db2946d
-        sourceBlobDigest: sha256:225194213e8eb25f32c769c68e4d604c0fa8ac1484239c21aa0de9ce14be78b5
+        sourceRevisionDigest: sha256:8ecfb7eba34def2294c075aa5997a62d749a14f946de13d0898f8067b5a83581
+        sourceBlobDigest: sha256:a75839fcfb583e0cc7fcbb20e743857fdb0b49b0bf7586f2de0d61276c074b94
         tags:
             - latest
             - 0.17.4-beta
@@ -11,10 +11,10 @@ targets:
     warera:
         source: WarEra API
         sourceNamespace: war-era-api
-        sourceRevisionDigest: sha256:c2ba12323d8a6608d5c15ade878543077a57e7c089c31d815b14204a2db2946d
-        sourceBlobDigest: sha256:225194213e8eb25f32c769c68e4d604c0fa8ac1484239c21aa0de9ce14be78b5
+        sourceRevisionDigest: sha256:8ecfb7eba34def2294c075aa5997a62d749a14f946de13d0898f8067b5a83581
+        sourceBlobDigest: sha256:a75839fcfb583e0cc7fcbb20e743857fdb0b49b0bf7586f2de0d61276c074b94
         codeSamplesNamespace: war-era-api-typescript-code-samples
-        codeSamplesRevisionDigest: sha256:d09c88aa887f5f749c3b35ed6d35cf79ff24e01a1dfc7491c7d9878c44fd129e
+        codeSamplesRevisionDigest: sha256:d6cc54bc7469d8dddd0c85745e7b5983a5368da0107733f4f4f2d2715dc31c41
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

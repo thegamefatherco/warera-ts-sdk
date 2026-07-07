@@ -5,24 +5,10 @@
 import { HTTPClient } from "./http.js";
 import { Logger } from "./logger.js";
 import { RetryConfig } from "./retries.js";
-import { Params, pathToFunc } from "./url.js";
-
-/**
- * Contains the list of servers available to the SDK
- */
-export const ServerList = [
-  /**
-   * Server
-   */
-  "/trpc",
-] as const;
+import { pathToFunc } from "./url.js";
 
 export type SDKOptions = {
   httpClient?: HTTPClient;
-  /**
-   * Allows overriding the default server used by the SDK
-   */
-  serverIdx?: number | undefined;
   /**
    * Specifies the server URL to be used by the SDK
    */
@@ -40,17 +26,13 @@ export type SDKOptions = {
 };
 
 export function serverURLFromOptions(options: SDKOptions): URL | null {
-  let serverURL = options.serverURL;
-
-  const params: Params = {};
+  const serverURL = options.serverURL;
 
   if (!serverURL) {
-    const serverIdx = options.serverIdx ?? 0;
-    if (serverIdx < 0 || serverIdx >= ServerList.length) {
-      throw new Error(`Invalid server index ${serverIdx}`);
-    }
-    serverURL = ServerList[serverIdx] || "";
+    return null;
   }
+
+  const params: Record<string, string | undefined> = {};
 
   const u = pathToFunc(serverURL)(params);
   return new URL(u);
@@ -59,8 +41,8 @@ export function serverURLFromOptions(options: SDKOptions): URL | null {
 export const SDK_METADATA = {
   language: "typescript",
   openapiDocVersion: "0.17.4-beta",
-  sdkVersion: "0.3.1",
-  genVersion: "2.788.15",
+  sdkVersion: "0.4.0",
+  genVersion: "2.916.2",
   userAgent:
-    "speakeasy-sdk/typescript 0.3.1 2.788.15 0.17.4-beta @thegamefatherco/warera-sdk",
+    "speakeasy-sdk/typescript 0.4.0 2.916.2 0.17.4-beta @thegamefatherco/warera-sdk",
 } as const;
