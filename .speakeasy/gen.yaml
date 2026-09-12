@@ -16,6 +16,8 @@ generation:
     requestResponseComponentNamesFeb2024: true
     securityFeb2025: true
     sharedErrorComponentsApr2025: true
+    sharedNestedComponentsJan2026: false
+    nameOverrideFeb2026: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
@@ -25,13 +27,14 @@ generation:
   schemas:
     allOfMergeStrategy: shallowMerge
   requestBodyFieldName: body
+  versioningStrategy: automatic
   persistentEdits: {}
   tests:
     generateTests: true
     generateNewTests: true
     skipResponseBodyAssertions: false
 typescript:
-  version: 0.3.1
+  version: 0.4.0
   acceptHeaderEnum: false
   additionalDependencies:
     dependencies: {}
@@ -42,6 +45,7 @@ typescript:
       url: https://github.com/thegamefatherco/warera-ts-sdk
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: true
+  apiPromiseHelpers: false
   author: The Gamefather Co.
   baseErrorName: WarEraError
   clientServerStatusCodesAsErrors: true
@@ -52,7 +56,10 @@ typescript:
   enableReactQuery: true
   enumFormat: union
   envVarPrefix: WARERA
+  eventStreamClassName: EventStream
   exportZodModelNamespace: true
+  fixEnumNameSanitization: false
+  flatAdditionalProperties: false
   flattenGlobalSecurity: true
   flatteningOrder: parameters-first
   formStringArrayEncodeMode: array
@@ -71,6 +78,7 @@ typescript:
   inputModelSuffix: input
   jsonpath: rfc9535
   laxMode: lax
+  legacyFileNaming: true
   maxMethodParams: 0
   methodArguments: infer-optional-args
   modelPropertyCasing: camel
@@ -79,10 +87,15 @@ typescript:
   outputModelSuffix: output
   packageName: '@thegamefatherco/warera-sdk'
   preApplyUnionDiscriminators: true
+  preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
+  requestExtras: false
   responseFormat: flat
   sseFlatResponse: false
   templateVersion: v2
   unionStrategy: populated-fields
   usageSDKInitImports: []
   useIndexModules: true
+  useOxlint: false
+  useTsgo: false
   zodVersion: v4-mini
