@@ -4,7 +4,7 @@ info:
   version: "0.17.4-beta"
   description: "WarEra tRPC API endpoints. ⚠️ Please notice that every call is in GET and not POST."
 paths:
-  "/company.getById":
+  /company.getById:
     get:
       tags:
         - "company"
@@ -12,18 +12,19 @@ paths:
       summary: "Get company by ID"
       operationId: "company.getById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "companyId":
+                  companyId:
                     type: "string"
                     minLength: 1
                     description: "The unique identifier of the company"
@@ -32,7 +33,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: companies
       x-speakeasy-name-override: getById
-  "/company.getCompanies":
+  /company.getCompanies:
     get:
       tags:
         - "company"
@@ -40,36 +41,37 @@ paths:
       summary: "Get companies with pagination"
       operationId: "company.getCompanies"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "userId":
+                  userId:
                     type: "string"
                     description: "Filter companies by user ID"
-                  "orgId":
+                  orgId:
                     type: "string"
                     description: "Filter companies by organization ID"
-                  "perPage":
+                  perPage:
                     type: "number"
                     minimum: 1
                     maximum: 100
                     default: 10
                     description: "Number of companies per page (1-100)"
-                  "cursor":
+                  cursor:
                     type: "string"
                     description: "Pagination cursor for next page"
                 additionalProperties: false
       x-speakeasy-group: companies
       x-speakeasy-name-override: list
-  "/country.getCountryById":
+  /country.getCountryById:
     get:
       tags:
         - "country"
@@ -77,18 +79,19 @@ paths:
       summary: "Get country by ID"
       operationId: "country.getCountryById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "countryId":
+                  countryId:
                     type: "string"
                     minLength: 1
                     description: "The unique identifier of the country"
@@ -97,7 +100,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: countries
       x-speakeasy-name-override: getById
-  "/country.getAllCountries":
+  /country.getAllCountries:
     get:
       tags:
         - "country"
@@ -105,20 +108,22 @@ paths:
       summary: "Get all countries"
       operationId: "country.getAllCountries"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
+                properties: {}
                 additionalProperties: false
       x-speakeasy-group: countries
       x-speakeasy-name-override: getAll
-  "/event.getEventsPaginated":
+  /event.getEventsPaginated:
     get:
       tags:
         - "event"
@@ -126,33 +131,34 @@ paths:
       summary: "Get paginated events"
       operationId: "event.getEventsPaginated"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "limit":
+                  limit:
                     type: "number"
                     minimum: 1
                     maximum: 100
                     default: 10
                     description: "The limit of events to get"
-                  "cursor":
+                  cursor:
                     type: "string"
                     description: "The cursor to get the next events"
-                  "countryId":
+                  countryId:
                     type: "string"
                     description: "Filter events by country ID"
                 additionalProperties: false
       x-speakeasy-group: events
       x-speakeasy-name-override: getPaginated
-  "/government.getByCountryId":
+  /government.getByCountryId:
     get:
       tags:
         - "government"
@@ -160,18 +166,19 @@ paths:
       summary: "Get government by country ID"
       operationId: "government.getByCountryId"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "countryId":
+                  countryId:
                     type: "string"
                     description: "The unique identifier of the country"
                 required:
@@ -179,7 +186,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: governments
       x-speakeasy-name-override: getByCountryId
-  "/region.getById":
+  /region.getById:
     get:
       tags:
         - "region"
@@ -187,18 +194,19 @@ paths:
       summary: "Get region by ID"
       operationId: "region.getById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "regionId":
+                  regionId:
                     type: "string"
                     minLength: 1
                     description: "The unique identifier of the region"
@@ -207,7 +215,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: regions
       x-speakeasy-name-override: getById
-  "/region.getRegionsObject":
+  /region.getRegionsObject:
     get:
       tags:
         - "region"
@@ -215,20 +223,22 @@ paths:
       summary: "Get all regions"
       operationId: "region.getRegionsObject"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
+                properties: {}
                 additionalProperties: false
       x-speakeasy-group: regions
       x-speakeasy-name-override: list
-  "/battle.getById":
+  /battle.getById:
     get:
       tags:
         - "battle"
@@ -236,18 +246,19 @@ paths:
       summary: "Get battle by ID"
       operationId: "battle.getById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "battleId":
+                  battleId:
                     type: "string"
                     description: "The unique identifier of the battle"
                 required:
@@ -255,7 +266,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: battles
       x-speakeasy-name-override: getById
-  "/battle.getLiveBattleData":
+  /battle.getLiveBattleData:
     get:
       tags:
         - "battle"
@@ -263,22 +274,23 @@ paths:
       summary: "Get live battle data"
       operationId: "battle.getLiveBattleData"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "battleId":
+                  battleId:
                     type: "string"
                     minLength: 1
                     description: "The unique identifier of the battle"
-                  "roundNumber":
+                  roundNumber:
                     type: "number"
                     description: "Optional specific round number to retrieve"
                 required:
@@ -286,7 +298,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: battles
       x-speakeasy-name-override: getLiveData
-  "/battle.getBattles":
+  /battle.getBattles:
     get:
       tags:
         - "battle"
@@ -294,55 +306,56 @@ paths:
       summary: "Get battles"
       operationId: "battle.getBattles"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "isActive":
+                  isActive:
                     type: "boolean"
                     description: "Whether to get active battles"
-                  "limit":
+                  limit:
                     type: "number"
                     minimum: 1
                     maximum: 100
                     default: 10
                     description: "The limit of battles to get"
-                  "cursor":
+                  cursor:
                     type: "string"
                     description: "The cursor to get the next battles"
-                  "direction":
+                  direction:
                     type: "string"
                     enum:
                       - "forward"
                       - "backward"
                     description: "The direction to get the battles"
-                  "filter":
+                  filter:
                     type: "string"
                     enum:
                       - "all"
                       - "yourCountry"
                       - "yourEnemies"
                     description: "Filter type for battles"
-                  "defenderRegionId":
+                  defenderRegionId:
                     type: "string"
                     description: "Filter battles by defender region ID"
-                  "warId":
+                  warId:
                     type: "string"
                     description: "Filter battles by war ID"
-                  "countryId":
+                  countryId:
                     type: "string"
                     description: "Filter battles by country ID"
                 additionalProperties: false
       x-speakeasy-group: battles
       x-speakeasy-name-override: list
-  "/round.getById":
+  /round.getById:
     get:
       tags:
         - "round"
@@ -350,18 +363,19 @@ paths:
       summary: "Get round by ID"
       operationId: "round.getById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "roundId":
+                  roundId:
                     type: "string"
                     minLength: 1
                     description: "The unique identifier of the round"
@@ -370,7 +384,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: rounds
       x-speakeasy-name-override: getById
-  "/round.getLastHits":
+  /round.getLastHits:
     get:
       tags:
         - "round"
@@ -378,18 +392,19 @@ paths:
       summary: "Get last hits in round"
       operationId: "round.getLastHits"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "roundId":
+                  roundId:
                     type: "string"
                     minLength: 1
                     description: "The unique identifier of the round"
@@ -397,7 +412,7 @@ paths:
                   - "roundId"
                 additionalProperties: false
       x-speakeasy-name-override: getLastHits
-  "/battleRanking.getRanking":
+  /battleRanking.getRanking:
     get:
       tags:
         - "battleRanking"
@@ -405,44 +420,45 @@ paths:
       summary: "Get battle rankings"
       operationId: "battleRanking.getRanking"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "battleId":
+                  battleId:
                     type: "string"
                     minLength: 1
                     description: "Optional battle ID to filter rankings"
-                  "roundId":
+                  roundId:
                     type: "string"
                     minLength: 1
                     description: "Optional round ID to filter rankings"
-                  "warId":
+                  warId:
                     type: "string"
                     minLength: 1
                     description: "Optional war ID to filter rankings"
-                  "dataType":
+                  dataType:
                     type: "string"
                     enum:
                       - "damage"
                       - "points"
                       - "money"
                     description: "Type of ranking data to retrieve (damage, ground points, or money)"
-                  "type":
+                  type:
                     type: "string"
                     enum:
                       - "user"
                       - "country"
                       - "mu"
                     description: "Whether to rank by user or country"
-                  "side":
+                  side:
                     type: "string"
                     enum:
                       - "attacker"
@@ -455,7 +471,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: battleRankings
       x-speakeasy-name-override: get
-  "/itemTrading.getPrices":
+  /itemTrading.getPrices:
     get:
       tags:
         - "itemTrading"
@@ -463,20 +479,22 @@ paths:
       summary: "Get item prices"
       operationId: "itemTrading.getPrices"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
+                properties: {}
                 additionalProperties: false
       x-speakeasy-group: itemTradings
       x-speakeasy-name-override: getPrices
-  "/tradingOrder.getTopOrders":
+  /tradingOrder.getTopOrders:
     get:
       tags:
         - "tradingOrder"
@@ -484,24 +502,25 @@ paths:
       summary: "Get best orders for an item"
       operationId: "tradingOrder.getTopOrders"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "itemCode":
+                  itemCode:
                     type: "string"
                     minLength: 1
                     description: "The item code to get orders for"
-                  "limit":
+                  limit:
                     type: "integer"
-                    exclusiveMinimum: false
+                    exclusiveMinimum: 0
                     maximum: 100
                     default: 10
                     description: "The limit of orders to get"
@@ -510,7 +529,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: tradingOrders
       x-speakeasy-name-override: getTop
-  "/itemOffer.getById":
+  /itemOffer.getById:
     get:
       tags:
         - "itemOffer"
@@ -518,18 +537,19 @@ paths:
       summary: "Get item offer by ID"
       operationId: "itemOffer.getById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "itemOfferId":
+                  itemOfferId:
                     type: "string"
                     minLength: 1
                 required:
@@ -537,7 +557,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: itemOffers
       x-speakeasy-name-override: getById
-  "/workOffer.getById":
+  /workOffer.getById:
     get:
       tags:
         - "workOffer"
@@ -545,18 +565,19 @@ paths:
       summary: "Get work offer by ID"
       operationId: "workOffer.getById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "workOfferId":
+                  workOfferId:
                     type: "string"
                     minLength: 1
                 required:
@@ -564,7 +585,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: workOffers
       x-speakeasy-name-override: getById
-  "/workOffer.getWorkOfferByCompanyId":
+  /workOffer.getWorkOfferByCompanyId:
     get:
       tags:
         - "workOffer"
@@ -572,18 +593,19 @@ paths:
       summary: "Get work offer by company ID"
       operationId: "workOffer.getWorkOfferByCompanyId"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "companyId":
+                  companyId:
                     type: "string"
                     minLength: 1
                 required:
@@ -591,7 +613,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: workOffers
       x-speakeasy-name-override: getByCompanyId
-  "/workOffer.getWorkOffersPaginated":
+  /workOffer.getWorkOffersPaginated:
     get:
       tags:
         - "workOffer"
@@ -599,32 +621,33 @@ paths:
       summary: "Get paginated work offers"
       operationId: "workOffer.getWorkOffersPaginated"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "userId":
+                  userId:
                     type: "string"
                     minLength: 1
-                  "regionId":
+                  regionId:
                     type: "string"
                     minLength: 1
-                  "cursor":
+                  cursor:
                     type: "string"
-                  "limit":
+                  limit:
                     type: "integer"
                     default: 10
                 additionalProperties: false
       x-speakeasy-group: workOffers
       x-speakeasy-name-override: getPaginated
-  "/ranking.getRanking":
+  /ranking.getRanking:
     get:
       tags:
         - "ranking"
@@ -632,18 +655,19 @@ paths:
       summary: "Get ranking data"
       operationId: "ranking.getRanking"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "rankingType":
+                  rankingType:
                     type: "string"
                     enum:
                       - "weeklyCountryDamages"
@@ -678,7 +702,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: rankings
       x-speakeasy-name-override: get
-  "/search.searchAnything":
+  /search.searchAnything:
     get:
       tags:
         - "search"
@@ -686,18 +710,19 @@ paths:
       summary: "Global search"
       operationId: "search.searchAnything"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "searchText":
+                  searchText:
                     type: "string"
                     minLength: 1
                     description: "The search query string"
@@ -705,7 +730,7 @@ paths:
                   - "searchText"
                 additionalProperties: false
       x-speakeasy-name-override: global
-  "/gameConfig.getDates":
+  /gameConfig.getDates:
     get:
       tags:
         - "gameConfig"
@@ -713,19 +738,21 @@ paths:
       summary: "Get game dates"
       operationId: "gameConfig.getDates"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
+                properties: {}
                 additionalProperties: false
       x-speakeasy-name-override: getDates
-  "/gameConfig.getGameConfig":
+  /gameConfig.getGameConfig:
     get:
       tags:
         - "gameConfig"
@@ -733,19 +760,21 @@ paths:
       summary: "Get game configuration"
       operationId: "gameConfig.getGameConfig"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
+                properties: {}
                 additionalProperties: false
       x-speakeasy-name-override: get
-  "/user.getUserLite":
+  /user.getUserLite:
     get:
       tags:
         - "user"
@@ -753,18 +782,19 @@ paths:
       summary: "Get user profile (lite)"
       operationId: "user.getUserLite"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "userId":
+                  userId:
                     type: "string"
                     description: "The unique identifier of the user"
                 required:
@@ -772,7 +802,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: users
       x-speakeasy-name-override: getLite
-  "/user.getUsersByCountry":
+  /user.getUsersByCountry:
     get:
       tags:
         - "user"
@@ -780,33 +810,34 @@ paths:
       summary: "Get users by country"
       operationId: "user.getUsersByCountry"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "countryId":
+                  countryId:
                     type: "string"
                     minLength: 1
-                  "limit":
+                  limit:
                     type: "number"
                     minimum: 1
                     maximum: 100
                     default: 10
-                  "cursor":
+                  cursor:
                     type: "string"
                 required:
                   - "countryId"
                 additionalProperties: false
       x-speakeasy-group: users
       x-speakeasy-name-override: listByCountry
-  "/article.getArticleById":
+  /article.getArticleById:
     get:
       tags:
         - "article"
@@ -814,18 +845,19 @@ paths:
       summary: "Get article by ID"
       operationId: "article.getArticleById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "articleId":
+                  articleId:
                     type: "string"
                     description: "The ID of the article to get"
                 required:
@@ -833,7 +865,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: articles
       x-speakeasy-name-override: getById
-  "/article.getArticlesPaginated":
+  /article.getArticlesPaginated:
     get:
       tags:
         - "article"
@@ -841,18 +873,19 @@ paths:
       summary: "Get paginated articles"
       operationId: "article.getArticlesPaginated"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "type":
+                  type:
                     type: "string"
                     enum:
                       - "weekly"
@@ -861,23 +894,23 @@ paths:
                       - "subscriptions"
                       - "last"
                     description: "The type of articles to get"
-                  "limit":
+                  limit:
                     type: "number"
                     minimum: 1
                     maximum: 100
                     default: 10
                     description: "The limit of articles to get"
-                  "cursor":
+                  cursor:
                     type: "string"
-                  "userId":
+                  userId:
                     type: "string"
                     description: "The user ID to get articles for"
-                  "categories":
+                  categories:
                     type: "array"
                     items:
                       type: "string"
                     description: "The categories to get articles for"
-                  "languages":
+                  languages:
                     type: "array"
                     items:
                       type: "string"
@@ -887,7 +920,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: articles
       x-speakeasy-name-override: listPaginated
-  "/mu.getById":
+  /mu.getById:
     get:
       tags:
         - "mu"
@@ -895,25 +928,26 @@ paths:
       summary: "Get military unit by ID"
       operationId: "mu.getById"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "muId":
+                  muId:
                     type: "string"
                 required:
                   - "muId"
                 additionalProperties: false
       x-speakeasy-group: mus
       x-speakeasy-name-override: getById
-  "/mu.getManyPaginated":
+  /mu.getManyPaginated:
     get:
       tags:
         - "mu"
@@ -921,36 +955,37 @@ paths:
       summary: "Get military units (paginated)"
       operationId: "mu.getManyPaginated"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "limit":
+                  limit:
                     type: "number"
                     minimum: 1
                     maximum: 100
                     default: 20
-                  "cursor":
+                  cursor:
                     type: "string"
-                  "memberId":
+                  memberId:
                     type: "string"
-                  "userId":
+                  userId:
                     type: "string"
-                  "orgId":
+                  orgId:
                     type: "string"
-                  "search":
+                  search:
                     type: "string"
                 additionalProperties: false
       x-speakeasy-group: militaryUnits
       x-speakeasy-name-override: getPaginated
-  "/transaction.getPaginatedTransactions":
+  /transaction.getPaginatedTransactions:
     get:
       tags:
         - "transaction"
@@ -958,39 +993,40 @@ paths:
       summary: "Get paginated transactions"
       operationId: "transaction.getPaginatedTransactions"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: false
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "limit":
+                  limit:
                     type: "integer"
-                    exclusiveMinimum: false
+                    exclusiveMinimum: 0
                     maximum: 100
                     default: 10
                     description: "The limit of transactions to get"
-                  "cursor":
+                  cursor:
                     type: "string"
                     description: "The cursor to get the next transactions"
-                  "userId":
+                  userId:
                     type: "string"
                     description: "The user ID to get transactions for"
-                  "muId":
+                  muId:
                     type: "string"
                     description: "The MU ID to get transactions for"
-                  "countryId":
+                  countryId:
                     type: "string"
                     description: "The country ID to get transactions for"
-                  "itemCode":
+                  itemCode:
                     type: "string"
                     description: "The item code to get transactions for"
-                  "transactionType":
+                  transactionType:
                     anyOf:
                       - type: "string"
                         enum:
@@ -1020,7 +1056,7 @@ paths:
                 additionalProperties: false
       x-speakeasy-group: transactions
       x-speakeasy-name-override: listPaginated
-  "/upgrade.getUpgradeByTypeAndEntity":
+  /upgrade.getUpgradeByTypeAndEntity:
     get:
       tags:
         - "upgrade"
@@ -1028,18 +1064,19 @@ paths:
       summary: "Get upgrade by type and entity"
       operationId: "upgrade.getUpgradeByTypeAndEntity"
       responses:
-        "200": {}
+        "200":
+          description: ""
       parameters:
         - name: "input"
           in: "query"
           required: true
           description: "JSON-encoded input parameters"
           content:
-            "application/json":
+            application/json:
               schema:
                 type: "object"
                 properties:
-                  "upgradeType":
+                  upgradeType:
                     type: "string"
                     enum:
                       - "bunker"
@@ -1050,13 +1087,13 @@ paths:
                       - "headquarters"
                       - "dormitories"
                     description: "The upgrade type to get"
-                  "regionId":
+                  regionId:
                     type: "string"
                     description: "The region ID to get upgrade for"
-                  "companyId":
+                  companyId:
                     type: "string"
                     description: "The company ID to get upgrade for"
-                  "muId":
+                  muId:
                     type: "string"
                     description: "The military unit ID to get upgrade for"
                 required:
