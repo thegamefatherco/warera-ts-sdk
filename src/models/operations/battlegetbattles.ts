@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -77,9 +77,8 @@ export type BattleGetBattlesRequest = {
 };
 
 /** @internal */
-export const Direction$inboundSchema: z.ZodMiniEnum<typeof Direction> = z.enum(
-  Direction,
-);
+export const Direction$inboundSchema: z.ZodMiniEnum<typeof Direction> =
+  /* @__PURE__ */ lazySchema$(() => z.enum(Direction));
 /** @internal */
 export const Direction$outboundSchema: z.ZodMiniEnum<typeof Direction> =
   Direction$inboundSchema;
@@ -95,9 +94,8 @@ export namespace Direction$ {
 }
 
 /** @internal */
-export const Filter$inboundSchema: z.ZodMiniEnum<typeof Filter> = z.enum(
-  Filter,
-);
+export const Filter$inboundSchema: z.ZodMiniEnum<typeof Filter> =
+  /* @__PURE__ */ lazySchema$(() => z.enum(Filter));
 /** @internal */
 export const Filter$outboundSchema: z.ZodMiniEnum<typeof Filter> =
   Filter$inboundSchema;
@@ -116,16 +114,18 @@ export namespace Filter$ {
 export const BattleGetBattlesInput$inboundSchema: z.ZodMiniType<
   BattleGetBattlesInput,
   unknown
-> = z.object({
-  isActive: types.optional(types.boolean()),
-  limit: z._default(types.number(), 10),
-  cursor: types.optional(types.string()),
-  direction: types.optional(Direction$inboundSchema),
-  filter: types.optional(Filter$inboundSchema),
-  defenderRegionId: types.optional(types.string()),
-  warId: types.optional(types.string()),
-  countryId: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    isActive: types.optional(types.boolean()),
+    limit: z._default(types.number(), 10),
+    cursor: types.optional(types.string()),
+    direction: types.optional(Direction$inboundSchema),
+    filter: types.optional(Filter$inboundSchema),
+    defenderRegionId: types.optional(types.string()),
+    warId: types.optional(types.string()),
+    countryId: types.optional(types.string()),
+  })
+);
 /** @internal */
 export type BattleGetBattlesInput$Outbound = {
   isActive?: boolean | undefined;
@@ -142,16 +142,18 @@ export type BattleGetBattlesInput$Outbound = {
 export const BattleGetBattlesInput$outboundSchema: z.ZodMiniType<
   BattleGetBattlesInput$Outbound,
   BattleGetBattlesInput
-> = z.object({
-  isActive: z.optional(z.boolean()),
-  limit: z._default(z.number(), 10),
-  cursor: z.optional(z.string()),
-  direction: z.optional(Direction$outboundSchema),
-  filter: z.optional(Filter$outboundSchema),
-  defenderRegionId: z.optional(z.string()),
-  warId: z.optional(z.string()),
-  countryId: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    isActive: z.optional(z.boolean()),
+    limit: z._default(z.number(), 10),
+    cursor: z.optional(z.string()),
+    direction: z.optional(Direction$outboundSchema),
+    filter: z.optional(Filter$outboundSchema),
+    defenderRegionId: z.optional(z.string()),
+    warId: z.optional(z.string()),
+    countryId: z.optional(z.string()),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -186,9 +188,11 @@ export function battleGetBattlesInputFromJSON(
 export const BattleGetBattlesRequest$inboundSchema: z.ZodMiniType<
   BattleGetBattlesRequest,
   unknown
-> = z.object({
-  input: types.optional(z.lazy(() => BattleGetBattlesInput$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(z.lazy(() => BattleGetBattlesInput$inboundSchema)),
+  })
+);
 /** @internal */
 export type BattleGetBattlesRequest$Outbound = {
   input?: BattleGetBattlesInput$Outbound | undefined;
@@ -198,9 +202,11 @@ export type BattleGetBattlesRequest$Outbound = {
 export const BattleGetBattlesRequest$outboundSchema: z.ZodMiniType<
   BattleGetBattlesRequest$Outbound,
   BattleGetBattlesRequest
-> = z.object({
-  input: z.optional(z.lazy(() => BattleGetBattlesInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(z.lazy(() => BattleGetBattlesInput$outboundSchema)),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

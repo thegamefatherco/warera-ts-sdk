@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type GovernmentGetByCountryIdRequest = {
 export const GovernmentGetByCountryIdInput$inboundSchema: z.ZodMiniType<
   GovernmentGetByCountryIdInput,
   unknown
-> = z.object({
-  countryId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    countryId: types.string(),
+  })
+);
 /** @internal */
 export type GovernmentGetByCountryIdInput$Outbound = {
   countryId: string;
@@ -38,9 +40,11 @@ export type GovernmentGetByCountryIdInput$Outbound = {
 export const GovernmentGetByCountryIdInput$outboundSchema: z.ZodMiniType<
   GovernmentGetByCountryIdInput$Outbound,
   GovernmentGetByCountryIdInput
-> = z.object({
-  countryId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    countryId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -77,9 +81,11 @@ export function governmentGetByCountryIdInputFromJSON(
 export const GovernmentGetByCountryIdRequest$inboundSchema: z.ZodMiniType<
   GovernmentGetByCountryIdRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => GovernmentGetByCountryIdInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => GovernmentGetByCountryIdInput$inboundSchema),
+  })
+);
 /** @internal */
 export type GovernmentGetByCountryIdRequest$Outbound = {
   input: GovernmentGetByCountryIdInput$Outbound;
@@ -89,9 +95,11 @@ export type GovernmentGetByCountryIdRequest$Outbound = {
 export const GovernmentGetByCountryIdRequest$outboundSchema: z.ZodMiniType<
   GovernmentGetByCountryIdRequest$Outbound,
   GovernmentGetByCountryIdRequest
-> = z.object({
-  input: z.lazy(() => GovernmentGetByCountryIdInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => GovernmentGetByCountryIdInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -60,7 +60,7 @@ export type ArticleGetArticlesPaginatedRequest = {
 /** @internal */
 export const ArticleGetArticlesPaginatedType$inboundSchema: z.ZodMiniEnum<
   typeof ArticleGetArticlesPaginatedType
-> = z.enum(ArticleGetArticlesPaginatedType);
+> = /* @__PURE__ */ lazySchema$(() => z.enum(ArticleGetArticlesPaginatedType));
 /** @internal */
 export const ArticleGetArticlesPaginatedType$outboundSchema: z.ZodMiniEnum<
   typeof ArticleGetArticlesPaginatedType
@@ -80,14 +80,16 @@ export namespace ArticleGetArticlesPaginatedType$ {
 export const ArticleGetArticlesPaginatedInput$inboundSchema: z.ZodMiniType<
   ArticleGetArticlesPaginatedInput,
   unknown
-> = z.object({
-  type: ArticleGetArticlesPaginatedType$inboundSchema,
-  limit: z._default(types.number(), 10),
-  cursor: types.optional(types.string()),
-  userId: types.optional(types.string()),
-  categories: types.optional(z.array(types.string())),
-  languages: types.optional(z.array(types.string())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ArticleGetArticlesPaginatedType$inboundSchema,
+    limit: z._default(types.number(), 10),
+    cursor: types.optional(types.string()),
+    userId: types.optional(types.string()),
+    categories: types.optional(z.array(types.string())),
+    languages: types.optional(z.array(types.string())),
+  })
+);
 /** @internal */
 export type ArticleGetArticlesPaginatedInput$Outbound = {
   type: string;
@@ -102,14 +104,16 @@ export type ArticleGetArticlesPaginatedInput$Outbound = {
 export const ArticleGetArticlesPaginatedInput$outboundSchema: z.ZodMiniType<
   ArticleGetArticlesPaginatedInput$Outbound,
   ArticleGetArticlesPaginatedInput
-> = z.object({
-  type: ArticleGetArticlesPaginatedType$outboundSchema,
-  limit: z._default(z.number(), 10),
-  cursor: z.optional(z.string()),
-  userId: z.optional(z.string()),
-  categories: z.optional(z.array(z.string())),
-  languages: z.optional(z.array(z.string())),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    type: ArticleGetArticlesPaginatedType$outboundSchema,
+    limit: z._default(z.number(), 10),
+    cursor: z.optional(z.string()),
+    userId: z.optional(z.string()),
+    categories: z.optional(z.array(z.string())),
+    languages: z.optional(z.array(z.string())),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -146,9 +150,11 @@ export function articleGetArticlesPaginatedInputFromJSON(
 export const ArticleGetArticlesPaginatedRequest$inboundSchema: z.ZodMiniType<
   ArticleGetArticlesPaginatedRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => ArticleGetArticlesPaginatedInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => ArticleGetArticlesPaginatedInput$inboundSchema),
+  })
+);
 /** @internal */
 export type ArticleGetArticlesPaginatedRequest$Outbound = {
   input: ArticleGetArticlesPaginatedInput$Outbound;
@@ -158,9 +164,11 @@ export type ArticleGetArticlesPaginatedRequest$Outbound = {
 export const ArticleGetArticlesPaginatedRequest$outboundSchema: z.ZodMiniType<
   ArticleGetArticlesPaginatedRequest$Outbound,
   ArticleGetArticlesPaginatedRequest
-> = z.object({
-  input: z.lazy(() => ArticleGetArticlesPaginatedInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => ArticleGetArticlesPaginatedInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

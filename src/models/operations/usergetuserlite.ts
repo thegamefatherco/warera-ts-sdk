@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type UserGetUserLiteRequest = {
 export const UserGetUserLiteInput$inboundSchema: z.ZodMiniType<
   UserGetUserLiteInput,
   unknown
-> = z.object({
-  userId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: types.string(),
+  })
+);
 /** @internal */
 export type UserGetUserLiteInput$Outbound = {
   userId: string;
@@ -38,9 +40,11 @@ export type UserGetUserLiteInput$Outbound = {
 export const UserGetUserLiteInput$outboundSchema: z.ZodMiniType<
   UserGetUserLiteInput$Outbound,
   UserGetUserLiteInput
-> = z.object({
-  userId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -75,9 +79,11 @@ export function userGetUserLiteInputFromJSON(
 export const UserGetUserLiteRequest$inboundSchema: z.ZodMiniType<
   UserGetUserLiteRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => UserGetUserLiteInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => UserGetUserLiteInput$inboundSchema),
+  })
+);
 /** @internal */
 export type UserGetUserLiteRequest$Outbound = {
   input: UserGetUserLiteInput$Outbound;
@@ -87,9 +93,11 @@ export type UserGetUserLiteRequest$Outbound = {
 export const UserGetUserLiteRequest$outboundSchema: z.ZodMiniType<
   UserGetUserLiteRequest$Outbound,
   UserGetUserLiteRequest
-> = z.object({
-  input: z.lazy(() => UserGetUserLiteInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => UserGetUserLiteInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,7 +21,7 @@ export type RegionGetRegionsObjectRequest = {
 export const RegionGetRegionsObjectInput$inboundSchema: z.ZodMiniType<
   RegionGetRegionsObjectInput,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type RegionGetRegionsObjectInput$Outbound = {};
 
@@ -29,7 +29,7 @@ export type RegionGetRegionsObjectInput$Outbound = {};
 export const RegionGetRegionsObjectInput$outboundSchema: z.ZodMiniType<
   RegionGetRegionsObjectInput$Outbound,
   RegionGetRegionsObjectInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -66,11 +66,13 @@ export function regionGetRegionsObjectInputFromJSON(
 export const RegionGetRegionsObjectRequest$inboundSchema: z.ZodMiniType<
   RegionGetRegionsObjectRequest,
   unknown
-> = z.object({
-  input: types.optional(
-    z.lazy(() => RegionGetRegionsObjectInput$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(
+      z.lazy(() => RegionGetRegionsObjectInput$inboundSchema),
+    ),
+  })
+);
 /** @internal */
 export type RegionGetRegionsObjectRequest$Outbound = {
   input?: RegionGetRegionsObjectInput$Outbound | undefined;
@@ -80,9 +82,11 @@ export type RegionGetRegionsObjectRequest$Outbound = {
 export const RegionGetRegionsObjectRequest$outboundSchema: z.ZodMiniType<
   RegionGetRegionsObjectRequest$Outbound,
   RegionGetRegionsObjectRequest
-> = z.object({
-  input: z.optional(z.lazy(() => RegionGetRegionsObjectInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(z.lazy(() => RegionGetRegionsObjectInput$outboundSchema)),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

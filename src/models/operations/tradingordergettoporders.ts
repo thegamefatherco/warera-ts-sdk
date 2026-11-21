@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -30,10 +30,12 @@ export type TradingOrderGetTopOrdersRequest = {
 export const TradingOrderGetTopOrdersInput$inboundSchema: z.ZodMiniType<
   TradingOrderGetTopOrdersInput,
   unknown
-> = z.object({
-  itemCode: types.string(),
-  limit: z._default(types.number(), 10),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    itemCode: types.string(),
+    limit: z._default(types.number(), 10),
+  })
+);
 /** @internal */
 export type TradingOrderGetTopOrdersInput$Outbound = {
   itemCode: string;
@@ -44,10 +46,12 @@ export type TradingOrderGetTopOrdersInput$Outbound = {
 export const TradingOrderGetTopOrdersInput$outboundSchema: z.ZodMiniType<
   TradingOrderGetTopOrdersInput$Outbound,
   TradingOrderGetTopOrdersInput
-> = z.object({
-  itemCode: z.string(),
-  limit: z._default(z.int(), 10),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    itemCode: z.string(),
+    limit: z._default(z.int(), 10),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -84,9 +88,11 @@ export function tradingOrderGetTopOrdersInputFromJSON(
 export const TradingOrderGetTopOrdersRequest$inboundSchema: z.ZodMiniType<
   TradingOrderGetTopOrdersRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => TradingOrderGetTopOrdersInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => TradingOrderGetTopOrdersInput$inboundSchema),
+  })
+);
 /** @internal */
 export type TradingOrderGetTopOrdersRequest$Outbound = {
   input: TradingOrderGetTopOrdersInput$Outbound;
@@ -96,9 +102,11 @@ export type TradingOrderGetTopOrdersRequest$Outbound = {
 export const TradingOrderGetTopOrdersRequest$outboundSchema: z.ZodMiniType<
   TradingOrderGetTopOrdersRequest$Outbound,
   TradingOrderGetTopOrdersRequest
-> = z.object({
-  input: z.lazy(() => TradingOrderGetTopOrdersInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => TradingOrderGetTopOrdersInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
