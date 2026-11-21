@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type ArticleGetArticleByIdRequest = {
 export const ArticleGetArticleByIdInput$inboundSchema: z.ZodMiniType<
   ArticleGetArticleByIdInput,
   unknown
-> = z.object({
-  articleId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    articleId: types.string(),
+  })
+);
 /** @internal */
 export type ArticleGetArticleByIdInput$Outbound = {
   articleId: string;
@@ -38,9 +40,11 @@ export type ArticleGetArticleByIdInput$Outbound = {
 export const ArticleGetArticleByIdInput$outboundSchema: z.ZodMiniType<
   ArticleGetArticleByIdInput$Outbound,
   ArticleGetArticleByIdInput
-> = z.object({
-  articleId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    articleId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -75,9 +79,11 @@ export function articleGetArticleByIdInputFromJSON(
 export const ArticleGetArticleByIdRequest$inboundSchema: z.ZodMiniType<
   ArticleGetArticleByIdRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => ArticleGetArticleByIdInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => ArticleGetArticleByIdInput$inboundSchema),
+  })
+);
 /** @internal */
 export type ArticleGetArticleByIdRequest$Outbound = {
   input: ArticleGetArticleByIdInput$Outbound;
@@ -87,9 +93,11 @@ export type ArticleGetArticleByIdRequest$Outbound = {
 export const ArticleGetArticleByIdRequest$outboundSchema: z.ZodMiniType<
   ArticleGetArticleByIdRequest$Outbound,
   ArticleGetArticleByIdRequest
-> = z.object({
-  input: z.lazy(() => ArticleGetArticleByIdInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => ArticleGetArticleByIdInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

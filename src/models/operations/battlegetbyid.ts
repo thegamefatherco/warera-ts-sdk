@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type BattleGetByIdRequest = {
 export const BattleGetByIdInput$inboundSchema: z.ZodMiniType<
   BattleGetByIdInput,
   unknown
-> = z.object({
-  battleId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    battleId: types.string(),
+  })
+);
 /** @internal */
 export type BattleGetByIdInput$Outbound = {
   battleId: string;
@@ -38,9 +40,11 @@ export type BattleGetByIdInput$Outbound = {
 export const BattleGetByIdInput$outboundSchema: z.ZodMiniType<
   BattleGetByIdInput$Outbound,
   BattleGetByIdInput
-> = z.object({
-  battleId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    battleId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -75,9 +79,11 @@ export function battleGetByIdInputFromJSON(
 export const BattleGetByIdRequest$inboundSchema: z.ZodMiniType<
   BattleGetByIdRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => BattleGetByIdInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => BattleGetByIdInput$inboundSchema),
+  })
+);
 /** @internal */
 export type BattleGetByIdRequest$Outbound = {
   input: BattleGetByIdInput$Outbound;
@@ -87,9 +93,11 @@ export type BattleGetByIdRequest$Outbound = {
 export const BattleGetByIdRequest$outboundSchema: z.ZodMiniType<
   BattleGetByIdRequest$Outbound,
   BattleGetByIdRequest
-> = z.object({
-  input: z.lazy(() => BattleGetByIdInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => BattleGetByIdInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,7 +21,7 @@ export type CountryGetAllCountriesRequest = {
 export const CountryGetAllCountriesInput$inboundSchema: z.ZodMiniType<
   CountryGetAllCountriesInput,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type CountryGetAllCountriesInput$Outbound = {};
 
@@ -29,7 +29,7 @@ export type CountryGetAllCountriesInput$Outbound = {};
 export const CountryGetAllCountriesInput$outboundSchema: z.ZodMiniType<
   CountryGetAllCountriesInput$Outbound,
   CountryGetAllCountriesInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -66,11 +66,13 @@ export function countryGetAllCountriesInputFromJSON(
 export const CountryGetAllCountriesRequest$inboundSchema: z.ZodMiniType<
   CountryGetAllCountriesRequest,
   unknown
-> = z.object({
-  input: types.optional(
-    z.lazy(() => CountryGetAllCountriesInput$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(
+      z.lazy(() => CountryGetAllCountriesInput$inboundSchema),
+    ),
+  })
+);
 /** @internal */
 export type CountryGetAllCountriesRequest$Outbound = {
   input?: CountryGetAllCountriesInput$Outbound | undefined;
@@ -80,9 +82,11 @@ export type CountryGetAllCountriesRequest$Outbound = {
 export const CountryGetAllCountriesRequest$outboundSchema: z.ZodMiniType<
   CountryGetAllCountriesRequest$Outbound,
   CountryGetAllCountriesRequest
-> = z.object({
-  input: z.optional(z.lazy(() => CountryGetAllCountriesInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(z.lazy(() => CountryGetAllCountriesInput$outboundSchema)),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

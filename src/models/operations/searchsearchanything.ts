@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type SearchSearchAnythingRequest = {
 export const SearchSearchAnythingInput$inboundSchema: z.ZodMiniType<
   SearchSearchAnythingInput,
   unknown
-> = z.object({
-  searchText: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    searchText: types.string(),
+  })
+);
 /** @internal */
 export type SearchSearchAnythingInput$Outbound = {
   searchText: string;
@@ -38,9 +40,11 @@ export type SearchSearchAnythingInput$Outbound = {
 export const SearchSearchAnythingInput$outboundSchema: z.ZodMiniType<
   SearchSearchAnythingInput$Outbound,
   SearchSearchAnythingInput
-> = z.object({
-  searchText: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    searchText: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -75,9 +79,11 @@ export function searchSearchAnythingInputFromJSON(
 export const SearchSearchAnythingRequest$inboundSchema: z.ZodMiniType<
   SearchSearchAnythingRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => SearchSearchAnythingInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => SearchSearchAnythingInput$inboundSchema),
+  })
+);
 /** @internal */
 export type SearchSearchAnythingRequest$Outbound = {
   input: SearchSearchAnythingInput$Outbound;
@@ -87,9 +93,11 @@ export type SearchSearchAnythingRequest$Outbound = {
 export const SearchSearchAnythingRequest$outboundSchema: z.ZodMiniType<
   SearchSearchAnythingRequest$Outbound,
   SearchSearchAnythingRequest
-> = z.object({
-  input: z.lazy(() => SearchSearchAnythingInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => SearchSearchAnythingInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -25,11 +25,13 @@ export type UserGetUsersByCountryRequest = {
 export const UserGetUsersByCountryInput$inboundSchema: z.ZodMiniType<
   UserGetUsersByCountryInput,
   unknown
-> = z.object({
-  countryId: types.string(),
-  limit: z._default(types.number(), 10),
-  cursor: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    countryId: types.string(),
+    limit: z._default(types.number(), 10),
+    cursor: types.optional(types.string()),
+  })
+);
 /** @internal */
 export type UserGetUsersByCountryInput$Outbound = {
   countryId: string;
@@ -41,11 +43,13 @@ export type UserGetUsersByCountryInput$Outbound = {
 export const UserGetUsersByCountryInput$outboundSchema: z.ZodMiniType<
   UserGetUsersByCountryInput$Outbound,
   UserGetUsersByCountryInput
-> = z.object({
-  countryId: z.string(),
-  limit: z._default(z.number(), 10),
-  cursor: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    countryId: z.string(),
+    limit: z._default(z.number(), 10),
+    cursor: z.optional(z.string()),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -80,9 +84,11 @@ export function userGetUsersByCountryInputFromJSON(
 export const UserGetUsersByCountryRequest$inboundSchema: z.ZodMiniType<
   UserGetUsersByCountryRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => UserGetUsersByCountryInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => UserGetUsersByCountryInput$inboundSchema),
+  })
+);
 /** @internal */
 export type UserGetUsersByCountryRequest$Outbound = {
   input: UserGetUsersByCountryInput$Outbound;
@@ -92,9 +98,11 @@ export type UserGetUsersByCountryRequest$Outbound = {
 export const UserGetUsersByCountryRequest$outboundSchema: z.ZodMiniType<
   UserGetUsersByCountryRequest$Outbound,
   UserGetUsersByCountryRequest
-> = z.object({
-  input: z.lazy(() => UserGetUsersByCountryInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => UserGetUsersByCountryInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

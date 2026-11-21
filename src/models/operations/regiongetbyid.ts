@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type RegionGetByIdRequest = {
 export const RegionGetByIdInput$inboundSchema: z.ZodMiniType<
   RegionGetByIdInput,
   unknown
-> = z.object({
-  regionId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    regionId: types.string(),
+  })
+);
 /** @internal */
 export type RegionGetByIdInput$Outbound = {
   regionId: string;
@@ -38,9 +40,11 @@ export type RegionGetByIdInput$Outbound = {
 export const RegionGetByIdInput$outboundSchema: z.ZodMiniType<
   RegionGetByIdInput$Outbound,
   RegionGetByIdInput
-> = z.object({
-  regionId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    regionId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -75,9 +79,11 @@ export function regionGetByIdInputFromJSON(
 export const RegionGetByIdRequest$inboundSchema: z.ZodMiniType<
   RegionGetByIdRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => RegionGetByIdInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => RegionGetByIdInput$inboundSchema),
+  })
+);
 /** @internal */
 export type RegionGetByIdRequest$Outbound = {
   input: RegionGetByIdInput$Outbound;
@@ -87,9 +93,11 @@ export type RegionGetByIdRequest$Outbound = {
 export const RegionGetByIdRequest$outboundSchema: z.ZodMiniType<
   RegionGetByIdRequest$Outbound,
   RegionGetByIdRequest
-> = z.object({
-  input: z.lazy(() => RegionGetByIdInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => RegionGetByIdInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

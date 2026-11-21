@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -34,11 +34,13 @@ export type EventGetEventsPaginatedRequest = {
 export const EventGetEventsPaginatedInput$inboundSchema: z.ZodMiniType<
   EventGetEventsPaginatedInput,
   unknown
-> = z.object({
-  limit: z._default(types.number(), 10),
-  cursor: types.optional(types.string()),
-  countryId: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z._default(types.number(), 10),
+    cursor: types.optional(types.string()),
+    countryId: types.optional(types.string()),
+  })
+);
 /** @internal */
 export type EventGetEventsPaginatedInput$Outbound = {
   limit: number;
@@ -50,11 +52,13 @@ export type EventGetEventsPaginatedInput$Outbound = {
 export const EventGetEventsPaginatedInput$outboundSchema: z.ZodMiniType<
   EventGetEventsPaginatedInput$Outbound,
   EventGetEventsPaginatedInput
-> = z.object({
-  limit: z._default(z.number(), 10),
-  cursor: z.optional(z.string()),
-  countryId: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z._default(z.number(), 10),
+    cursor: z.optional(z.string()),
+    countryId: z.optional(z.string()),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -91,11 +95,13 @@ export function eventGetEventsPaginatedInputFromJSON(
 export const EventGetEventsPaginatedRequest$inboundSchema: z.ZodMiniType<
   EventGetEventsPaginatedRequest,
   unknown
-> = z.object({
-  input: types.optional(
-    z.lazy(() => EventGetEventsPaginatedInput$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(
+      z.lazy(() => EventGetEventsPaginatedInput$inboundSchema),
+    ),
+  })
+);
 /** @internal */
 export type EventGetEventsPaginatedRequest$Outbound = {
   input?: EventGetEventsPaginatedInput$Outbound | undefined;
@@ -105,9 +111,13 @@ export type EventGetEventsPaginatedRequest$Outbound = {
 export const EventGetEventsPaginatedRequest$outboundSchema: z.ZodMiniType<
   EventGetEventsPaginatedRequest$Outbound,
   EventGetEventsPaginatedRequest
-> = z.object({
-  input: z.optional(z.lazy(() => EventGetEventsPaginatedInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(
+      z.lazy(() => EventGetEventsPaginatedInput$outboundSchema),
+    ),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
