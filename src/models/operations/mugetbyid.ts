@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,9 +23,11 @@ export type MuGetByIdRequest = {
 export const MuGetByIdInput$inboundSchema: z.ZodMiniType<
   MuGetByIdInput,
   unknown
-> = z.object({
-  muId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    muId: types.string(),
+  })
+);
 /** @internal */
 export type MuGetByIdInput$Outbound = {
   muId: string;
@@ -35,9 +37,11 @@ export type MuGetByIdInput$Outbound = {
 export const MuGetByIdInput$outboundSchema: z.ZodMiniType<
   MuGetByIdInput$Outbound,
   MuGetByIdInput
-> = z.object({
-  muId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    muId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -68,9 +72,11 @@ export function muGetByIdInputFromJSON(
 export const MuGetByIdRequest$inboundSchema: z.ZodMiniType<
   MuGetByIdRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => MuGetByIdInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => MuGetByIdInput$inboundSchema),
+  })
+);
 /** @internal */
 export type MuGetByIdRequest$Outbound = {
   input: MuGetByIdInput$Outbound;
@@ -80,9 +86,11 @@ export type MuGetByIdRequest$Outbound = {
 export const MuGetByIdRequest$outboundSchema: z.ZodMiniType<
   MuGetByIdRequest$Outbound,
   MuGetByIdRequest
-> = z.object({
-  input: z.lazy(() => MuGetByIdInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => MuGetByIdInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

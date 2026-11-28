@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -53,8 +53,8 @@ export type UpgradeGetUpgradeByTypeAndEntityRequest = {
 };
 
 /** @internal */
-export const UpgradeType$inboundSchema: z.ZodMiniEnum<typeof UpgradeType> = z
-  .enum(UpgradeType);
+export const UpgradeType$inboundSchema: z.ZodMiniEnum<typeof UpgradeType> =
+  /* @__PURE__ */ lazySchema$(() => z.enum(UpgradeType));
 /** @internal */
 export const UpgradeType$outboundSchema: z.ZodMiniEnum<typeof UpgradeType> =
   UpgradeType$inboundSchema;
@@ -73,12 +73,14 @@ export namespace UpgradeType$ {
 export const UpgradeGetUpgradeByTypeAndEntityInput$inboundSchema: z.ZodMiniType<
   UpgradeGetUpgradeByTypeAndEntityInput,
   unknown
-> = z.object({
-  upgradeType: UpgradeType$inboundSchema,
-  regionId: types.optional(types.string()),
-  companyId: types.optional(types.string()),
-  muId: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    upgradeType: UpgradeType$inboundSchema,
+    regionId: types.optional(types.string()),
+    companyId: types.optional(types.string()),
+    muId: types.optional(types.string()),
+  })
+);
 /** @internal */
 export type UpgradeGetUpgradeByTypeAndEntityInput$Outbound = {
   upgradeType: string;
@@ -92,12 +94,14 @@ export const UpgradeGetUpgradeByTypeAndEntityInput$outboundSchema:
   z.ZodMiniType<
     UpgradeGetUpgradeByTypeAndEntityInput$Outbound,
     UpgradeGetUpgradeByTypeAndEntityInput
-  > = z.object({
-    upgradeType: UpgradeType$outboundSchema,
-    regionId: z.optional(z.string()),
-    companyId: z.optional(z.string()),
-    muId: z.optional(z.string()),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      upgradeType: UpgradeType$outboundSchema,
+      regionId: z.optional(z.string()),
+      companyId: z.optional(z.string()),
+      muId: z.optional(z.string()),
+    })
+  );
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -135,9 +139,14 @@ export function upgradeGetUpgradeByTypeAndEntityInputFromJSON(
 
 /** @internal */
 export const UpgradeGetUpgradeByTypeAndEntityRequest$inboundSchema:
-  z.ZodMiniType<UpgradeGetUpgradeByTypeAndEntityRequest, unknown> = z.object({
-    input: z.lazy(() => UpgradeGetUpgradeByTypeAndEntityInput$inboundSchema),
-  });
+  z.ZodMiniType<UpgradeGetUpgradeByTypeAndEntityRequest, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        input: z.lazy(() =>
+          UpgradeGetUpgradeByTypeAndEntityInput$inboundSchema
+        ),
+      })
+    );
 /** @internal */
 export type UpgradeGetUpgradeByTypeAndEntityRequest$Outbound = {
   input: UpgradeGetUpgradeByTypeAndEntityInput$Outbound;
@@ -148,9 +157,11 @@ export const UpgradeGetUpgradeByTypeAndEntityRequest$outboundSchema:
   z.ZodMiniType<
     UpgradeGetUpgradeByTypeAndEntityRequest$Outbound,
     UpgradeGetUpgradeByTypeAndEntityRequest
-  > = z.object({
-    input: z.lazy(() => UpgradeGetUpgradeByTypeAndEntityInput$outboundSchema),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      input: z.lazy(() => UpgradeGetUpgradeByTypeAndEntityInput$outboundSchema),
+    })
+  );
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

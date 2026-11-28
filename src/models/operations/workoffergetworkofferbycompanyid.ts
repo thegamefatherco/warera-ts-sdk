@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,9 +23,11 @@ export type WorkOfferGetWorkOfferByCompanyIdRequest = {
 export const WorkOfferGetWorkOfferByCompanyIdInput$inboundSchema: z.ZodMiniType<
   WorkOfferGetWorkOfferByCompanyIdInput,
   unknown
-> = z.object({
-  companyId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    companyId: types.string(),
+  })
+);
 /** @internal */
 export type WorkOfferGetWorkOfferByCompanyIdInput$Outbound = {
   companyId: string;
@@ -36,9 +38,11 @@ export const WorkOfferGetWorkOfferByCompanyIdInput$outboundSchema:
   z.ZodMiniType<
     WorkOfferGetWorkOfferByCompanyIdInput$Outbound,
     WorkOfferGetWorkOfferByCompanyIdInput
-  > = z.object({
-    companyId: z.string(),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      companyId: z.string(),
+    })
+  );
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -76,9 +80,14 @@ export function workOfferGetWorkOfferByCompanyIdInputFromJSON(
 
 /** @internal */
 export const WorkOfferGetWorkOfferByCompanyIdRequest$inboundSchema:
-  z.ZodMiniType<WorkOfferGetWorkOfferByCompanyIdRequest, unknown> = z.object({
-    input: z.lazy(() => WorkOfferGetWorkOfferByCompanyIdInput$inboundSchema),
-  });
+  z.ZodMiniType<WorkOfferGetWorkOfferByCompanyIdRequest, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        input: z.lazy(() =>
+          WorkOfferGetWorkOfferByCompanyIdInput$inboundSchema
+        ),
+      })
+    );
 /** @internal */
 export type WorkOfferGetWorkOfferByCompanyIdRequest$Outbound = {
   input: WorkOfferGetWorkOfferByCompanyIdInput$Outbound;
@@ -89,9 +98,11 @@ export const WorkOfferGetWorkOfferByCompanyIdRequest$outboundSchema:
   z.ZodMiniType<
     WorkOfferGetWorkOfferByCompanyIdRequest$Outbound,
     WorkOfferGetWorkOfferByCompanyIdRequest
-  > = z.object({
-    input: z.lazy(() => WorkOfferGetWorkOfferByCompanyIdInput$outboundSchema),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      input: z.lazy(() => WorkOfferGetWorkOfferByCompanyIdInput$outboundSchema),
+    })
+  );
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

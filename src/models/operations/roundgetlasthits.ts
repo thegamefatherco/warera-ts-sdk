@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type RoundGetLastHitsRequest = {
 export const RoundGetLastHitsInput$inboundSchema: z.ZodMiniType<
   RoundGetLastHitsInput,
   unknown
-> = z.object({
-  roundId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    roundId: types.string(),
+  })
+);
 /** @internal */
 export type RoundGetLastHitsInput$Outbound = {
   roundId: string;
@@ -38,9 +40,11 @@ export type RoundGetLastHitsInput$Outbound = {
 export const RoundGetLastHitsInput$outboundSchema: z.ZodMiniType<
   RoundGetLastHitsInput$Outbound,
   RoundGetLastHitsInput
-> = z.object({
-  roundId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    roundId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -75,9 +79,11 @@ export function roundGetLastHitsInputFromJSON(
 export const RoundGetLastHitsRequest$inboundSchema: z.ZodMiniType<
   RoundGetLastHitsRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => RoundGetLastHitsInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => RoundGetLastHitsInput$inboundSchema),
+  })
+);
 /** @internal */
 export type RoundGetLastHitsRequest$Outbound = {
   input: RoundGetLastHitsInput$Outbound;
@@ -87,9 +93,11 @@ export type RoundGetLastHitsRequest$Outbound = {
 export const RoundGetLastHitsRequest$outboundSchema: z.ZodMiniType<
   RoundGetLastHitsRequest$Outbound,
   RoundGetLastHitsRequest
-> = z.object({
-  input: z.lazy(() => RoundGetLastHitsInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => RoundGetLastHitsInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

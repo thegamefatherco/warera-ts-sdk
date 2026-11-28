@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -23,9 +23,11 @@ export type WorkOfferGetByIdRequest = {
 export const WorkOfferGetByIdInput$inboundSchema: z.ZodMiniType<
   WorkOfferGetByIdInput,
   unknown
-> = z.object({
-  workOfferId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workOfferId: types.string(),
+  })
+);
 /** @internal */
 export type WorkOfferGetByIdInput$Outbound = {
   workOfferId: string;
@@ -35,9 +37,11 @@ export type WorkOfferGetByIdInput$Outbound = {
 export const WorkOfferGetByIdInput$outboundSchema: z.ZodMiniType<
   WorkOfferGetByIdInput$Outbound,
   WorkOfferGetByIdInput
-> = z.object({
-  workOfferId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    workOfferId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -72,9 +76,11 @@ export function workOfferGetByIdInputFromJSON(
 export const WorkOfferGetByIdRequest$inboundSchema: z.ZodMiniType<
   WorkOfferGetByIdRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => WorkOfferGetByIdInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => WorkOfferGetByIdInput$inboundSchema),
+  })
+);
 /** @internal */
 export type WorkOfferGetByIdRequest$Outbound = {
   input: WorkOfferGetByIdInput$Outbound;
@@ -84,9 +90,11 @@ export type WorkOfferGetByIdRequest$Outbound = {
 export const WorkOfferGetByIdRequest$outboundSchema: z.ZodMiniType<
   WorkOfferGetByIdRequest$Outbound,
   WorkOfferGetByIdRequest
-> = z.object({
-  input: z.lazy(() => WorkOfferGetByIdInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => WorkOfferGetByIdInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

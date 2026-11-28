@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type RoundGetByIdRequest = {
 export const RoundGetByIdInput$inboundSchema: z.ZodMiniType<
   RoundGetByIdInput,
   unknown
-> = z.object({
-  roundId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    roundId: types.string(),
+  })
+);
 /** @internal */
 export type RoundGetByIdInput$Outbound = {
   roundId: string;
@@ -38,9 +40,11 @@ export type RoundGetByIdInput$Outbound = {
 export const RoundGetByIdInput$outboundSchema: z.ZodMiniType<
   RoundGetByIdInput$Outbound,
   RoundGetByIdInput
-> = z.object({
-  roundId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    roundId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -75,9 +79,11 @@ export function roundGetByIdInputFromJSON(
 export const RoundGetByIdRequest$inboundSchema: z.ZodMiniType<
   RoundGetByIdRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => RoundGetByIdInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => RoundGetByIdInput$inboundSchema),
+  })
+);
 /** @internal */
 export type RoundGetByIdRequest$Outbound = {
   input: RoundGetByIdInput$Outbound;
@@ -87,9 +93,11 @@ export type RoundGetByIdRequest$Outbound = {
 export const RoundGetByIdRequest$outboundSchema: z.ZodMiniType<
   RoundGetByIdRequest$Outbound,
   RoundGetByIdRequest
-> = z.object({
-  input: z.lazy(() => RoundGetByIdInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => RoundGetByIdInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

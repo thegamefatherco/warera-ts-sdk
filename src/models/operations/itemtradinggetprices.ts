@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,7 +21,7 @@ export type ItemTradingGetPricesRequest = {
 export const ItemTradingGetPricesInput$inboundSchema: z.ZodMiniType<
   ItemTradingGetPricesInput,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type ItemTradingGetPricesInput$Outbound = {};
 
@@ -29,7 +29,7 @@ export type ItemTradingGetPricesInput$Outbound = {};
 export const ItemTradingGetPricesInput$outboundSchema: z.ZodMiniType<
   ItemTradingGetPricesInput$Outbound,
   ItemTradingGetPricesInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -64,9 +64,13 @@ export function itemTradingGetPricesInputFromJSON(
 export const ItemTradingGetPricesRequest$inboundSchema: z.ZodMiniType<
   ItemTradingGetPricesRequest,
   unknown
-> = z.object({
-  input: types.optional(z.lazy(() => ItemTradingGetPricesInput$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(
+      z.lazy(() => ItemTradingGetPricesInput$inboundSchema),
+    ),
+  })
+);
 /** @internal */
 export type ItemTradingGetPricesRequest$Outbound = {
   input?: ItemTradingGetPricesInput$Outbound | undefined;
@@ -76,9 +80,11 @@ export type ItemTradingGetPricesRequest$Outbound = {
 export const ItemTradingGetPricesRequest$outboundSchema: z.ZodMiniType<
   ItemTradingGetPricesRequest$Outbound,
   ItemTradingGetPricesRequest
-> = z.object({
-  input: z.optional(z.lazy(() => ItemTradingGetPricesInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(z.lazy(() => ItemTradingGetPricesInput$outboundSchema)),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

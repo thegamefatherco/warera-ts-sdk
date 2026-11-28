@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -87,7 +87,7 @@ export type TransactionGetPaginatedTransactionsRequest = {
 /** @internal */
 export const TransactionTypeEnum2$inboundSchema: z.ZodMiniEnum<
   typeof TransactionTypeEnum2
-> = z.enum(TransactionTypeEnum2);
+> = /* @__PURE__ */ lazySchema$(() => z.enum(TransactionTypeEnum2));
 /** @internal */
 export const TransactionTypeEnum2$outboundSchema: z.ZodMiniEnum<
   typeof TransactionTypeEnum2
@@ -106,7 +106,7 @@ export namespace TransactionTypeEnum2$ {
 /** @internal */
 export const TransactionTypeEnum1$inboundSchema: z.ZodMiniEnum<
   typeof TransactionTypeEnum1
-> = z.enum(TransactionTypeEnum1);
+> = /* @__PURE__ */ lazySchema$(() => z.enum(TransactionTypeEnum1));
 /** @internal */
 export const TransactionTypeEnum1$outboundSchema: z.ZodMiniEnum<
   typeof TransactionTypeEnum1
@@ -126,10 +126,12 @@ export namespace TransactionTypeEnum1$ {
 export const TransactionType$inboundSchema: z.ZodMiniType<
   TransactionType,
   unknown
-> = smartUnion([
-  TransactionTypeEnum1$inboundSchema,
-  z.array(TransactionTypeEnum2$inboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  smartUnion([
+    TransactionTypeEnum1$inboundSchema,
+    z.array(TransactionTypeEnum2$inboundSchema),
+  ])
+);
 /** @internal */
 export type TransactionType$Outbound = string | Array<string>;
 
@@ -137,10 +139,12 @@ export type TransactionType$Outbound = string | Array<string>;
 export const TransactionType$outboundSchema: z.ZodMiniType<
   TransactionType$Outbound,
   TransactionType
-> = smartUnion([
-  TransactionTypeEnum1$outboundSchema,
-  z.array(TransactionTypeEnum2$outboundSchema),
-]);
+> = /* @__PURE__ */ lazySchema$(() =>
+  smartUnion([
+    TransactionTypeEnum1$outboundSchema,
+    z.array(TransactionTypeEnum2$outboundSchema),
+  ])
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -171,20 +175,23 @@ export function transactionTypeFromJSON(
 
 /** @internal */
 export const TransactionGetPaginatedTransactionsInput$inboundSchema:
-  z.ZodMiniType<TransactionGetPaginatedTransactionsInput, unknown> = z.object({
-    limit: z._default(types.number(), 10),
-    cursor: types.optional(types.string()),
-    userId: types.optional(types.string()),
-    muId: types.optional(types.string()),
-    countryId: types.optional(types.string()),
-    itemCode: types.optional(types.string()),
-    transactionType: types.optional(
-      smartUnion([
-        TransactionTypeEnum1$inboundSchema,
-        z.array(TransactionTypeEnum2$inboundSchema),
-      ]),
-    ),
-  });
+  z.ZodMiniType<TransactionGetPaginatedTransactionsInput, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        limit: z._default(types.number(), 10),
+        cursor: types.optional(types.string()),
+        userId: types.optional(types.string()),
+        muId: types.optional(types.string()),
+        countryId: types.optional(types.string()),
+        itemCode: types.optional(types.string()),
+        transactionType: types.optional(
+          smartUnion([
+            TransactionTypeEnum1$inboundSchema,
+            z.array(TransactionTypeEnum2$inboundSchema),
+          ]),
+        ),
+      })
+    );
 /** @internal */
 export type TransactionGetPaginatedTransactionsInput$Outbound = {
   limit: number;
@@ -201,20 +208,22 @@ export const TransactionGetPaginatedTransactionsInput$outboundSchema:
   z.ZodMiniType<
     TransactionGetPaginatedTransactionsInput$Outbound,
     TransactionGetPaginatedTransactionsInput
-  > = z.object({
-    limit: z._default(z.int(), 10),
-    cursor: z.optional(z.string()),
-    userId: z.optional(z.string()),
-    muId: z.optional(z.string()),
-    countryId: z.optional(z.string()),
-    itemCode: z.optional(z.string()),
-    transactionType: z.optional(
-      smartUnion([
-        TransactionTypeEnum1$outboundSchema,
-        z.array(TransactionTypeEnum2$outboundSchema),
-      ]),
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      limit: z._default(z.int(), 10),
+      cursor: z.optional(z.string()),
+      userId: z.optional(z.string()),
+      muId: z.optional(z.string()),
+      countryId: z.optional(z.string()),
+      itemCode: z.optional(z.string()),
+      transactionType: z.optional(
+        smartUnion([
+          TransactionTypeEnum1$outboundSchema,
+          z.array(TransactionTypeEnum2$outboundSchema),
+        ]),
+      ),
+    })
+  );
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -258,13 +267,14 @@ export function transactionGetPaginatedTransactionsInputFromJSON(
 
 /** @internal */
 export const TransactionGetPaginatedTransactionsRequest$inboundSchema:
-  z.ZodMiniType<TransactionGetPaginatedTransactionsRequest, unknown> = z.object(
-    {
-      input: types.optional(z.lazy(() =>
-        TransactionGetPaginatedTransactionsInput$inboundSchema
-      )),
-    },
-  );
+  z.ZodMiniType<TransactionGetPaginatedTransactionsRequest, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        input: types.optional(
+          z.lazy(() => TransactionGetPaginatedTransactionsInput$inboundSchema),
+        ),
+      })
+    );
 /** @internal */
 export type TransactionGetPaginatedTransactionsRequest$Outbound = {
   input?: TransactionGetPaginatedTransactionsInput$Outbound | undefined;
@@ -275,11 +285,13 @@ export const TransactionGetPaginatedTransactionsRequest$outboundSchema:
   z.ZodMiniType<
     TransactionGetPaginatedTransactionsRequest$Outbound,
     TransactionGetPaginatedTransactionsRequest
-  > = z.object({
-    input: z.optional(
-      z.lazy(() => TransactionGetPaginatedTransactionsInput$outboundSchema),
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      input: z.optional(
+        z.lazy(() => TransactionGetPaginatedTransactionsInput$outboundSchema),
+      ),
+    })
+  );
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

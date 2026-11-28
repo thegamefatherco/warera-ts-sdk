@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,9 +26,11 @@ export type CompanyGetByIdRequest = {
 export const CompanyGetByIdInput$inboundSchema: z.ZodMiniType<
   CompanyGetByIdInput,
   unknown
-> = z.object({
-  companyId: types.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    companyId: types.string(),
+  })
+);
 /** @internal */
 export type CompanyGetByIdInput$Outbound = {
   companyId: string;
@@ -38,9 +40,11 @@ export type CompanyGetByIdInput$Outbound = {
 export const CompanyGetByIdInput$outboundSchema: z.ZodMiniType<
   CompanyGetByIdInput$Outbound,
   CompanyGetByIdInput
-> = z.object({
-  companyId: z.string(),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    companyId: z.string(),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -75,9 +79,11 @@ export function companyGetByIdInputFromJSON(
 export const CompanyGetByIdRequest$inboundSchema: z.ZodMiniType<
   CompanyGetByIdRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => CompanyGetByIdInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => CompanyGetByIdInput$inboundSchema),
+  })
+);
 /** @internal */
 export type CompanyGetByIdRequest$Outbound = {
   input: CompanyGetByIdInput$Outbound;
@@ -87,9 +93,11 @@ export type CompanyGetByIdRequest$Outbound = {
 export const CompanyGetByIdRequest$outboundSchema: z.ZodMiniType<
   CompanyGetByIdRequest$Outbound,
   CompanyGetByIdRequest
-> = z.object({
-  input: z.lazy(() => CompanyGetByIdInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => CompanyGetByIdInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

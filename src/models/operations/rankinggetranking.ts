@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -59,8 +59,8 @@ export type RankingGetRankingRequest = {
 };
 
 /** @internal */
-export const RankingType$inboundSchema: z.ZodMiniEnum<typeof RankingType> = z
-  .enum(RankingType);
+export const RankingType$inboundSchema: z.ZodMiniEnum<typeof RankingType> =
+  /* @__PURE__ */ lazySchema$(() => z.enum(RankingType));
 /** @internal */
 export const RankingType$outboundSchema: z.ZodMiniEnum<typeof RankingType> =
   RankingType$inboundSchema;
@@ -79,9 +79,11 @@ export namespace RankingType$ {
 export const RankingGetRankingInput$inboundSchema: z.ZodMiniType<
   RankingGetRankingInput,
   unknown
-> = z.object({
-  rankingType: RankingType$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rankingType: RankingType$inboundSchema,
+  })
+);
 /** @internal */
 export type RankingGetRankingInput$Outbound = {
   rankingType: string;
@@ -91,9 +93,11 @@ export type RankingGetRankingInput$Outbound = {
 export const RankingGetRankingInput$outboundSchema: z.ZodMiniType<
   RankingGetRankingInput$Outbound,
   RankingGetRankingInput
-> = z.object({
-  rankingType: RankingType$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    rankingType: RankingType$outboundSchema,
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -128,9 +132,11 @@ export function rankingGetRankingInputFromJSON(
 export const RankingGetRankingRequest$inboundSchema: z.ZodMiniType<
   RankingGetRankingRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => RankingGetRankingInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => RankingGetRankingInput$inboundSchema),
+  })
+);
 /** @internal */
 export type RankingGetRankingRequest$Outbound = {
   input: RankingGetRankingInput$Outbound;
@@ -140,9 +146,11 @@ export type RankingGetRankingRequest$Outbound = {
 export const RankingGetRankingRequest$outboundSchema: z.ZodMiniType<
   RankingGetRankingRequest$Outbound,
   RankingGetRankingRequest
-> = z.object({
-  input: z.lazy(() => RankingGetRankingInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => RankingGetRankingInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
