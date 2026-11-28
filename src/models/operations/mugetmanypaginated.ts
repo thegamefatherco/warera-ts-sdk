@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -28,14 +28,16 @@ export type MuGetManyPaginatedRequest = {
 export const MuGetManyPaginatedInput$inboundSchema: z.ZodMiniType<
   MuGetManyPaginatedInput,
   unknown
-> = z.object({
-  limit: z._default(types.number(), 20),
-  cursor: types.optional(types.string()),
-  memberId: types.optional(types.string()),
-  userId: types.optional(types.string()),
-  orgId: types.optional(types.string()),
-  search: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z._default(types.number(), 20),
+    cursor: types.optional(types.string()),
+    memberId: types.optional(types.string()),
+    userId: types.optional(types.string()),
+    orgId: types.optional(types.string()),
+    search: types.optional(types.string()),
+  })
+);
 /** @internal */
 export type MuGetManyPaginatedInput$Outbound = {
   limit: number;
@@ -50,14 +52,16 @@ export type MuGetManyPaginatedInput$Outbound = {
 export const MuGetManyPaginatedInput$outboundSchema: z.ZodMiniType<
   MuGetManyPaginatedInput$Outbound,
   MuGetManyPaginatedInput
-> = z.object({
-  limit: z._default(z.number(), 20),
-  cursor: z.optional(z.string()),
-  memberId: z.optional(z.string()),
-  userId: z.optional(z.string()),
-  orgId: z.optional(z.string()),
-  search: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    limit: z._default(z.number(), 20),
+    cursor: z.optional(z.string()),
+    memberId: z.optional(z.string()),
+    userId: z.optional(z.string()),
+    orgId: z.optional(z.string()),
+    search: z.optional(z.string()),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -92,9 +96,11 @@ export function muGetManyPaginatedInputFromJSON(
 export const MuGetManyPaginatedRequest$inboundSchema: z.ZodMiniType<
   MuGetManyPaginatedRequest,
   unknown
-> = z.object({
-  input: types.optional(z.lazy(() => MuGetManyPaginatedInput$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(z.lazy(() => MuGetManyPaginatedInput$inboundSchema)),
+  })
+);
 /** @internal */
 export type MuGetManyPaginatedRequest$Outbound = {
   input?: MuGetManyPaginatedInput$Outbound | undefined;
@@ -104,9 +110,11 @@ export type MuGetManyPaginatedRequest$Outbound = {
 export const MuGetManyPaginatedRequest$outboundSchema: z.ZodMiniType<
   MuGetManyPaginatedRequest$Outbound,
   MuGetManyPaginatedRequest
-> = z.object({
-  input: z.optional(z.lazy(() => MuGetManyPaginatedInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(z.lazy(() => MuGetManyPaginatedInput$outboundSchema)),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

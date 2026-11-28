@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,7 +21,7 @@ export type GameConfigGetGameConfigRequest = {
 export const GameConfigGetGameConfigInput$inboundSchema: z.ZodMiniType<
   GameConfigGetGameConfigInput,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type GameConfigGetGameConfigInput$Outbound = {};
 
@@ -29,7 +29,7 @@ export type GameConfigGetGameConfigInput$Outbound = {};
 export const GameConfigGetGameConfigInput$outboundSchema: z.ZodMiniType<
   GameConfigGetGameConfigInput$Outbound,
   GameConfigGetGameConfigInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -66,11 +66,13 @@ export function gameConfigGetGameConfigInputFromJSON(
 export const GameConfigGetGameConfigRequest$inboundSchema: z.ZodMiniType<
   GameConfigGetGameConfigRequest,
   unknown
-> = z.object({
-  input: types.optional(
-    z.lazy(() => GameConfigGetGameConfigInput$inboundSchema),
-  ),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(
+      z.lazy(() => GameConfigGetGameConfigInput$inboundSchema),
+    ),
+  })
+);
 /** @internal */
 export type GameConfigGetGameConfigRequest$Outbound = {
   input?: GameConfigGetGameConfigInput$Outbound | undefined;
@@ -80,9 +82,13 @@ export type GameConfigGetGameConfigRequest$Outbound = {
 export const GameConfigGetGameConfigRequest$outboundSchema: z.ZodMiniType<
   GameConfigGetGameConfigRequest$Outbound,
   GameConfigGetGameConfigRequest
-> = z.object({
-  input: z.optional(z.lazy(() => GameConfigGetGameConfigInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(
+      z.lazy(() => GameConfigGetGameConfigInput$outboundSchema),
+    ),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

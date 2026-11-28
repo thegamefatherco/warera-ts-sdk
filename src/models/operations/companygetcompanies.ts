@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -38,12 +38,14 @@ export type CompanyGetCompaniesRequest = {
 export const CompanyGetCompaniesInput$inboundSchema: z.ZodMiniType<
   CompanyGetCompaniesInput,
   unknown
-> = z.object({
-  userId: types.optional(types.string()),
-  orgId: types.optional(types.string()),
-  perPage: z._default(types.number(), 10),
-  cursor: types.optional(types.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: types.optional(types.string()),
+    orgId: types.optional(types.string()),
+    perPage: z._default(types.number(), 10),
+    cursor: types.optional(types.string()),
+  })
+);
 /** @internal */
 export type CompanyGetCompaniesInput$Outbound = {
   userId?: string | undefined;
@@ -56,12 +58,14 @@ export type CompanyGetCompaniesInput$Outbound = {
 export const CompanyGetCompaniesInput$outboundSchema: z.ZodMiniType<
   CompanyGetCompaniesInput$Outbound,
   CompanyGetCompaniesInput
-> = z.object({
-  userId: z.optional(z.string()),
-  orgId: z.optional(z.string()),
-  perPage: z._default(z.number(), 10),
-  cursor: z.optional(z.string()),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.optional(z.string()),
+    orgId: z.optional(z.string()),
+    perPage: z._default(z.number(), 10),
+    cursor: z.optional(z.string()),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -96,9 +100,11 @@ export function companyGetCompaniesInputFromJSON(
 export const CompanyGetCompaniesRequest$inboundSchema: z.ZodMiniType<
   CompanyGetCompaniesRequest,
   unknown
-> = z.object({
-  input: types.optional(z.lazy(() => CompanyGetCompaniesInput$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(z.lazy(() => CompanyGetCompaniesInput$inboundSchema)),
+  })
+);
 /** @internal */
 export type CompanyGetCompaniesRequest$Outbound = {
   input?: CompanyGetCompaniesInput$Outbound | undefined;
@@ -108,9 +114,11 @@ export type CompanyGetCompaniesRequest$Outbound = {
 export const CompanyGetCompaniesRequest$outboundSchema: z.ZodMiniType<
   CompanyGetCompaniesRequest$Outbound,
   CompanyGetCompaniesRequest
-> = z.object({
-  input: z.optional(z.lazy(() => CompanyGetCompaniesInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(z.lazy(() => CompanyGetCompaniesInput$outboundSchema)),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

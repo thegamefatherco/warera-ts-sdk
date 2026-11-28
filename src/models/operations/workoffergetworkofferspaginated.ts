@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -26,12 +26,14 @@ export type WorkOfferGetWorkOffersPaginatedRequest = {
 export const WorkOfferGetWorkOffersPaginatedInput$inboundSchema: z.ZodMiniType<
   WorkOfferGetWorkOffersPaginatedInput,
   unknown
-> = z.object({
-  userId: types.optional(types.string()),
-  regionId: types.optional(types.string()),
-  cursor: types.optional(types.string()),
-  limit: z._default(types.number(), 10),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: types.optional(types.string()),
+    regionId: types.optional(types.string()),
+    cursor: types.optional(types.string()),
+    limit: z._default(types.number(), 10),
+  })
+);
 /** @internal */
 export type WorkOfferGetWorkOffersPaginatedInput$Outbound = {
   userId?: string | undefined;
@@ -44,12 +46,14 @@ export type WorkOfferGetWorkOffersPaginatedInput$Outbound = {
 export const WorkOfferGetWorkOffersPaginatedInput$outboundSchema: z.ZodMiniType<
   WorkOfferGetWorkOffersPaginatedInput$Outbound,
   WorkOfferGetWorkOffersPaginatedInput
-> = z.object({
-  userId: z.optional(z.string()),
-  regionId: z.optional(z.string()),
-  cursor: z.optional(z.string()),
-  limit: z._default(z.int(), 10),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    userId: z.optional(z.string()),
+    regionId: z.optional(z.string()),
+    cursor: z.optional(z.string()),
+    limit: z._default(z.int(), 10),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -87,11 +91,14 @@ export function workOfferGetWorkOffersPaginatedInputFromJSON(
 
 /** @internal */
 export const WorkOfferGetWorkOffersPaginatedRequest$inboundSchema:
-  z.ZodMiniType<WorkOfferGetWorkOffersPaginatedRequest, unknown> = z.object({
-    input: types.optional(
-      z.lazy(() => WorkOfferGetWorkOffersPaginatedInput$inboundSchema),
-    ),
-  });
+  z.ZodMiniType<WorkOfferGetWorkOffersPaginatedRequest, unknown> =
+    /* @__PURE__ */ lazySchema$(() =>
+      z.object({
+        input: types.optional(
+          z.lazy(() => WorkOfferGetWorkOffersPaginatedInput$inboundSchema),
+        ),
+      })
+    );
 /** @internal */
 export type WorkOfferGetWorkOffersPaginatedRequest$Outbound = {
   input?: WorkOfferGetWorkOffersPaginatedInput$Outbound | undefined;
@@ -102,11 +109,13 @@ export const WorkOfferGetWorkOffersPaginatedRequest$outboundSchema:
   z.ZodMiniType<
     WorkOfferGetWorkOffersPaginatedRequest$Outbound,
     WorkOfferGetWorkOffersPaginatedRequest
-  > = z.object({
-    input: z.optional(
-      z.lazy(() => WorkOfferGetWorkOffersPaginatedInput$outboundSchema),
-    ),
-  });
+  > = /* @__PURE__ */ lazySchema$(() =>
+    z.object({
+      input: z.optional(
+        z.lazy(() => WorkOfferGetWorkOffersPaginatedInput$outboundSchema),
+      ),
+    })
+  );
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

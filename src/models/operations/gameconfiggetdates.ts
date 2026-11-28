@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdkvalidationerror.js";
@@ -21,7 +21,7 @@ export type GameConfigGetDatesRequest = {
 export const GameConfigGetDatesInput$inboundSchema: z.ZodMiniType<
   GameConfigGetDatesInput,
   unknown
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /** @internal */
 export type GameConfigGetDatesInput$Outbound = {};
 
@@ -29,7 +29,7 @@ export type GameConfigGetDatesInput$Outbound = {};
 export const GameConfigGetDatesInput$outboundSchema: z.ZodMiniType<
   GameConfigGetDatesInput$Outbound,
   GameConfigGetDatesInput
-> = z.object({});
+> = /* @__PURE__ */ lazySchema$(() => z.object({}));
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -64,9 +64,11 @@ export function gameConfigGetDatesInputFromJSON(
 export const GameConfigGetDatesRequest$inboundSchema: z.ZodMiniType<
   GameConfigGetDatesRequest,
   unknown
-> = z.object({
-  input: types.optional(z.lazy(() => GameConfigGetDatesInput$inboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: types.optional(z.lazy(() => GameConfigGetDatesInput$inboundSchema)),
+  })
+);
 /** @internal */
 export type GameConfigGetDatesRequest$Outbound = {
   input?: GameConfigGetDatesInput$Outbound | undefined;
@@ -76,9 +78,11 @@ export type GameConfigGetDatesRequest$Outbound = {
 export const GameConfigGetDatesRequest$outboundSchema: z.ZodMiniType<
   GameConfigGetDatesRequest$Outbound,
   GameConfigGetDatesRequest
-> = z.object({
-  input: z.optional(z.lazy(() => GameConfigGetDatesInput$outboundSchema)),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.optional(z.lazy(() => GameConfigGetDatesInput$outboundSchema)),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.

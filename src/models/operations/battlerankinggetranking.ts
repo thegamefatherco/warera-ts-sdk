@@ -3,7 +3,7 @@
  */
 
 import * as z from "zod/v4-mini";
-import { safeParse } from "../../lib/schemas.js";
+import { lazySchema as lazySchema$, safeParse } from "../../lib/schemas.js";
 import { ClosedEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
@@ -84,9 +84,8 @@ export type BattleRankingGetRankingRequest = {
 };
 
 /** @internal */
-export const DataType$inboundSchema: z.ZodMiniEnum<typeof DataType> = z.enum(
-  DataType,
-);
+export const DataType$inboundSchema: z.ZodMiniEnum<typeof DataType> =
+  /* @__PURE__ */ lazySchema$(() => z.enum(DataType));
 /** @internal */
 export const DataType$outboundSchema: z.ZodMiniEnum<typeof DataType> =
   DataType$inboundSchema;
@@ -104,7 +103,7 @@ export namespace DataType$ {
 /** @internal */
 export const BattleRankingGetRankingType$inboundSchema: z.ZodMiniEnum<
   typeof BattleRankingGetRankingType
-> = z.enum(BattleRankingGetRankingType);
+> = /* @__PURE__ */ lazySchema$(() => z.enum(BattleRankingGetRankingType));
 /** @internal */
 export const BattleRankingGetRankingType$outboundSchema: z.ZodMiniEnum<
   typeof BattleRankingGetRankingType
@@ -121,7 +120,8 @@ export namespace BattleRankingGetRankingType$ {
 }
 
 /** @internal */
-export const Side$inboundSchema: z.ZodMiniEnum<typeof Side> = z.enum(Side);
+export const Side$inboundSchema: z.ZodMiniEnum<typeof Side> =
+  /* @__PURE__ */ lazySchema$(() => z.enum(Side));
 /** @internal */
 export const Side$outboundSchema: z.ZodMiniEnum<typeof Side> =
   Side$inboundSchema;
@@ -140,14 +140,16 @@ export namespace Side$ {
 export const BattleRankingGetRankingInput$inboundSchema: z.ZodMiniType<
   BattleRankingGetRankingInput,
   unknown
-> = z.object({
-  battleId: types.optional(types.string()),
-  roundId: types.optional(types.string()),
-  warId: types.optional(types.string()),
-  dataType: DataType$inboundSchema,
-  type: BattleRankingGetRankingType$inboundSchema,
-  side: Side$inboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    battleId: types.optional(types.string()),
+    roundId: types.optional(types.string()),
+    warId: types.optional(types.string()),
+    dataType: DataType$inboundSchema,
+    type: BattleRankingGetRankingType$inboundSchema,
+    side: Side$inboundSchema,
+  })
+);
 /** @internal */
 export type BattleRankingGetRankingInput$Outbound = {
   battleId?: string | undefined;
@@ -162,14 +164,16 @@ export type BattleRankingGetRankingInput$Outbound = {
 export const BattleRankingGetRankingInput$outboundSchema: z.ZodMiniType<
   BattleRankingGetRankingInput$Outbound,
   BattleRankingGetRankingInput
-> = z.object({
-  battleId: z.optional(z.string()),
-  roundId: z.optional(z.string()),
-  warId: z.optional(z.string()),
-  dataType: DataType$outboundSchema,
-  type: BattleRankingGetRankingType$outboundSchema,
-  side: Side$outboundSchema,
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    battleId: z.optional(z.string()),
+    roundId: z.optional(z.string()),
+    warId: z.optional(z.string()),
+    dataType: DataType$outboundSchema,
+    type: BattleRankingGetRankingType$outboundSchema,
+    side: Side$outboundSchema,
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
@@ -206,9 +210,11 @@ export function battleRankingGetRankingInputFromJSON(
 export const BattleRankingGetRankingRequest$inboundSchema: z.ZodMiniType<
   BattleRankingGetRankingRequest,
   unknown
-> = z.object({
-  input: z.lazy(() => BattleRankingGetRankingInput$inboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => BattleRankingGetRankingInput$inboundSchema),
+  })
+);
 /** @internal */
 export type BattleRankingGetRankingRequest$Outbound = {
   input: BattleRankingGetRankingInput$Outbound;
@@ -218,9 +224,11 @@ export type BattleRankingGetRankingRequest$Outbound = {
 export const BattleRankingGetRankingRequest$outboundSchema: z.ZodMiniType<
   BattleRankingGetRankingRequest$Outbound,
   BattleRankingGetRankingRequest
-> = z.object({
-  input: z.lazy(() => BattleRankingGetRankingInput$outboundSchema),
-});
+> = /* @__PURE__ */ lazySchema$(() =>
+  z.object({
+    input: z.lazy(() => BattleRankingGetRankingInput$outboundSchema),
+  })
+);
 /**
  * @internal
  * @deprecated This namespace will be removed in future versions. Use schemas and types that are exported directly from this module.
